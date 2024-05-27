@@ -1,21 +1,31 @@
 import { useRoutes } from "react-router-dom"
+import UserLayout from "../layouts/UserLayout"
+import HomePage from "../modules/UserLayout/HomePage/HomePage"
+import DetailJobPage from "../modules/UserLayout/DetailJobPage/DetailJobPage"
+import ListJobAndTypeJobPage from "../modules/UserLayout/ListJobAndTypeJobPage/ListJobAndTypeJobPage"
+import ListJobPage from "../modules/UserLayout/ListJobPage/ListJobPage"
 
 const useRouteElement = () => {
     const element = useRoutes([
         {
             path: '',
-            // import components chính chứa Outlet của layout
-            element:'',
-            children:[
+            element: <UserLayout />,
+            children: [
                 {
-                    path:'',
-                    // import components trong modules
-                    element:''
+                    path: '',
+                    element: <HomePage />
                 },
                 {
-                    path:'',
-                    // import  import components trong modules
-                    element:'',
+                    path: 'list-job',
+                    element: <ListJobPage />
+                },
+                {
+                    path: 'list-job-and-type-job',
+                    element: <ListJobAndTypeJobPage />
+                },
+                {
+                    path: 'detail-job',
+                    element: <DetailJobPage />,
                 }
             ]
         }
