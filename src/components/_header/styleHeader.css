@@ -4,7 +4,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position:fixed;
     z-index: 2;
     padding: 10px 80px;
     width: 100%;
@@ -22,11 +22,6 @@ header p {
     color: white;
     font-size: 36px;
 }
-
-header.changeColor p {
-    color: black;
-}
-
 
 /* Custom input search */
 .hidden {
@@ -85,8 +80,11 @@ nav a {
     font-weight: 500;
     cursor: pointer;
 }
+/* .changeColor p{
+    color: #62646a;
+} */
 
-.changeColor nav a {
+.changeColor nav a,.changeColor p {
     color: #62646a;
 }
 
@@ -98,20 +96,20 @@ nav a {
 .btn-custom {
     padding: 0 19px;
     font-size: 16px;
-    border: 1px solid #fff;
+    border: 1px solid white;
     height: 40px;
     margin-left: 10px;
 }
 
-.btn-join {
+header .btn-join {
     background-color: transparent;
-    color: #fff;
+    color: white;
     font-weight: 500;
 }
 
 .btn-join:hover {
     background-color: #1dbf73 !important;
-    border-color: green !important;
+    border-color: transparent !important;
     color: white !important;
 }
 header.changeColor .btn-join{
@@ -134,7 +132,9 @@ header.changeColor .btn-join{
     color: #62646a;
 }
 .menu-list-job p{
-    margin: 0 5px
+    margin: 0 7px;
+    font-size: 16px;
+    
 }
 
 .menu-list-job a {

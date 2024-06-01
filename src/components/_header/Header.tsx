@@ -67,7 +67,7 @@ export default function HeaderPage() {
     const listJob = document.getElementsByClassName('menu-list-job')[0]
     if (window.scrollY > 0) {
       header?.classList.add('changeColor');
-      if (window.scrollY > 60) {
+      if (window.scrollY > 180) {
         search?.classList.remove('hidden-search-navbar')
         listJob?.classList.remove('hidden')
 
