@@ -300,7 +300,7 @@ export default function HomePage() {
     <section className='item-menu'>
       <div className='container mx-auto'>
         <h1 className='tittle-item'>You need it, we've got it</h1>
-        <ul className='grid grid-flow-cols grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 place-content-center'>
+        <ul className='grid grid-flow-cols grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 place-content-center'>
           <li className='list-item-menu'>
             <a href=''>
               <img src={ImageItem1}></img>
