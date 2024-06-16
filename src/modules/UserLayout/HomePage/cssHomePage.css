@@ -1,20 +1,44 @@
+.carousel {
+    background-image: url('../../../assets/img/background.png');
+    background-size: cover;
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+    height: 395px;
+    border-radius: 25px;
+    /* object-fit: cover; */
+    /* width: 100%; */
+}
+
+.form-carousel {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.form-carousel .form-carousel-tittle em {
+    color: #1dbf73;
+}
 
 .form-carousel-tittle {
-    font-size: 45px;
-    font-weight: 600;
+    font-size: 2.5rem;
+    font-weight: 500;
     letter-spacing: 1px;
     color: white;
+    margin-bottom: 20px;
 }
 
 .form-carousel .ant-input {
     font-size: 18px !important;
 }
 
-.popular-carousel {
+/* .popular-carousel {
     margin-top: 20px;
     font-size: 16px;
     color: white;
-}
+} */
 
 .carousel .form-carousel .form-carousel-btn {
     border: 1px solid white;
@@ -38,11 +62,28 @@
     color: black;
 }
 
-/* .ant-carousel .slick-dots{
-    display: none !important
-} */
+.show-listNameJob {
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    overflow-y: scroll;
+    margin-top: 5px;
+}
 
-/* css thẻ tên */
+.show-listNameJob .list-job {
+    margin: 7px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0 5px;
+}
+
+.show-listNameJob .list-job:hover {
+    background-color: rgba(194, 196, 195, 0.312);
+    border-radius: 3px;
+}
+
+
+/* css tag name */
 
 .carousel .tag-name {
     font-size: 50px;
@@ -84,9 +125,9 @@
 
 
 /* Css div Trust */
-.info-trust {
+/* .info-trust {
     background-color: #f5f5f5;
-}
+} */
 
 .trust-by {
     font-size: 20px;
@@ -95,7 +136,11 @@
     justify-content: space-between;
     max-width: 800px;
     padding: 20px 0;
-    margin-bottom: 90px;
+}
+
+.trust-by .trust-by-span,
+.trust-by-logo {
+    margin: 0 10px;
 }
 
 /* Css popular-services */
@@ -199,29 +244,33 @@
 }
 
 /* Css item menu */
-.tittle-item{
+.tittle-item {
     font-size: 40px;
     font-weight: 600;
     margin: 80px 0;
 }
+
 .list-item-menu {
     width: 100%;
     text-align: center;
     margin: 20px 0;
 }
-.list-item-menu a{
+
+.list-item-menu a {
     color: #222325;
     display: inline-block;
     position: relative;
     text-align: center;
 }
+
 .item-menu img {
     display: block;
     height: 48px;
     margin: 0 auto 15px;
     width: 48px;
 }
-.item-menu a::after{
+
+.item-menu a::after {
     border-bottom: 2px solid #c5c6c9;
     content: "";
     padding: 0 0 8px;
@@ -232,7 +281,8 @@
     transition: .3s;
     width: 48px;
 }
-.item-menu a:hover::after{
+
+.item-menu a:hover::after {
     width: 100px;
     border-color: #1dbf73;
 }
@@ -266,4 +316,16 @@
 
 .slick-next {
     right: -3px !important;
+}
+
+/* responsive */
+@media only screen and (max-width:900px) {
+    .ant-carousel .slick-slide .item img {
+        /* display: none !important; */
+        background: #206419 !important;
+    }
+
+    .form-carousel-tittle {
+        font-size: 2rem;
+    }
 }

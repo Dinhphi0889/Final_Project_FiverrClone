@@ -1,17 +1,28 @@
-import React from 'react';
+// import modules
+import React, { useState } from 'react';
 import { Carousel, Input } from 'antd';
+import { nameJobAction } from '../../../redux/slices/nameJob.slice.ts';
+
+// import image
 import { ImageBanner1, ImageBanner2, ImageBanner3, ImageBanner4, ImageBanner5, ImageLogo1, ImageLogo2, ImageLogo3, ImageLogo4, ImageLogo5, ImageGoogle, ImageMeta, ImageNetflix, ImagePandg, ImagePaypal, Item1, Item2, Item3, Item4, Item5, Item6, Item7, Item8, Item9, Item10, Video1, Video2, ImgVideo1, ImgVideo2, ImageItem1, ImageItem2, ImageItem3, ImageItem4, ImageItem5, ImageItem6, ImageItem7, ImageItem8, ImageItem9, ImageItem10 } from './image.ts';
+
+// import file css
 import './cssHomePage.css'
-import type { SearchProps } from 'antd/es/input/Search';
+
+// import api
+import { apiGetNameJob } from '../../../apis/apiGetNameJob.ts';
+
+// import hooks
+import { useAppDispatch } from '../../../redux/hooks.ts';
+import ListNameJob from './ListNameJob.tsx';
+
+
 
 
 
 const { Search } = Input;
-const onSearch: SearchProps['onSearch'] = (value, _e) => {
-  console.log(value)
-};
 
-
+// render carousel
 const CarouselCustom: React.FC = () => (
   <Carousel effect="fade"
     autoplay
@@ -116,6 +127,8 @@ const CarouselCustom: React.FC = () => (
     </div>
   </Carousel>
 );
+
+// render slide
 const SlideItem: React.FC = () => (
   <Carousel arrows infinite={true}>
     <div className='carousel-item'>
@@ -197,45 +210,58 @@ const SlideItem: React.FC = () => (
 
 export default function HomePage() {
 
+  // create + use hooks
+  const dispatch = useAppDispatch()
+  const [showNameJob, setShowNameJob] = useState('none')
+
+  // create + use event handlers
+  const onSearch = async (event: any) => {
+    if (event.target.value !== "" && event.target.value.trim()) {
+      const result = await apiGetNameJob(event.target.value)
+      dispatch(nameJobAction.setNameJob(result))
+      setShowNameJob('block')
+    } else if (event.target.value === '') {
+      setShowNameJob('none')
+    }
+  }
+
+
   return (<>
     {/* Carousel */}
-    <section className="carousel"
-      style={{
-        position: 'relative',
-      }}>
-      <div className='form-carousel'
-        style={{
-          position: 'absolute',
-          top: '40%',
-          left: '10%',
-          zIndex: '1',
-        }}>
+    <section className="carousel container mx-auto relative"
+    >
+      <div className='form-carousel'>
         <h1 className='form-carousel-tittle'
         >Find the right <em>freelance</em><br /> service, right away</h1>
         <Search className='form-carousel-input' placeholder='Search for any service...'
-          onSearch={onSearch}
+          onChange={onSearch}
         />
-        <div className='popular-carousel'>
+        <div className='show-listNameJob rounded-md h-64 shadow-lg'
+          style={{ display: showNameJob }}>
+          <ListNameJob />
+        </div>
+        {/* <div className='popular-carousel'>
           <span className='popular-carousel-span'>Popular: </span>
           <button className='form-carousel-btn'>Website Design</button>
           <button className='form-carousel-btn'>WordPress</button>
           <button className='form-carousel-btn'>Logo Design</button>
           <button className='form-carousel-btn'>AI Services</button>
         </div>
-      </div>
-      <CarouselCustom />
-    </section>
+        Item Trusted */}
 
-    {/* Item Trusted */}
-    <section className='info-trust'>
-      <div className='trust-by container mx-auto flex items-center'>
-        <span className='trust-by-span'>Trusted By:</span>
-        <img className='trust-by-logo' src={ImageMeta}></img>
-        <img className='trust-by-logo' src={ImageGoogle}></img>
-        <img className='trust-by-logo' src={ImageNetflix}></img>
-        <img className='trust-by-logo' src={ImagePandg}></img>
-        <img className='trust-by-logo' src={ImagePaypal}></img>
+        <div className='info-trust'>
+          <div className='trust-by container mx-auto flex items-center'>
+            <span className='trust-by-span'>Trusted By:</span>
+            <img className='trust-by-logo' src={ImageMeta}></img>
+            <img className='trust-by-logo' src={ImageGoogle}></img>
+            <img className='trust-by-logo' src={ImageNetflix}></img>
+            <img className='trust-by-logo' src={ImagePandg}></img>
+            <img className='trust-by-logo' src={ImagePaypal}></img>
+          </div>
+        </div>
+
       </div>
+      {/* <CarouselCustom /> */}
     </section>
 
     {/* Popular Service */}

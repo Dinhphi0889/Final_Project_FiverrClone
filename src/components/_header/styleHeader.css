@@ -1,32 +1,108 @@
+
+#changeHeader {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    transition: all .3s ease;
+    width: 100%;
+    height: 90px;
+    z-index: 2;
+    border-bottom: 1px solid rgb(199, 197, 197);
+}
+
 header {
-    background-color: transparent;
     transition: .3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    position:fixed;
+    /* position: fixed; */
     z-index: 2;
-    padding: 10px 80px;
-    width: 100%;
+    padding: 10px 50px;
+    margin: 0 auto;
+    max-width: 1400px;
 }
 
-.hidden-search-navbar {
-    visibility: hidden;
+
+.ant-space-item a:hover {
+    color: #1dbf73;
 }
 
-header.changeColor {
+/* css header page child */
+.fixed-header-page {
+    height: 128px;
+}
+
+
+.fixed-header-page #btn-sidebar {
+    color: #62646a;
+}
+
+.fixed-header-page header p,
+.fixed-header-page header a {
+    color: #565759;
+}
+
+.fixed-header-page header .btn-join {
+    color: #1dbf73;
+    border-color: #1dbf73;
+}
+
+.fixed-header-page .menu-list-job {
+    display: flex !important;
+    box-shadow: 0px 22px 40px 0px #0000003e;
+}
+
+
+/* sidebar */
+.show-sidebar .sidebar-menu a {
+    margin: 5px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #62646a;
+}
+
+.show-sidebar .sidebar-menu a i {
+    margin-left: 5px;
+}
+
+#btn-sidebar {
+    display: none !important;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+}
+
+#btn-sidebar:focus {
+    outline: none;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+/* .changeColor #btn-sidebar {
+    color: #62646a;
+} */
+
+
+/* header.changeColor {
     background-color: white;
-}
+} */
 
 header p {
-    color: white;
+    color: #393a3c;
     font-size: 36px;
 }
 
 /* Custom input search */
+.hidden-search-navbar {
+    visibility: hidden;
+}
+
 .hidden {
     display: none !important;
-    /* transition: 1s; */
 }
 
 #searchHeader {
@@ -34,7 +110,10 @@ header p {
     margin: 10px 20px;
     transition: 0s !important;
 }
-#searchHeader .ant-input-group-addon,#searchHeader .ant-input-search-button, #searchHeader .ant-input-outlined {
+
+#searchHeader .ant-input-group-addon,
+#searchHeader .ant-input-search-button,
+#searchHeader .ant-input-outlined {
     transition: 0s !important;
 }
 
@@ -75,22 +154,41 @@ header p {
 /* Custom Navbar */
 nav a {
     margin: 0 15px;
-    color: white;
-    font-size: 18px;
+    /* color: white; */
+    color: #565759;
+    font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
+    text-wrap: nowrap;
+    padding: 5px 6px;
 }
-/* .changeColor p{
+nav a:hover{
+    color: #1dbf73;
+}
+nav a:nth-child(1):hover,
+nav a:nth-child(2):hover{
+    background-color: #b8b8b82e;
+    color: #565759;
+    border-radius: 5px;
+}
+
+.menu-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+}
+
+
+/* .changeColor nav a,
+.changeColor p {
     color: #62646a;
 } */
-
-.changeColor nav a,.changeColor p {
-    color: #62646a;
-}
 
 .menu-bar i {
     padding-left: 8px;
     font-size: 14px;
+    display: inline;
 }
 
 .btn-custom {
@@ -103,7 +201,7 @@ nav a {
 
 header .btn-join {
     background-color: transparent;
-    color: white;
+    color: #1dbf73;
     font-weight: 500;
 }
 
@@ -112,10 +210,15 @@ header .btn-join {
     border-color: transparent !important;
     color: white !important;
 }
-header.changeColor .btn-join{
+
+/* header.changeColor .btn-join {
     border-color: green;
     color: green;
-} 
+} */
+.btn-join {
+    border-color: #1dbf73;
+    color: green;
+}
 
 
 .btn-join:focus {
@@ -127,14 +230,20 @@ header.changeColor .btn-join{
 
 .menu-list-job {
     background-color: white;
+    color: #62646a;
     display: flex;
     justify-content: center;
-    color: #62646a;
+    position: fixed;
+    top: 88px;
+    z-index: 2;
+    padding: 10px 50px;
+    width: 100%;
 }
-.menu-list-job p{
+
+.menu-list-job p {
     margin: 0 7px;
     font-size: 16px;
-    
+    text-wrap: nowrap;
 }
 
 .menu-list-job a {
@@ -146,6 +255,11 @@ header.changeColor .btn-join{
     display: block;
     width: 0;
     height: 3px;
+}
+
+/* custom ant */
+.ant-affix {
+    width: 100% !important;
 }
 
 .ant-dropdown-trigger:hover::after {
@@ -178,8 +292,56 @@ header.changeColor .btn-join{
     background-color: white;
 }
 
-/* @media screen and (min-width: 1280px) {
-    .container{
-        max-width: 100vw !important;
+@media screen and (max-width: 1160px) {
+    .menu-bar a:nth-child(3) {
+        display: none;
     }
-} */
+
+    #btn-sidebar {
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    nav a:nth-child(1),
+    nav a:nth-child(2),
+    nav a:nth-child(4) {
+        display: none;
+    }
+
+    .menu-bar {
+        justify-content: flex-end;
+    }
+
+    #searchHeader {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+        padding: 10px 0px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    nav a:nth-child(5) {
+        display: none;
+    }
+
+    header {
+        justify-content: space-between;
+        /* padding: 0px 20px; */
+    }
+
+    .menu-bar {
+        width: 10%;
+    }
+
+    /* header.changeColor .btn-join {
+        border: none;
+        color: #62646a;
+        font-size: 1.1rem;
+    } */
+}

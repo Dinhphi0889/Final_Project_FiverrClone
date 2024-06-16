@@ -16,7 +16,7 @@ const useRouteElement = () => {
                     element: <HomePage />
                 },
                 {
-                    path: 'list-job',
+                    path: 'list-job/:id',
                     element: <ListJobPage />
                 },
                 {
