@@ -10,7 +10,8 @@ const menuJobSlice = createSlice({
     reducers: {
         setMenuJob: (state, { payload }) => {
             state.menuJob = payload
-        }
+        },
+        
     },
 })
 
