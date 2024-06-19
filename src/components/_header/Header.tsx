@@ -1,14 +1,28 @@
-import { Button, Drawer, Input } from 'antd';
-import './styleHeader.css'
-import { SearchProps } from 'antd/es/input/Search';
+// import hooks
+import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom'
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+// import css
+import './styleHeader.css'
+
+// import antd
+import { Button, Drawer, Input, Modal } from 'antd';
+import { SearchProps } from 'antd/es/input/Search';
 import { getMenuJob } from '../../apis/apiMenuJob';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
-import { useEffect, useState } from 'react';
-import { SettingOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom';
-
+import FormLogin from './FormLogin';
 
 const { Search } = Input;
 const onSearch: SearchProps['onSearch'] = (value, _e) => {
@@ -18,8 +32,35 @@ const onSearch: SearchProps['onSearch'] = (value, _e) => {
 
 export default function HeaderPage() {
 
+  // Create + use hooks
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    const changeHeader = document.querySelector('#changeHeader')
+    const searchHeader = document.querySelector('.search')
+    if (window.location.pathname === '/') {
+      handleScroll()
+    } else {
+      changeHeader?.classList.add("fixed-header-page");
+      searchHeader?.classList.add('set-search-header')
+    }
+  }, [window.location.pathname])
+
+
+  // Handler show modal
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   //Call api get list menu job
   const { data = [] } = useQuery({
     queryKey: ['menu'],
@@ -35,28 +76,31 @@ export default function HeaderPage() {
     setOpen(false);
   };
 
+
   // Render menu job
   const handleRenderMenuJob = () => {
     const dataSlice = data.slice(0, 11)
     return dataSlice.map((itemData, index) => {
+      // itemData.tenLoaiCongViec
       const items: MenuProps['items'] = [
         {
           key: itemData.tenLoaiCongViec,
           label: (
             <div className='nameGroup'>
               {(itemData.dsNhomChiTietLoai.map((itemDetail) => {
-                // console.log(itemDetail)
                 return <div>
                   <ul>
                     <p>{itemDetail.tenNhom}</p>
                     {itemDetail.dsChiTietLoai.map((itemDetailType) => {
-                      return <li>
-                        <a
-                          className='txtDetail'
-                          href='#'>
-                          {itemDetailType.tenChiTiet}
-                        </a>
-                      </li>
+                      return (
+                        <li>
+                          <a
+                            className='txtDetail'
+                            href='#'>
+                            {itemDetailType.tenChiTiet}
+                          </a>
+                        </li>
+                      )
                     })}
                   </ul>
                 </div>
@@ -66,29 +110,27 @@ export default function HeaderPage() {
         },
       ];
       return <>
-        <Dropdown key={index} menu={{ items }}>
-          <p onClick={(e) => e.preventDefault()}>
-            <Space>
-              <NavLink to={`list-job/${itemData.id}`}>
-
-                {itemData.tenLoaiCongViec}
-              </NavLink>
-            </Space>
-          </p>
-        </Dropdown>
+        <SwiperSlide>
+          <Dropdown key={index} menu={{ items }}>
+            <p onClick={(e) => e.preventDefault()}>
+              <Space>
+                <Button onClick={() => handleNavigate(itemData.tenLoaiCongViec, itemData.id)}>
+                  {itemData.tenLoaiCongViec}
+                </Button>
+              </Space>
+            </p>
+          </Dropdown >
+        </SwiperSlide>
       </>
-
     })
   }
-
 
   // Event scroll change header
   const handleScroll = () => {
     const search = document.getElementById('searchHeader')
     const header = document.querySelector('header')
-    // const changeHeader = document.querySelector('#changeHeader')
+
     const listJob = document.getElementsByClassName('menu-list-job')[0]
-    // if (window.location.pathname === "/") {
     if (window.scrollY > 0) {
       header?.classList.add('changeColor');
       if (window.scrollY > 180) {
@@ -102,43 +144,9 @@ export default function HeaderPage() {
     } else {
       header?.classList.remove('changeColor');
     }
-    // }
-    //  else {
-    //   changeHeader?.classList.add("fixed-header-page");
-    // }
+
   }
-
-  useEffect(() => {
-    const changeHeader = document.querySelector('#changeHeader')
-    if (window.location.pathname === '/') {
-      handleScroll()
-    } else {
-      changeHeader?.classList.add("fixed-header-page");
-    }
-  }, [window.location.pathname])
-
   window.addEventListener('scroll', handleScroll);
-
-
-  type MenuItem = Required<MenuProps>['items'][number];
-  const items: MenuItem[] = [
-    {
-      type: 'divider',
-    },
-    {
-      key: 'sub4',
-      label: 'Navigation Three',
-      icon: <SettingOutlined />,
-      children: [
-
-        { key: '9', label: 'Option 9' },
-        { key: '10', label: 'Option 10' },
-        { key: '11', label: 'Option 11' },
-        { key: '12', label: 'Option 12' },
-      ],
-    },
-
-  ];
 
 
   // Custom Sidebar
@@ -149,6 +157,7 @@ export default function HeaderPage() {
       onClose={onClose}
       open={open}
       key='left'
+      width={300}
     >
       <div className='show-sidebar'>
         <button className='bg-black text-white text-center text-lg font-bold px-6 py-2 my-3 flex rounded-md'>Join Fiverr</button>
@@ -167,6 +176,48 @@ export default function HeaderPage() {
     </Drawer>
   }
 
+  // Custom swiper
+  const refSwiper = useRef(null);
+  const [showItem, setShowItem] = useState(6)
+  useEffect(() => {
+    const observer = new ResizeObserver(entries => {
+      let getEndPoint = entries[0].contentRect.width
+      if (getEndPoint < 1024 && getEndPoint >= 768) {
+        setShowItem(5)
+      } else if (getEndPoint <= 768 && getEndPoint >= 640) {
+        setShowItem(4)
+      }
+      else if (getEndPoint <= 640 && getEndPoint >= 500) {
+
+        setShowItem(3)
+      }
+      else if (getEndPoint < 500) {
+        setShowItem(2)
+      } else {
+        setShowItem(6)
+      }
+    });
+    if (refSwiper.current) {
+      observer.observe(refSwiper.current);
+    }
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // handler change url
+  const handleNavigate = (nameSplit: String, id: Number) => {
+    let customNameURL = nameSplit.split(' ').join('-')
+    let lowerNameCustom = customNameURL.toLowerCase()
+    navigate(`/list-job/${lowerNameCustom}`, { state: { jobId: id } })
+  }
+
+  const modalLogin = () => {
+    return <Modal title='Login' open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      {/* <h1 className='text-2xl font-semibold'>Login</h1> */}
+      <FormLogin />
+    </Modal>
+  }
 
   return (
     <div id='changeHeader'>
@@ -195,13 +246,27 @@ export default function HeaderPage() {
               style={{ paddingRight: '8px' }}></i>English</a>
             <a>Become a Seller</a>
             <a>Sign Up</a>
-            <Button className='btn-custom btn-join'>Join</Button>
+            <Button onClick={showModal}
+              className='btn-custom btn-join'>Join
+            </Button>
+
           </nav>
         </header>
+        {/* show menu job */}
         <div className='menu-list-job hidden animate__animated animate__flipInX' >
-          {handleRenderMenuJob()}
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={10}
+            slidesPerView={showItem}
+            navigation
+            ref={refSwiper}
+            style={{ maxWidth: '1400px' }}
+          >
+            {handleRenderMenuJob()}
+          </Swiper>
         </div>
       </div>
+      {modalLogin()}
     </div>
   );
 }

@@ -1,10 +1,10 @@
 // import modules
-import React, { useState } from 'react';
-import { Carousel, Input } from 'antd';
+import { useState } from 'react';
+import { Input } from 'antd';
 import { nameJobAction } from '../../../redux/slices/nameJob.slice.ts';
 
 // import image
-import { ImageBanner1, ImageBanner2, ImageBanner3, ImageBanner4, ImageBanner5, ImageLogo1, ImageLogo2, ImageLogo3, ImageLogo4, ImageLogo5, ImageGoogle, ImageMeta, ImageNetflix, ImagePandg, ImagePaypal, Item1, Item2, Item3, Item4, Item5, Item6, Item7, Item8, Item9, Item10, Video1, Video2, ImgVideo1, ImgVideo2, ImageItem1, ImageItem2, ImageItem3, ImageItem4, ImageItem5, ImageItem6, ImageItem7, ImageItem8, ImageItem9, ImageItem10 } from './image.ts';
+import { ImageGoogle, ImageMeta, ImageNetflix, ImagePandg, ImagePaypal, Video1, Video2, ImgVideo1, ImgVideo2, ImageItem1, ImageItem2, ImageItem3, ImageItem4, ImageItem5, ImageItem6, ImageItem7, ImageItem8, ImageItem9, ImageItem10 } from './image.ts';
 
 // import file css
 import './cssHomePage.css'
@@ -14,205 +14,23 @@ import { apiGetNameJob } from '../../../apis/apiGetNameJob.ts';
 
 // import hooks
 import { useAppDispatch } from '../../../redux/hooks.ts';
-import ListNameJob from './ListNameJob.tsx';
 
+// import components render
+import ListNameJob from './ListNameJob.tsx';
+import SwiperSlideCustom from './SwiperSlideCustom.tsx';
 
 
 
 
 const { Search } = Input;
 
-// render carousel
-const CarouselCustom: React.FC = () => (
-  <Carousel effect="fade"
-    autoplay
-  >
-    <div className='item'>
-      <img className='img-carousel'
-        src={ImageBanner1}>
-      </img>
-      <div className='tag-name'>
-        <div className='tag-name-img'>
-          <img src={ImageLogo1}>
-          </img>
-        </div>
-        <div className='tag-name-info'>
-          <p className='span-name'>@jenny</p>
-          <p className='span-job'>Children's Voice Over</p>
-        </div>
-        <span className='number-start'>5
-          <i className="fa-solid fa-star" style={{
-            fontSize: '14px',
-            color: 'white',
-          }}></i>
-        </span>
-      </div>
-    </div>
-    <div className='item'>
-      <img className='img-carousel' src={ImageBanner2}>
-      </img>
-
-      <div className='tag-name'>
-        <div className='tag-name-img'>
-          <img src={ImageLogo2}>
-          </img>
-        </div>
-        <div className='tag-name-info'>
-          <p className='span-name'>@colinstark</p>
-          <p className='span-job'>Creative Director</p>
-        </div>
-        <span className='number-start'>5
-          <i className="fa-solid fa-star" style={{
-            fontSize: '14px',
-            color: 'white',
-          }}></i>
-        </span>
-      </div>
-    </div>
-    <div className='item'
-    >
-      <img className='img-carousel' src={ImageBanner3}>
-      </img>
-      <div className='tag-name'>
-        <div className='tag-name-img'>
-          <img src={ImageLogo3}>
-          </img>
-        </div>
-        <div className='tag-name-info'>
-          <p className='span-name'>Scarlett</p>
-          <p className='span-job'>Business Founder</p>
-        </div>
-      </div>
-
-    </div>
-    <div className='item'>
-      <img className='img-carousel' src={ImageBanner4}>
-      </img>
-      <div className='tag-name' >
-        <div className='tag-name-img'>
-          <img src={ImageLogo4}>
-          </img>
-        </div>
-        <div className='tag-name-info'>
-          <p className='span-name'>Jordanruncie_</p>
-          <p className='span-job'>Production Assistant</p>
-        </div>
-        <span className='number-start'>5
-          <i className="fa-solid fa-star" style={{
-            fontSize: '14px',
-            color: 'white',
-          }}></i>
-        </span>
-      </div>
-
-    </div>
-    <div className='item'>
-      <img className='img-carousel' src={ImageBanner5}></img>
-      <div className='tag-name'>
-        <div className='tag-name-img'>
-          <img src={ImageLogo5}>
-          </img>
-        </div>
-        <div className='tag-name-info'>
-          <p className='span-name'>Christina</p>
-          <p className='span-job'>Jewelry Shop Owner</p>
-        </div>
-        <span className='number-start'>5
-          <i className="fa-solid fa-star" style={{
-            fontSize: '14px',
-            color: 'white',
-          }}></i>
-        </span>
-      </div>
-    </div>
-  </Carousel>
-);
-
-// render slide
-const SlideItem: React.FC = () => (
-  <Carousel arrows infinite={true}>
-    <div className='carousel-item'>
-      <div>
-        <div className='tittle-item'>
-          <p>Add talent to AI</p>
-          <p>AI Artists</p>
-        </div>
-        <img src={Item1}></img>
-      </div>
-      <div>
-        <div className='tittle-item'>
-          <p>Build your brand</p>
-          <p>Logo Design</p>
-        </div>
-        <img src={Item2}></img>
-      </div>
-      <div>
-        <div className='tittle-item'>
-          <p>Customize your site</p>
-          <p>WordPress</p>
-        </div>
-        <img src={Item3}></img>
-      </div>
-      <div>
-        <div className='tittle-item'>
-          <p>Share your message</p>
-          <p>Voice Over</p>
-        </div>
-        <img src={Item4}></img>
-      </div>
-      <div>
-        <div className='tittle-item'>
-          <p>Engage your audience</p>
-          <p>Video Explainer</p>
-        </div>
-        <img src={Item5}></img>
-      </div>
-    </div>
-    <div className='carousel-item'>
-      <div>
-        <div className='tittle-item'>
-          <p>Reach more customers</p>
-          <p>Social Media</p>
-        </div>
-        <img src={Item6}></img>
-      </div>
-      <div>
-        <div className='tittle-item'>
-          <p>Unlock growth online</p>
-          <p>SEO</p>
-        </div>
-        <img src={Item7}></img>
-      </div>
-      <div>
-        <div className='tittle-item'>
-          <p>Color your dreams</p>
-          <p>IIIustration</p>
-        </div>
-        <img src={Item8}></img>
-      </div>
-      <div>
-        <div className='tittle-item'>
-          <p>Go Global</p>
-          <p>Translation</p>
-        </div>
-        <img src={Item9}></img>
-      </div>
-      <div>
-        <div className='tittle-item'>
-          <p>Learn your business</p>
-          <p>Data Entry</p>
-        </div>
-        <img src={Item10}></img>
-      </div>
-    </div>
-  </Carousel>
-);
 
 export default function HomePage() {
 
   // create + use hooks
   const dispatch = useAppDispatch()
   const [showNameJob, setShowNameJob] = useState('none')
+
 
   // create + use event handlers
   const onSearch = async (event: any) => {
@@ -228,7 +46,7 @@ export default function HomePage() {
 
   return (<>
     {/* Carousel */}
-    <section className="carousel container mx-auto relative"
+    <section className="carousel container relative"
     >
       <div className='form-carousel'>
         <h1 className='form-carousel-tittle'
@@ -240,15 +58,8 @@ export default function HomePage() {
           style={{ display: showNameJob }}>
           <ListNameJob />
         </div>
-        {/* <div className='popular-carousel'>
-          <span className='popular-carousel-span'>Popular: </span>
-          <button className='form-carousel-btn'>Website Design</button>
-          <button className='form-carousel-btn'>WordPress</button>
-          <button className='form-carousel-btn'>Logo Design</button>
-          <button className='form-carousel-btn'>AI Services</button>
-        </div>
-        Item Trusted */}
 
+        {/* Item Trusted */}
         <div className='info-trust'>
           <div className='trust-by container mx-auto flex items-center'>
             <span className='trust-by-span'>Trusted By:</span>
@@ -259,9 +70,7 @@ export default function HomePage() {
             <img className='trust-by-logo' src={ImagePaypal}></img>
           </div>
         </div>
-
       </div>
-      {/* <CarouselCustom /> */}
     </section>
 
     {/* Popular Service */}
@@ -269,15 +78,16 @@ export default function HomePage() {
       <div className='container mx-auto'>
         <p className='tittle-popular-services'>Popular services</p>
         <div className='item-popular-services'>
-          <SlideItem />
+          {/* <SlideItem /> */}
+          <SwiperSlideCustom />
         </div>
       </div>
     </section>
 
     {/* Content */}
     <section className='content'>
-      <div className='background-content'>
-        <div className='container mx-auto'>
+      <div className='background-content container mx-auto'>
+        <div>
           <div className='content-top grid grid-flow-cols lg:grid-cols-2 md:grid-cols-1 md:gap-10 '>
             <div className='text-content lg:mx-4 mx-10'>
               <h1 className='tittle-content'>A whole world of freelance talent at your fingertips</h1>
@@ -341,7 +151,6 @@ export default function HomePage() {
           </li>
           <li className='list-item-menu'>
             <a href=''>
-
               <img src={ImageItem3}></img>
               <p>Writing & Translation</p>
             </a>

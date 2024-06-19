@@ -16,15 +16,15 @@ const useRouteElement = () => {
                     element: <HomePage />
                 },
                 {
-                    path: 'list-job/:id',
+                    path: 'list-job/:name',
                     element: <ListJobPage />
                 },
                 {
-                    path: 'list-job-and-type-job',
+                    path: 'list-job-and-type-job/:name',
                     element: <ListJobAndTypeJobPage />
                 },
                 {
-                    path: 'detail-job',
+                    path: 'detail-job/',
                     element: <DetailJobPage />,
                 }
             ]

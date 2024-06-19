@@ -21,7 +21,9 @@ header {
     margin: 0 auto;
     max-width: 1400px;
 }
-
+.set-search-header{
+    visibility :visible;
+}
 
 .ant-space-item a:hover {
     color: #1dbf73;
@@ -31,7 +33,6 @@ header {
 .fixed-header-page {
     height: 128px;
 }
-
 
 .fixed-header-page #btn-sidebar {
     color: #62646a;
@@ -49,7 +50,6 @@ header {
 
 .fixed-header-page .menu-list-job {
     display: flex !important;
-    box-shadow: 0px 22px 40px 0px #0000003e;
 }
 
 
@@ -70,7 +70,7 @@ header {
     background-color: transparent;
     border: none;
     font-size: 1.5rem;
-    color: white;
+    color:#565759;
 }
 
 #btn-sidebar:focus {
@@ -81,15 +81,6 @@ header {
     display: flex;
     flex-direction: column;
 }
-
-/* .changeColor #btn-sidebar {
-    color: #62646a;
-} */
-
-
-/* header.changeColor {
-    background-color: white;
-} */
 
 header p {
     color: #393a3c;
@@ -180,11 +171,6 @@ nav a:nth-child(2):hover{
 }
 
 
-/* .changeColor nav a,
-.changeColor p {
-    color: #62646a;
-} */
-
 .menu-bar i {
     padding-left: 8px;
     font-size: 14px;
@@ -203,21 +189,13 @@ header .btn-join {
     background-color: transparent;
     color: #1dbf73;
     font-weight: 500;
+    border-color: #1dbf73;
 }
 
 .btn-join:hover {
     background-color: #1dbf73 !important;
     border-color: transparent !important;
     color: white !important;
-}
-
-/* header.changeColor .btn-join {
-    border-color: green;
-    color: green;
-} */
-.btn-join {
-    border-color: #1dbf73;
-    color: green;
 }
 
 
@@ -242,14 +220,24 @@ header .btn-join {
 
 .menu-list-job p {
     margin: 0 7px;
-    font-size: 16px;
+    font-size: 1rem;
     text-wrap: nowrap;
 }
 
-.menu-list-job a {
-    margin: 0 10px;
+.menu-list-job button {
+    margin: 0 auto;
+    border: none;
+    background-color: transparent;
 }
-
+.menu-list-job button span{
+    font-size: 1.1rem;
+}
+.menu-list-job button:focus{
+    outline: none;
+}
+.menu-list-job button:hover span,.menu-list-job .ant-btn:hover{
+    color: #1dbf73 !important;
+}
 .ant-dropdown-trigger::after {
     content: '';
     display: block;
@@ -291,6 +279,17 @@ header .btn-join {
 .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
     background-color: white;
 }
+@media screen and (max-width:1200px) {
+    .menu-list-job{
+        justify-content: start;
+        padding: 0;
+        position: relative;
+        top: 0;
+    }
+    .menu-list-job p{
+        width: 90%;
+    }
+}
 
 @media screen and (max-width: 1160px) {
     .menu-bar a:nth-child(3) {
@@ -299,6 +298,13 @@ header .btn-join {
 
     #btn-sidebar {
         display: block !important;
+    }
+    .menu-list-job button{
+        margin: 0;
+    }
+    .menu-list-job button span{
+        font-size: 1rem;
+
     }
 }
 
@@ -332,16 +338,15 @@ header .btn-join {
 
     header {
         justify-content: space-between;
-        /* padding: 0px 20px; */
+        margin: 0 10px;
     }
 
     .menu-bar {
         width: 10%;
     }
+    header .btn-join {
+        color: #62646a !important;
+        border-color: transparent !important;
+    }
 
-    /* header.changeColor .btn-join {
-        border: none;
-        color: #62646a;
-        font-size: 1.1rem;
-    } */
 }
