@@ -11,3 +11,28 @@
 body {
     font-family: "Poppins", sans-serif;
 }
+
+/* css custom breadcrumb */
+.ant-breadcrumb-link{
+    color: rgba(0, 0, 0, 0.45);
+    transition: color 0.2s;
+    padding: 0 4px;
+    border-radius: 4px;
+    /* height: 22px; */
+    display: inline-block;
+    margin-inline: -4px;
+    font-weight: 600;
+}
+.ant-breadcrumb-link:hover{
+    background-color: #b8b8b82e;
+    color: #565759;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.ant-breadcrumb ol{
+    align-items: center;
+}
+
+.ant-modal-footer{
+    display: none;
+}

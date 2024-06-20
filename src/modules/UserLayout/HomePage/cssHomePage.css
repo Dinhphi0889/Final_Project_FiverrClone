@@ -326,7 +326,6 @@
     .carousel{
         background: linear-gradient(180deg,#003912 36.72%,#19aa64 141.43%);
         border-radius: 0;
-        /* height: 350px; */
     }
     .form-carousel{
         width: 100%;

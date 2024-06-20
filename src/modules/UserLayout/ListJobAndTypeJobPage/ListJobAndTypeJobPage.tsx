@@ -2,7 +2,7 @@
 // import hooks
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { useAppDispatch } from "../../../redux/hooks";
 
 // import api
 import { apiGetDetailOfTypeJob } from "../../../apis/apiGetTypeOfListJob";
@@ -15,13 +15,14 @@ import './cssListJobAndTypeJob.css'
 
 // import components custom
 import BreadcrumbCustom from "./BreadcrumbCustom";
+import ItemListJob from "./ItemListJob";
 
 export default function ListJobAndTypeJobPage() {
 
   // Create hooks
   const { state } = useLocation()
   const dispatch = useAppDispatch()
-  const { detailOfTypeJob } = useAppSelector((state) => state.detailOfListJob)
+
 
   // Function handler call api
   const callApiDetailOfTypeJob = async () => {
@@ -34,19 +35,13 @@ export default function ListJobAndTypeJobPage() {
     callApiDetailOfTypeJob()
   }, [state.detailJobId])
 
-  const handleShowListJob = () => {
-    if(detailOfTypeJob){
-      detailOfTypeJob.map((detail)=>{
-        console.log(detail)
-      })
-    }
-  }
-  handleShowListJob()
   return (
     <div className="container mx-auto">
-      <BreadcrumbCustom />
+      <BreadcrumbCustom/>
       <h1 className="tittle-type-job">Desktop Applications</h1>
-
+      <div className='item-detail-card grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2'>
+        <ItemListJob />
+      </div>
     </div>
   )
 }

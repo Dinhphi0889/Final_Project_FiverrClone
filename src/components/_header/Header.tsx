@@ -22,7 +22,12 @@ import { SearchProps } from 'antd/es/input/Search';
 import { getMenuJob } from '../../apis/apiMenuJob';
 import type { MenuProps } from 'antd';
 import { Dropdown, Space } from 'antd';
-import FormLogin from './FormLogin';
+
+// import form login & register
+import FormLogin from '../../modules/AuthenLayout/FormLogin';
+import FormRegister from '../../modules/AuthenLayout/FormRegister';
+
+
 
 const { Search } = Input;
 const onSearch: SearchProps['onSearch'] = (value, _e) => {
@@ -47,6 +52,9 @@ export default function HeaderPage() {
       searchHeader?.classList.add('set-search-header')
     }
   }, [window.location.pathname])
+
+  const [isRegister, setIsRegister] = useState(false);
+
 
 
   // Handler show modal
@@ -212,10 +220,24 @@ export default function HeaderPage() {
     navigate(`/list-job/${lowerNameCustom}`, { state: { jobId: id } })
   }
 
+  // modal login
   const modalLogin = () => {
-    return <Modal title='Login' open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-      {/* <h1 className='text-2xl font-semibold'>Login</h1> */}
-      <FormLogin />
+    return <Modal
+      className='modal-form relative'
+      open={isModalOpen}
+      onOk={handleOk}
+      onCancel={handleCancel}
+      width={1000}>
+        <h1 className='tittle-form-login text-center text-3xl font-semibold my-3'>Login</h1>
+        <div className='flex flex-row-reverse justify-around'>
+      <div className='form-login'>
+          <FormLogin />
+        </div>
+        <div className='form-register'>
+          <FormRegister />
+        </div>
+        <div className='img-form'></div>
+      </div>
     </Modal>
   }
 
@@ -266,7 +288,9 @@ export default function HeaderPage() {
           </Swiper>
         </div>
       </div>
-      {modalLogin()}
+      <div className='form-login'>
+        {modalLogin()}
+      </div>
     </div>
   );
 }

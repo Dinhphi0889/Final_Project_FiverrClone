@@ -1,5 +1,53 @@
-.tittle-type-job{
+.tittle-type-job {
     font-size: 1.5rem;
-    margin: 20px 0;
+    margin: 20px 10px;
     font-weight: 600;
+}
+
+
+.item-detail-card .desc-detail {
+    color: black;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.item-detail-card .tittle-card-detail {
+    margin-bottom: 5px;
+}
+
+.item-detail-card .desc-detail:hover {
+    color: #1dbf73;
+}
+
+.item-detail-card .evaluate {
+    color: gray;
+    font-weight: 500;
+    font-size: .9rem;
+}
+
+.item-detail-card .ant-card-body {
+    padding: 20px 0;
+}
+
+.item-detail-card .img-detail {
+    border: 1px solid gray;
+}
+.item-detail-card .ant-card-actions li span{
+    color: rgb(58, 57, 57);
+}
+.item-detail-card .ant-card-actions li span:hover{
+    cursor: default !important;
+    color: gray !important;
+}
+
+.empty{
+    width: 100%;
+}
+
+@media only screen and (max-width:640px) {
+    .item-detail-card .item-card {
+        margin: 0 auto !important;
+        width: 80% !important;
+    }
+
 }
