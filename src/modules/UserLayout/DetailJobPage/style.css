@@ -1,0 +1,149 @@
+p,
+span {
+  color: black;
+}
+
+.ant-divider {
+  margin: 0 !important;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  opacity: 1;
+}
+
+.slick-prev::after,
+.slick-next::after {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 2px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 0 solid currentcolor;
+  border-inline-width: 2px 0;
+  border-block-width: 2px 0;
+  /* border-radius: 1px; */
+  content: "";
+  color: black;
+}
+
+.slick-prev::after {
+  transform: rotate(-45deg) translate(8px, 0);
+}
+.slick-next::after {
+  transform: rotate(135deg) translate(-5px, 3px);
+}
+.slider-container .slider-items {
+  height: 100% !important;
+  overflow: hidden;
+}
+
+.slick-arrow {
+  padding: 12px !important;
+  /* position: absolute; */
+}
+.slider-items img {
+  object-fit: contain;
+  height: 100% !important;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.slider-items img:hover {
+  transform: scale(1.1);
+}
+
+.slider-container .slick-prev {
+  left: 4px !important;
+  z-index: 2;
+}
+
+.slider-container .slick-next {
+  right: 4px !important;
+}
+
+.slider-container .slick-prev::before,
+.slider-container .slick-next::before {
+  opacity: 0;
+}
+
+.slider-container .slick-dots {
+  /* text-align: left; */
+  height: 50px;
+  margin: 5px 0;
+  bottom: 0 !important;
+  background-color: rgb(128, 128, 128, 0.7);
+  overflow: hidden;
+}
+
+.slider-container .slick-dots img {
+  height: 100%;
+}
+.slider-container .small_image {
+  display: inline-block;
+  height: 100%;
+}
+
+.slick-dots li {
+  width: 80px;
+  height: 40px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+.desc_info_list {
+  list-style: circle;
+  color: black;
+}
+
+.desc_info_list li {
+  padding-left: 10px;
+}
+.desc_info_list li::marker {
+  content: "●"; /* Sử dụng dấu chấm tròn đầy */
+  color: black; /* Màu của dấu chấm */
+}
+
+.ant-table-cell {
+  padding: 0 16px !important;
+}
+.ant-table-cell span {
+  font-weight: bold;
+}
+.ant-btn {
+  width: 70px;
+}
+.ant-table-row .ant-table-cell {
+  padding: 0;
+}
+
+.ant-table-tbody {
+  background-color: transparent;
+}
+.ant-tabs-nav-wrap {
+  justify-content: center;
+}
+
+.sidercard_btn .ant-btn.css-dev-only-do-not-override-17seli4.ant-btn-primary {
+  background-color: green;
+  transition: all 0.5s;
+}
+.sidercard_btn
+  .ant-btn.css-dev-only-do-not-override-17seli4.ant-btn-primary:hover {
+  background-color: rgba(0, 128, 0, 0.479);
+}
+
+.ant-collapse-header-text {
+  font-weight: bold;
+}
+
+.custom-size {
+  width: 20px;
+  height: 15px;
+}
+
+.siderdetailjob {
+  position: fixed;
+}
