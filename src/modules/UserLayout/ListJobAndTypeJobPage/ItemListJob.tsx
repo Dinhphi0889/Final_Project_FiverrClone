@@ -12,7 +12,7 @@ export default function ItemListJob() {
             return Array(item.congViec).map((getDetail: CongViec) => {
                 return (
                     <Card
-                        className='item-card mx-5 my-5 '
+                        className='item-card mx-5 my-5 pb-10'
                         cover={
                             <img className='img-detail'
                                 alt="example"
@@ -20,7 +20,7 @@ export default function ItemListJob() {
                             />
                         }
                         actions={[
-                            <div className='flex justify-between mx-3 text-lg'>
+                            <div className='flex justify-between mx-3 text-lg border-b-2'>
                                 <i className="fa-regular fa-heart"></i>
                                 <span className=''>{`Prices : $${getDetail.giaTien}`}</span>
                             </div>

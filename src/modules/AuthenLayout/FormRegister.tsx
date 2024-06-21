@@ -1,59 +1,6 @@
-import React, { useState } from 'react';
-import type { CascaderProps } from 'antd';
-import {
-    AutoComplete,
-    Button,
-    Cascader,
-    Checkbox,
-    Col,
-    Form,
-    Input,
-    InputNumber,
-    Row,
-    Select,
-} from 'antd';
+import { Button, DatePicker, Form, Input, Select, } from 'antd';
+import { apiRegister } from '../../apis/apiRegister';
 const { Option } = Select;
-
-interface DataNodeType {
-    value: string;
-    label: string;
-    children?: DataNodeType[];
-}
-
-const residences: CascaderProps<DataNodeType>['options'] = [
-    {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-        children: [
-            {
-                value: 'hangzhou',
-                label: 'Hangzhou',
-                children: [
-                    {
-                        value: 'xihu',
-                        label: 'West Lake',
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-        children: [
-            {
-                value: 'nanjing',
-                label: 'Nanjing',
-                children: [
-                    {
-                        value: 'zhonghuamen',
-                        label: 'Zhong Hua Men',
-                    },
-                ],
-            },
-        ],
-    },
-];
 
 const formItemLayout = {
     labelCol: {
@@ -78,11 +25,20 @@ const tailFormItemLayout = {
         },
     },
 };
-export default function FormRegister() {
+export default function FormRegister(props: any) {
     const [form] = Form.useForm();
 
-    const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
+    const onFinish = (fieldsValue: any) => {
+        const getTime = new Date()
+        // const time = 
+        const values = {
+            ...fieldsValue,
+            id: getTime.getTime().toString().slice(-4),
+            'birthday': fieldsValue['birthday'].format('DD-MM-YYYY'),
+        }
+        // console.log('Received values of form: ', fieldsValue);
+        console.log('value', values)
+        apiRegister(values)
     };
 
 
@@ -92,14 +48,13 @@ export default function FormRegister() {
             form={form}
             name="register"
             onFinish={onFinish}
-            style={{ width: 400}}
+            style={{ width: 400 }}
             scrollToFirstError
         >
             <Form.Item
                 name="name"
                 label="Your Name"
                 rules={[
-
                     {
                         required: true,
                         message: 'Please input Your Name!',
@@ -133,6 +88,14 @@ export default function FormRegister() {
                         required: true,
                         message: 'Please input your password!',
                     },
+                    {
+                        min: 6,
+                        message: 'Password must be at least 6-16 characters'
+                    },
+                    {
+                        max: 16,
+                        message: 'Password must be at least 6-16 characters'
+                    },
                 ]}
                 hasFeedback
             >
@@ -142,8 +105,9 @@ export default function FormRegister() {
             <Form.Item
                 name="confirm"
                 label="Confirm Password"
+
                 dependencies={['password']}
-                hasFeedback
+                // hasFeedback
                 rules={[
                     {
                         required: true,
@@ -169,23 +133,39 @@ export default function FormRegister() {
             >
                 <Input style={{ width: '100%' }} />
             </Form.Item>
-
+            <Form.Item
+                name="birthday"
+                label="Birth Day" >
+                <DatePicker />
+            </Form.Item>
             <Form.Item
                 name="gender"
                 label="Gender"
                 rules={[{ required: true, message: 'Please select gender!' }]}
             >
                 <Select placeholder="select your gender">
-                    <Option value="male">Male</Option>
-                    <Option value="female">Female</Option>
+                    <Option value={true}>Male</Option>
+                    <Option value={false}>Female</Option>
                     <Option value="other">Other</Option>
                 </Select>
             </Form.Item>
 
-            <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
-                    Register
-                </Button>
+            <Form.Item {...tailFormItemLayout}
+            >
+                <div className='flex justify-around'>
+                    <Button className=''
+                        type="primary"
+                        htmlType="submit">
+                        Register
+                    </Button>
+                    <Button
+                        onClick={() => { props.setSwitchRegister(false) }}
+                        type="primary"
+                    >
+                        Login
+                    </Button>
+                </div>
+
             </Form.Item>
         </Form>
     );

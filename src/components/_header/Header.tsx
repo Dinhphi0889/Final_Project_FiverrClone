@@ -42,6 +42,9 @@ export default function HeaderPage() {
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [isSwitchImgModal, setIsSwitchImgModal] = useState(false)
+
+  //use hooks add class to set css
   useEffect(() => {
     const changeHeader = document.querySelector('#changeHeader')
     const searchHeader = document.querySelector('.search')
@@ -53,9 +56,11 @@ export default function HeaderPage() {
     }
   }, [window.location.pathname])
 
-  const [isRegister, setIsRegister] = useState(false);
 
-
+  // function props to switch img form
+  const switchModal = (boolean: any) => {
+    setIsSwitchImgModal(boolean)
+  }
 
   // Handler show modal
   const showModal = () => {
@@ -69,11 +74,18 @@ export default function HeaderPage() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const handleCloseModalProps = (boolean: any) => {
+    setIsModalOpen(boolean)
+  }
+
   //Call api get list menu job
   const { data = [] } = useQuery({
     queryKey: ['menu'],
     queryFn: getMenuJob
   })
+
+
 
 
   // Function handler show sidebar
@@ -220,23 +232,39 @@ export default function HeaderPage() {
     navigate(`/list-job/${lowerNameCustom}`, { state: { jobId: id } })
   }
 
-  // modal login
+  // modal login & register
   const modalLogin = () => {
     return <Modal
       className='modal-form relative'
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}
-      width={1000}>
-        <h1 className='tittle-form-login text-center text-3xl font-semibold my-3'>Login</h1>
-        <div className='flex flex-row-reverse justify-around'>
-      <div className='form-login'>
-          <FormLogin />
+      width={870}
+    >
+
+      <div className='flex flex-row-reverse justify-around'>
+        <div className='form-login'>
+          <h1 className='tittle-form-login text-center text-3xl font-semibold my-3'>Login</h1>
+          <FormLogin setSwitchLogin={switchModal} closeModal={handleCloseModalProps} />
         </div>
         <div className='form-register'>
-          <FormRegister />
+          <h1 className='tittle-form-login text-center text-3xl font-semibold my-3'>Register</h1>
+          <FormRegister setSwitchRegister={switchModal} />
         </div>
-        <div className='img-form'></div>
+        <div className={isSwitchImgModal ? 'switch-img-modal' : 'img-form'}>
+          <div className='text-img px-10 py-10'>
+            <h1 className='font-bold text-3xl my-5 text-white'>Success starts here
+            </h1>
+            <div className='text-lg'>
+              <p className='text-white my-3'><i className="fa-solid fa-check pr-2"></i>Over 600 categories
+              </p>
+              <p className='text-white my-3'><i className="fa-solid fa-check pr-2"></i>Pay per project, not per hour
+              </p>
+              <p className='text-white my-3'><i className="fa-solid fa-check pr-2"></i>Access to talent and businesses across the globe
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </Modal>
   }

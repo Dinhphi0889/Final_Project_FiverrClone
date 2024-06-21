@@ -246,17 +246,6 @@ header .btn-join {
     height: 3px;
 }
 
-.modal-form .img-form{
-    background-image: url('../../assets/img/img_form.png');
-    object-fit: cover;
-    background-size: cover;
-    position: absolute;
-    z-index: 99;
-    height: 80%;
-    width: 410px;
-    left: 6%;
-    top: 14%;
-}
 
 /* custom ant */
 .ant-affix {

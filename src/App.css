@@ -36,3 +36,31 @@ body {
 .ant-modal-footer{
     display: none;
 }
+
+/* css img modal */
+.modal-form .img-form{
+    background-image: url('../src/assets/img/img_form.png');
+    object-fit: cover;
+    background-size: cover;
+    position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 429px;
+    left: 0;
+    top: 0%;
+    border-radius: 8px 0 0 8px;
+    transition: 1s;
+}
+.modal-form .switch-img-modal{
+    background-image: url('../src/assets/img/img_form.png');
+    object-fit: cover;
+    background-size: cover;
+    position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 435px;
+    left: 50%;
+    top: 0%;
+    border-radius: 0 8px 8px 0;
+    transition: 1s;
+}

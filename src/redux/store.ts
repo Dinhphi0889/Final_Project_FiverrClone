@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
     menuJob: menuJobSlice.reducer,
     nameJob: nameJobSlice.reducer,
     listJob: listJobSlice.reducer,
-    detailOfListJob: detailTypeJobSlice.reducer
+    detailOfListJob: detailTypeJobSlice.reducer,
 })
 
 export const store = configureStore({

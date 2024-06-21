@@ -1,19 +1,50 @@
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, message, Space, Form, Input } from 'antd';
+import type { FormProps } from 'antd';
+import { apiLogin } from '../../apis/apiLogin';
 
 
-function FormLogin() {
 
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+function FormLogin(props: any) {
+
+  const [messageApi, contextHolder] = message.useMessage();
+  const loginSuccess = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Login Success',
+    });
   };
+
+  const loginError = () => {
+    messageApi.open({
+      type: 'error',
+      content: 'Email or password is incorrect',
+    });
+  };
+
+  const onFinish = async (values: any) => {
+    try {
+
+      const result = await apiLogin(values)
+      loginSuccess()
+      props.closeModal(false)
+      localStorage.setItem('user', JSON.stringify(result))
+    } catch {
+      loginError()
+    }
+  };
+
+
+
+
   return (
     <>
+      {contextHolder}
       <Form
         name="normal_login"
         className="login-form"
         onFinish={onFinish}
-        style={{width:400}}
+        style={{ width: 400 }}
       >
         <Form.Item
           name="email"
@@ -45,7 +76,7 @@ function FormLogin() {
             Log in
           </Button>
           <div>
-            <a className='block mb-2' href="">Don't have account? Create now!</a>
+            <a type='button' onClick={() => { props.setSwitchLogin(true) }} className='block mb-2'>Don't have account? Create now!</a>
             <a className="login-form-forgot" href="">
               Forgot password
             </a>
