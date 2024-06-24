@@ -26,14 +26,15 @@ import type { MenuProps } from 'antd';
 // import form login & register
 import FormLogin from '../../modules/AuthenLayout/FormLogin';
 import FormRegister from '../../modules/AuthenLayout/FormRegister';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { apiGetNameJob } from '../../apis/apiGetNameJob';
+
+import { detailOfListJobAction } from '../../redux/slices/detailOfTypeJob.slice';
 
 
 
 const { Search } = Input;
-const onSearch: SearchProps['onSearch'] = (value, _e) => {
-  console.log(_e, value)
-}
+
 
 
 export default function HeaderPage() {
@@ -44,8 +45,18 @@ export default function HeaderPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSwitchImgModal, setIsSwitchImgModal] = useState(false)
   const [getWidth, setGetWidth] = useState(0)
-  
+
   const { width } = useWindowSize()
+  const dispatch = useAppDispatch()
+
+  // search detail job
+  const onSearch: SearchProps['onSearch'] = async (value) => {
+    if (value !== "" && value.trim()) {
+      const result = await apiGetNameJob(value)
+      dispatch(detailOfListJobAction.setDetailOfTypeJob(result))
+      navigate(`/list-job-and-type-job/result-for-${value}`, { state: { nameFind: value } })
+    }
+  }
 
   //use hooks add class to set css
   useEffect(() => {
@@ -71,9 +82,9 @@ export default function HeaderPage() {
       let getNameUserSplit = getNameUser.charAt(0)
       setGetNameAvatar(getNameUserSplit.toUpperCase())
     }
-  }, currentUser)
+  }, [currentUser])
 
-  
+
   // function props to switch form login register
   const switchModal = (boolean: any, none?: any, block?: any) => {
     let formRegister = document.querySelector('.form-register') as HTMLElement

@@ -61,7 +61,7 @@ export default function FormRegister(props: any) {
                 onFinish={onFinish}
                 style={{ width: 400 }}
                 scrollToFirstError
-                ref={props.ref}
+                
             >
                 <Form.Item
                     name="name"

@@ -1,7 +1,12 @@
+// import antd
 import { Avatar, Card, Rate } from 'antd';
-import { useAppSelector } from '../../../redux/hooks';
-import { CongViec, TypeDetailOfListJob } from '../../../types/typeDetailOfListJob';
 import { Empty } from 'antd';
+
+// import hooks
+import { useAppSelector } from '../../../redux/hooks';
+
+// import type
+import { CongViec, TypeDetailOfListJob } from '../../../types/typeDetailOfListJob';
 
 const { Meta } = Card;
 export default function ItemListJob() {
@@ -12,7 +17,8 @@ export default function ItemListJob() {
             return Array(item.congViec).map((getDetail: CongViec) => {
                 return (
                     <Card
-                        className='item-card mx-5 my-5 pb-10'
+                    
+                        className='item-card mx-5 my-5 pb-10 h-96'
                         cover={
                             <img className='img-detail'
                                 alt="example"
@@ -39,10 +45,6 @@ export default function ItemListJob() {
 
                             </div>
                         </div>
-
-                        {/* <Meta
-                            description={`$${getDetail.giaTien}`} 
-                            /> */}
                     </Card>
                 )
             })

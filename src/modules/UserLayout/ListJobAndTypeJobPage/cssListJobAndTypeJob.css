@@ -40,6 +40,20 @@
     color: gray !important;
 }
 
+.dropdown-type-job-page .dropdown-item{
+    margin: 10px 20px 20px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.dropdown-type-job-page .dropdown-item:hover{
+    color: black !important;
+    background-color: #f5f5f5 !important;
+    /* border-color: white !important; */
+}
+
 .empty{
     width: 100%;
 }
@@ -49,5 +63,14 @@
         margin: 0 auto !important;
         width: 80% !important;
     }
-
+    .dropdown-type-job-page{
+        text-align: center;
+    }
+    .type-job-page .tittle-result{
+        text-align: center;
+    }
+    .dropdown-type-job-page .dropdown-item{
+        margin: 5px 5px 5px 0;
+    }
 }
+

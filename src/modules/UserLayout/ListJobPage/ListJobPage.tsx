@@ -13,7 +13,7 @@ import { listJobAction } from '../../../redux/slices/listJob.slice'
 import { TypeListJob } from '../../../types/typeListJob'
 
 // import antd
-import { Button, Card, Modal, Tag } from 'antd';
+import { Button, Card, Empty, Modal, Tag } from 'antd';
 
 // import css
 import './cssListJobPage.css'
@@ -231,30 +231,37 @@ export default function ListJobPage() {
     </Swiper>
   }
 
+
   const renderShowListJob = () => {
+
     if (listJob) {
       return listJob.map((item: TypeListJob) => {
-        return item.dsNhomChiTietLoai.map((detailItem) => {
-          return (
-            <div className='item-list-job'>
-              <Card
-                hoverable
-                style={{ width: 340 }}
-                cover={<img src={detailItem.hinhAnh} />}
-                className='item-list-job container mb-5 px-5'
-              >
-                <p className='text-2xl font-bold mb-3'>{detailItem.tenNhom}</p>
-                {detailItem.dsChiTietLoai.map((detailName) => {
-                  return (
-                    <button onClick={() => (handleNavigate(detailName.tenChiTiet, detailItem.dsChiTietLoai))} className='btn-name-detail block text-base my-1'>
-                      {detailName.tenChiTiet}
-                    </button>
-                  )
-                })}
-              </Card>
-            </div>
-          )
-        })
+        if (item.dsNhomChiTietLoai.length < 1){
+          return <div className='empty my-24'>
+          <Empty />
+        </div>
+        }
+          return item.dsNhomChiTietLoai.map((detailItem) => {
+            return (
+              <div className='item-list-job'>
+                <Card
+                  hoverable
+                  style={{ width: 340 }}
+                  cover={<img src={detailItem.hinhAnh} />}
+                  className='item-list-job container mb-5 px-5'
+                >
+                  <p className='text-2xl font-bold mb-3'>{detailItem.tenNhom}</p>
+                  {detailItem.dsChiTietLoai.map((detailName) => {
+                    return (
+                      <button onClick={() => (handleNavigate(detailName.tenChiTiet, detailItem.dsChiTietLoai))} className='btn-name-detail block text-base my-1'>
+                        {detailName.tenChiTiet}
+                      </button>
+                    )
+                  })}
+                </Card>
+              </div>
+            )
+          })
 
       })
     }
@@ -279,7 +286,7 @@ export default function ListJobPage() {
         <h1 className='tittle-programming-tech text-2xl my-8 font-bold ml-2'>Most Popular in Programming & Tech</h1>
         {swiperCustom()}
       </div>
-      <h1 className='tittle text-2xl my-8 font-bold'>Explore Programming & Tech</h1>
+      <h1 className='tittle text-2xl my-8 font-bold ml-2'>Explore Programming & Tech</h1>
       <div className='show-list-job container mx-auto grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'>
         {renderShowListJob()}
       </div>

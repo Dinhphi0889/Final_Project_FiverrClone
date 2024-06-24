@@ -149,7 +149,7 @@ header p {
 
 /* Custom Navbar */
 nav a {
-    margin: 0 15px;
+    margin: 0 7px;
     /* color: white; */
     color: #565759;
     font-size: 1rem;
@@ -262,7 +262,7 @@ header .btn-join {
 
 
 /* custom ant */
-.ant-affix {
+#changeHeader .ant-affix {
     width: 100% !important;
 }
 
@@ -274,7 +274,7 @@ header .btn-join {
     transition: .5s;
 }
 
-.ant-space-item:hover {
+#changeHeader .ant-space-item:hover {
     color: rgb(16, 168, 52);
     transform: translateX(1);
     transition: .5s;

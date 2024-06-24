@@ -1,6 +1,5 @@
 // import modules
 import { useState } from 'react';
-import { Input } from 'antd';
 import { nameJobAction } from '../../../redux/slices/nameJob.slice.ts';
 
 // import image
@@ -18,6 +17,13 @@ import { useAppDispatch } from '../../../redux/hooks.ts';
 // import components render
 import ListNameJob from './ListNameJob.tsx';
 import SwiperSlideCustom from './SwiperSlideCustom.tsx';
+import { useNavigate } from 'react-router-dom';
+
+// import antd
+import { Input } from 'antd';
+import { SearchProps } from 'antd/es/input/Search';
+import { detailOfListJobAction } from '../../../redux/slices/detailOfTypeJob.slice.ts';
+
 
 
 
@@ -30,16 +36,25 @@ export default function HomePage() {
   // create + use hooks
   const dispatch = useAppDispatch()
   const [showNameJob, setShowNameJob] = useState('none')
+  const navigate = useNavigate()
 
 
   // create + use event handlers
-  const onSearch = async (event: any) => {
+  const showOnSearch = async (event: any) => {
     if (event.target.value !== "" && event.target.value.trim()) {
       const result = await apiGetNameJob(event.target.value)
       dispatch(nameJobAction.setNameJob(result))
       setShowNameJob('block')
     } else if (event.target.value === '') {
       setShowNameJob('none')
+    }
+  }
+  const onSearch: SearchProps['onSearch'] = async (value) => {
+    if (value !== "" && value.trim()) {
+      console.log(value)
+      const result = await apiGetNameJob(value)
+      dispatch(detailOfListJobAction.setDetailOfTypeJob(result))
+      navigate(`/list-job-and-type-job/result-for-${value}`, { state: { nameFind: value } })
     }
   }
 
@@ -52,7 +67,8 @@ export default function HomePage() {
         <h1 className='form-carousel-tittle'
         >Find the right <em>freelance</em><br /> service, right away</h1>
         <Search className='form-carousel-input' placeholder='Search for any service...'
-          onChange={onSearch}
+          onChange={showOnSearch}
+          onSearch={onSearch}
         />
         <div className='show-listNameJob rounded-md h-64 shadow-lg'
           style={{ display: showNameJob }}>
