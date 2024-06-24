@@ -89,7 +89,7 @@ header p {
 }
 
 /* Custom input search */
-.hidden-search-navbar {
+#searchHeader .hidden-search-navbar {
     visibility: hidden;
 }
 
@@ -101,6 +101,10 @@ header p {
     width: 30%;
     margin: 10px 20px;
     transition: 0s !important;
+}
+#searchHeaderLogin{
+    width: 100%;
+    margin: 10px 20px;
 }
 
 #searchHeader .ant-input-group-addon,
@@ -164,6 +168,8 @@ nav a:nth-child(2):hover{
     border-radius: 5px;
 }
 
+/* menu-bar */
+
 .menu-bar {
     display: flex;
     align-items: center;
@@ -176,6 +182,14 @@ nav a:nth-child(2):hover{
     padding-left: 8px;
     font-size: 14px;
     display: inline;
+}
+
+/* menu-bar-login */
+.menu-bar-login{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 60%;
 }
 
 .btn-custom {
@@ -225,7 +239,7 @@ header .btn-join {
     text-wrap: nowrap;
 }
 
-.menu-list-job button {
+.menu-list-job a {
     margin: 0 auto;
     border: none;
     background-color: transparent;
@@ -239,7 +253,7 @@ header .btn-join {
 .menu-list-job button:hover span,.menu-list-job .ant-btn:hover{
     color: #1dbf73 !important;
 }
-.ant-dropdown-trigger::after {
+.menu-list-job .ant-dropdown-trigger .ant-space-item::after {
     content: '';
     display: block;
     width: 0;
@@ -252,7 +266,7 @@ header .btn-join {
     width: 100% !important;
 }
 
-.ant-dropdown-trigger:hover::after {
+.menu-list-job .ant-dropdown-trigger .ant-space-item:hover::after {
     width: 100%;
     background: rgb(16, 168, 52);
     color: rgb(16, 168, 52);
@@ -318,11 +332,11 @@ header .btn-join {
         display: none;
     }
 
-    .menu-bar {
+    .menu-bar,.menu-bar-login {
         justify-content: flex-end;
     }
 
-    #searchHeader {
+    #searchHeader, #searchHeaderLogin{
         display: none;
     }
 
@@ -334,7 +348,13 @@ header .btn-join {
 }
 
 @media screen and (max-width: 600px) {
+    nav a:nth-child(3) {
+        display: none;
+    }
     nav a:nth-child(5) {
+        display: none;
+    }
+    nav.menu-bar-login a:nth-child(3){
         display: none;
     }
 

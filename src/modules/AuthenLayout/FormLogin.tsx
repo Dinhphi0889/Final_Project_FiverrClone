@@ -1,12 +1,14 @@
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
-import { Button, message, Space, Form, Input } from 'antd';
-import type { FormProps } from 'antd';
+import { Button, message, Form, Input } from 'antd';
 import { apiLogin } from '../../apis/apiLogin';
+import { useAppDispatch } from '../../redux/hooks';
+import { setCurrentUser } from '../../redux/slices/user.slice';
 
 
 
 function FormLogin(props: any) {
 
+  const dispatch = useAppDispatch()
   const [messageApi, contextHolder] = message.useMessage();
   const loginSuccess = () => {
     messageApi.open({
@@ -29,11 +31,12 @@ function FormLogin(props: any) {
       loginSuccess()
       props.closeModal(false)
       localStorage.setItem('user', JSON.stringify(result))
+      dispatch(setCurrentUser(result))
+
     } catch {
       loginError()
     }
   };
-
 
 
 
@@ -76,7 +79,7 @@ function FormLogin(props: any) {
             Log in
           </Button>
           <div>
-            <a type='button' onClick={() => { props.setSwitchLogin(true) }} className='block mb-2'>Don't have account? Create now!</a>
+            <a type='button' onClick={() => { props.setSwitchLogin(true, 'block', 'none') }} className='block mb-2'>Don't have account? Create now!</a>
             <a className="login-form-forgot" href="">
               Forgot password
             </a>

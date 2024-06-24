@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom'
+import { useWindowSize } from 'react-use'
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
@@ -17,15 +18,15 @@ import 'swiper/css/scrollbar';
 import './styleHeader.css'
 
 // import antd
-import { Button, Drawer, Input, Modal } from 'antd';
+import { Button, Drawer, Input, Modal, Dropdown, Space, Avatar, Badge } from 'antd';
 import { SearchProps } from 'antd/es/input/Search';
 import { getMenuJob } from '../../apis/apiMenuJob';
 import type { MenuProps } from 'antd';
-import { Dropdown, Space } from 'antd';
 
 // import form login & register
 import FormLogin from '../../modules/AuthenLayout/FormLogin';
 import FormRegister from '../../modules/AuthenLayout/FormRegister';
+import { useAppSelector } from '../../redux/hooks';
 
 
 
@@ -41,8 +42,10 @@ export default function HeaderPage() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [isSwitchImgModal, setIsSwitchImgModal] = useState(false)
+  const [getWidth, setGetWidth] = useState(0)
+  
+  const { width } = useWindowSize()
 
   //use hooks add class to set css
   useEffect(() => {
@@ -56,11 +59,52 @@ export default function HeaderPage() {
     }
   }, [window.location.pathname])
 
+  // get user form redux
+  const { currentUser } = useAppSelector((state) => state.user)
 
-  // function props to switch img form
-  const switchModal = (boolean: any) => {
-    setIsSwitchImgModal(boolean)
+  // custom name Avatar
+  const [getNameAvatar, setGetNameAvatar] = useState('')
+  useEffect(() => {
+
+    if (currentUser) {
+      let getNameUser = currentUser.user.name
+      let getNameUserSplit = getNameUser.charAt(0)
+      setGetNameAvatar(getNameUserSplit.toUpperCase())
+    }
+  }, currentUser)
+
+  
+  // function props to switch form login register
+  const switchModal = (boolean: any, none?: any, block?: any) => {
+    let formRegister = document.querySelector('.form-register') as HTMLElement
+    let formLogin = document.querySelector('.form-login') as HTMLElement
+
+    if (getWidth > 900) {
+      setIsSwitchImgModal(boolean)
+
+    } else {
+      formRegister.style.display = none
+      formLogin.style.display = block
+    }
   }
+  useEffect(() => {
+    let formRegister = document.querySelector('.form-register') as HTMLElement
+    let formLogin = document.querySelector('.form-login') as HTMLElement
+    if (width > 900) {
+      setGetWidth(1000)
+    } else {
+      setGetWidth(0)
+    }
+    if (getWidth > 900 && formLogin && formRegister) {
+      formRegister.style.display = 'block'
+      formLogin.style.display = 'block'
+    } else if (getWidth < 900 && formLogin && formRegister) {
+      formRegister.style.display = 'none'
+      formLogin.style.display = 'block'
+    }
+  }, [width])
+
+
 
   // Handler show modal
   const showModal = () => {
@@ -86,8 +130,6 @@ export default function HeaderPage() {
   })
 
 
-
-
   // Function handler show sidebar
   const showDrawer = () => {
     setOpen(true);
@@ -101,7 +143,6 @@ export default function HeaderPage() {
   const handleRenderMenuJob = () => {
     const dataSlice = data.slice(0, 11)
     return dataSlice.map((itemData, index) => {
-      // itemData.tenLoaiCongViec
       const items: MenuProps['items'] = [
         {
           key: itemData.tenLoaiCongViec,
@@ -134,9 +175,9 @@ export default function HeaderPage() {
           <Dropdown key={index} menu={{ items }}>
             <p onClick={(e) => e.preventDefault()}>
               <Space>
-                <Button onClick={() => handleNavigate(itemData.tenLoaiCongViec, itemData.id)}>
+                <a type='button' onClick={() => handleNavigate(itemData.tenLoaiCongViec, itemData.id)}>
                   {itemData.tenLoaiCongViec}
-                </Button>
+                </a>
               </Space>
             </p>
           </Dropdown >
@@ -180,16 +221,23 @@ export default function HeaderPage() {
       width={300}
     >
       <div className='show-sidebar'>
-        <button className='bg-black text-white text-center text-lg font-bold px-6 py-2 my-3 flex rounded-md'>Join Fiverr</button>
         <div className='sidebar-menu'>
-          <a href="">Sign In</a>
-          <a href="">Browse categories</a>
-          <a href="">Explore</a>
-          <a href="">Fiverr Pro</a>
-          <a href="">General</a>
-          <a href="">Home</a>
-          <a>English<i className="fa-solid fa-globe"></i></a>
-          <a href="">US$ USD</a>
+          {currentUser ?
+            (
+              <div>Logined</div>
+            ) : (
+              <>
+                <button className='bg-black text-white text-center text-lg font-bold px-6 py-2 my-3 flex rounded-md'>Join Fiverr</button>
+                <a href="">Sign In</a>
+                <a href="">Browse categories</a>
+                <a href="">Explore</a>
+                <a href="">Fiverr Pro</a>
+                <a href="">General</a>
+                <a href="">Home</a>
+                <a>English<i className="fa-solid fa-globe"></i></a>
+                <a href="">US$ USD</a>
+              </>
+            )}
 
         </div>
       </div>
@@ -233,7 +281,7 @@ export default function HeaderPage() {
   }
 
   // modal login & register
-  const modalLogin = () => {
+  const modalCustom = () => {
     return <Modal
       className='modal-form relative'
       open={isModalOpen}
@@ -247,11 +295,13 @@ export default function HeaderPage() {
           <h1 className='tittle-form-login text-center text-3xl font-semibold my-3'>Login</h1>
           <FormLogin setSwitchLogin={switchModal} closeModal={handleCloseModalProps} />
         </div>
+
+
         <div className='form-register'>
           <h1 className='tittle-form-login text-center text-3xl font-semibold my-3'>Register</h1>
           <FormRegister setSwitchRegister={switchModal} />
         </div>
-        <div className={isSwitchImgModal ? 'switch-img-modal' : 'img-form'}>
+        <div className={isSwitchImgModal ? 'css-img-modal switch-img-modal' : 'css-img-modal img-form'}>
           <div className='text-img px-10 py-10'>
             <h1 className='font-bold text-3xl my-5 text-white'>Success starts here
             </h1>
@@ -269,56 +319,112 @@ export default function HeaderPage() {
     </Modal>
   }
 
-  return (
-    <div id='changeHeader'>
-      <div >
-        <header>
-          <Button className='pt-0' id='btn-sidebar' onClick={showDrawer} >
-            <i className="fa-solid fa-bars"
-            ></i>
-          </Button>
-          {customDrawer()}
-          <p
-            style={{
-              fontWeight: 'bold'
-            }}><a href='/'>fiverr</a><span style={{ color: 'green', fontSize: '45px' }}>.</span></p>
-          <div id='searchHeader' className='hidden-search-navbar'>
-            <Search
-              className='search'
-              placeholder="What service are you looking for today?"
-              onSearch={onSearch}
-            />
-          </div>
-          <nav className='menu-bar'>
-            <a>Fiverr Pro<i className="fa-solid fa-chevron-down"></i></a>
-            <a>Explore<i className="fa-solid fa-chevron-down"></i></a>
-            <a><i className="fa-solid fa-globe"
-              style={{ paddingRight: '8px' }}></i>English</a>
-            <a>Become a Seller</a>
-            <a>Sign Up</a>
-            <Button onClick={showModal}
-              className='btn-custom btn-join'>Join
-            </Button>
+  // handler Logout
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    navigate('/')
+  }
 
-          </nav>
-        </header>
-        {/* show menu job */}
-        <div className='menu-list-job hidden animate__animated animate__flipInX' >
-          <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
-            spaceBetween={10}
-            slidesPerView={showItem}
-            navigation
-            ref={refSwiper}
-            style={{ maxWidth: '1400px' }}
-          >
-            {handleRenderMenuJob()}
-          </Swiper>
+  return (
+    <>
+      <div id='changeHeader'>
+        <div >
+          <header>
+            <Button className='pt-0' id='btn-sidebar' onClick={showDrawer} >
+              <i className="fa-solid fa-bars"
+              ></i>
+            </Button>
+            {customDrawer()}
+            <p
+              style={{
+                fontWeight: 'bold'
+              }}><a href='/'>fiverr</a><span style={{ color: 'green', fontSize: '45px' }}>.</span></p>
+            <div
+              id={currentUser ? 'searchHeaderLogin' : 'searchHeader'}
+              className='hidden-search-navbar'>
+              <Search
+                className='search'
+                placeholder="What service are you looking for today?"
+                onSearch={onSearch}
+              />
+            </div>
+            <nav className={currentUser ? 'menu-bar-login' : 'menu-bar'}>
+
+              {currentUser ? (
+                <>
+                  <a>
+                    <i className="fa-regular fa-bell text-xl"></i>
+                  </a>
+                  <a>
+                    <i className="fa-regular fa-envelope text-xl"></i>
+                  </a>
+                  <a>
+                    <i className="fa-regular fa-heart text-xl"></i>
+                  </a>
+                  <a type='button' className='text-lg font-semibold'>Orders</a>
+                  <Dropdown
+                    menu={{
+                      items: [
+                        { label: <a href='/profile'>Account Setting</a>, key: 0 },
+                        { label: <a href='' onClick={handleLogout}>Logout</a>, key: 1 },
+                      ]
+                    }}
+                  >
+                    <Space size="large">
+                      <Badge dot
+                        status='success'
+                        offset={[-7, 35]}>
+                        <Avatar
+                          className='text-xl'
+                          style={{
+                            cursor: 'pointer',
+                            verticalAlign: 'middle',
+                            backgroundColor: 'orange'
+                          }} size="large">
+                          {getNameAvatar}
+                        </Avatar>
+                      </Badge>
+                    </Space>
+                  </Dropdown>
+                </>
+
+              ) : (
+                <>
+                  <a>Fiverr Pro<i className="fa-solid fa-chevron-down"></i></a>
+                  <a>Explore<i className="fa-solid fa-chevron-down"></i></a>
+                  <a><i className="fa-solid fa-globe"
+                    style={{ paddingRight: '8px' }}></i>English</a>
+                  <a>Become a Seller</a>
+                  <a>Sign Up</a>
+                  <Button onClick={showModal}
+                    className='btn-custom btn-join'>Join
+                  </Button>
+                </>
+              )}
+
+
+
+            </nav>
+          </header>
+          {/* show menu job */}
+          <div className='menu-list-job hidden animate__animated animate__flipInX' >
+            <Swiper
+              modules={[Navigation, Pagination, Scrollbar, A11y]}
+              spaceBetween={10}
+              slidesPerView={showItem}
+              navigation
+              ref={refSwiper}
+              style={{ maxWidth: '1400px' }}
+            >
+              {handleRenderMenuJob()}
+            </Swiper>
+          </div>
         </div>
       </div>
-      <div className='form-login'>
-        {modalLogin()}
+      <div className='form-modal'>
+        {modalCustom()}
       </div>
-    </div>
+    </>
+
   );
 }

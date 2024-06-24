@@ -4,6 +4,7 @@ import HomePage from "../modules/UserLayout/HomePage/HomePage"
 import DetailJobPage from "../modules/UserLayout/DetailJobPage/DetailJobPage"
 import ListJobAndTypeJobPage from "../modules/UserLayout/ListJobAndTypeJobPage/ListJobAndTypeJobPage"
 import ListJobPage from "../modules/UserLayout/ListJobPage/ListJobPage"
+import ProfilePage from "../modules/UserLayout/ProfilePage/ProfilePage"
 
 const useRouteElement = () => {
     const element = useRoutes([
@@ -26,6 +27,10 @@ const useRouteElement = () => {
                 {
                     path: 'detail-job/',
                     element: <DetailJobPage />,
+                },
+                {
+                    path: 'profile',
+                    element: <ProfilePage />,
                 }
             ]
         }
