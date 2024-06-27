@@ -78,9 +78,9 @@ export default function HeaderPage() {
   useEffect(() => {
 
     if (currentUser) {
-      let getNameUser = currentUser.user.name
-      let getNameUserSplit = getNameUser.charAt(0)
-      setGetNameAvatar(getNameUserSplit.toUpperCase())
+      let getNameUser = currentUser.user?.name
+      let getNameUserSplit = getNameUser?.charAt(0)
+      setGetNameAvatar(getNameUserSplit?.toUpperCase())
     }
   }, [currentUser])
 
@@ -167,8 +167,10 @@ export default function HeaderPage() {
                       return (
                         <li>
                           <a
-                            className='txtDetail'
-                            href='#'>
+                            className='txt-detail'
+                            type='button'
+                            onClick={() => handleNavigate('list-job-and-type-job', itemDetailType.tenChiTiet, itemDetailType.id, itemDetailType.tenChiTiet)}>
+
                             {itemDetailType.tenChiTiet}
                           </a>
                         </li>
@@ -186,7 +188,7 @@ export default function HeaderPage() {
           <Dropdown key={index} menu={{ items }}>
             <p onClick={(e) => e.preventDefault()}>
               <Space>
-                <a type='button' onClick={() => handleNavigate(itemData.tenLoaiCongViec, itemData.id)}>
+                <a type='button' onClick={() => handleNavigate('list-job', itemData.tenLoaiCongViec, itemData.id, null)}>
                   {itemData.tenLoaiCongViec}
                 </a>
               </Space>
@@ -285,16 +287,16 @@ export default function HeaderPage() {
   }, []);
 
   // handler change url
-  const handleNavigate = (nameSplit: String, id: Number) => {
+  const handleNavigate = (url: String, nameSplit: String, id: Number, nameFind: any) => {
     let customNameURL = nameSplit.split(' ').join('-')
     let lowerNameCustom = customNameURL.toLowerCase()
-    navigate(`/list-job/${lowerNameCustom}`, { state: { jobId: id } })
+    navigate(`/${url}/${lowerNameCustom}`, { state: { jobId: id, nameFind } })
   }
 
   // modal login & register
   const modalCustom = () => {
     return <Modal
-      className='modal-form relative'
+      className='modal-login relative'
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleCancel}

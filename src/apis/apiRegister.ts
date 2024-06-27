@@ -7,7 +7,6 @@ export const apiRegister = async (data: {
     phone: String,
     birthday: String,
     gender: Boolean,
-    // confirm:String,
     role: 'USER',
     skill: [
         ''

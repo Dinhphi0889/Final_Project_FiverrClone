@@ -1,7 +1,8 @@
-import { createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 
 const getUserLocal = localStorage.getItem('user')
+
 const initialState = {
     currentUser: getUserLocal ? JSON.parse(getUserLocal) : null
 };
@@ -10,9 +11,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setCurrentUser: (state, { payload }) => {
-            state.currentUser = payload
+            const cloneUser = { ...payload }
+            state.currentUser = cloneUser
         }
     },
 })
-export const { setCurrentUser } = userSlice.actions
+export const currentUserAction = userSlice.actions
 export default userSlice

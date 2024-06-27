@@ -4,7 +4,7 @@ import { useAppSelector } from '../../../redux/hooks';
 import { useEffect, useState } from 'react';
 import { TypeDetailOfListJob } from '../../../types/typeDetailOfListJob';
 
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function BreadcrumbCustom() {
 
@@ -12,14 +12,14 @@ export default function BreadcrumbCustom() {
 
     const navigate = useNavigate()
 
-    const goBack = ()=>{
+    const goBack = () => {
         navigate(-1)
     }
 
     const [nameBreadcrumb, setnameBreadcrumb] = useState(String)
     const [endPointBreadcrumb, setEndPointBreadcrumb] = useState(String)
     useEffect(() => {
-        if (detailOfTypeJob) {
+        if (detailOfTypeJob.length > 0) {
             let name = ''
             let nameEndPoint = ''
             detailOfTypeJob.map((getName: TypeDetailOfListJob) => {
@@ -30,7 +30,7 @@ export default function BreadcrumbCustom() {
             setEndPointBreadcrumb(nameEndPoint)
         }
 
-    },[detailOfTypeJob])
+    }, [detailOfTypeJob])
 
     return (
         <Breadcrumb
@@ -39,7 +39,7 @@ export default function BreadcrumbCustom() {
                     href: '/',
                     title: <HomeOutlined />,
                 },
-                {   
+                {
                     // href:``,
                     title: (
                         <>

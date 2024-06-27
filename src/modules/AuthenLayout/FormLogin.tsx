@@ -2,7 +2,7 @@ import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { Button, message, Form, Input } from 'antd';
 import { apiLogin } from '../../apis/apiLogin';
 import { useAppDispatch } from '../../redux/hooks';
-import { setCurrentUser } from '../../redux/slices/user.slice';
+import { currentUserAction } from '../../redux/slices/user.slice';
 
 
 
@@ -31,7 +31,7 @@ function FormLogin(props: any) {
       loginSuccess()
       props.closeModal(false)
       localStorage.setItem('user', JSON.stringify(result))
-      dispatch(setCurrentUser(result))
+      dispatch(currentUserAction.setCurrentUser(result))
 
     } catch {
       loginError()

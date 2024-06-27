@@ -1,5 +1,6 @@
 import { Button, DatePicker, Form, Input, Select, message, } from 'antd';
 import { apiRegister } from '../../apis/apiRegister';
+import { useEffect } from 'react';
 const { Option } = Select;
 
 const formItemLayout = {
@@ -26,8 +27,20 @@ const tailFormItemLayout = {
     },
 };
 export default function FormRegister(props: any) {
-    const [form] = Form.useForm();
+    const [form] = Form.useForm<FormData>();
     const [messageApi, contextHolder] = message.useMessage();
+    const getData = localStorage.getItem('user')
+
+    const data = getData ? JSON.parse(getData) : null
+
+
+    useEffect(() => {
+        if (data) {
+            console.log(data)
+            // form.setFieldValue(data)
+        }
+    }, [])
+
     const registerSuccess = () => {
         messageApi.open({
             type: 'success',
@@ -61,7 +74,6 @@ export default function FormRegister(props: any) {
                 onFinish={onFinish}
                 style={{ width: 400 }}
                 scrollToFirstError
-                
             >
                 <Form.Item
                     name="name"
@@ -73,7 +85,7 @@ export default function FormRegister(props: any) {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input value={'a'} />
                 </Form.Item>
                 <Form.Item
                     name="email"
@@ -119,7 +131,6 @@ export default function FormRegister(props: any) {
                     label="Confirm Password"
 
                     dependencies={['password']}
-                    // hasFeedback
                     rules={[
                         {
                             required: true,
@@ -141,7 +152,16 @@ export default function FormRegister(props: any) {
                 <Form.Item
                     name="phone"
                     label="Phone Number"
-                    rules={[{ required: true, message: 'Please input your phone number!' }]}
+                    rules={[
+                        {
+                            type: 'number',
+                            message: 'Please input your phone number! '
+                        },
+                        {
+                            required: true,
+                            message: 'Please input your phone number!'
+                        }
+                    ]}
                 >
                     <Input style={{ width: '100%' }} />
                 </Form.Item>

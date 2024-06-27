@@ -42,6 +42,7 @@ export default function ListJobPage() {
   const { state } = useLocation()
   const [tittleBanner, setTittleBanner] = useState(String)
   const navigate = useNavigate()
+  console.log(listJob)
 
   // use hooks call api
   useEffect(() => {

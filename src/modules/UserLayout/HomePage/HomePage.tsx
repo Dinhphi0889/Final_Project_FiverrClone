@@ -22,6 +22,8 @@ import { useNavigate } from 'react-router-dom';
 // import antd
 import { Input } from 'antd';
 import { SearchProps } from 'antd/es/input/Search';
+
+
 import { detailOfListJobAction } from '../../../redux/slices/detailOfTypeJob.slice.ts';
 
 

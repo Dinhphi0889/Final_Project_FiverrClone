@@ -53,6 +53,9 @@ export default function ListJobAndTypeJobPage() {
     if (state.detailJobId) {
       const result = await apiGetDetailOfTypeJob(state.detailJobId)
       dispatch(detailOfListJobAction.setDetailOfTypeJob(result))
+    } else if (state.jobId) {
+      const result = await apiGetDetailOfTypeJob(state.jobId)
+      dispatch(detailOfListJobAction.setDetailOfTypeJob(result))
     }
   }
   useEffect(() => {
