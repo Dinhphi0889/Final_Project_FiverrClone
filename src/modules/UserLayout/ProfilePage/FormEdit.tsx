@@ -3,13 +3,8 @@ import {
     Form,
     Input,
     Select,
-    FormProps,
-    Button
 } from 'antd';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
-
-
 
 const formItemLayout = {
     labelCol: {
@@ -28,21 +23,11 @@ export default function FormEdit(props: any) {
 
     const [form] = Form.useForm<FormData>();
 
-    const [birthdayFormat, setBirthDayFormat] = useState<String>()
-
-    useEffect(() => {
-        if (props.dataProps.birthday) {
-            const getDay = props.dataProps.birthday
-            const getDayFormat = dayjs(getDay, 'DD-MM-YYYY').format('YYYY-MM-DD')
-            setBirthDayFormat(getDayFormat)
-        }
-    }, [])
-
     const handleValuesChange = () => {
         const values = form.getFieldsValue()
         props.onFormEdit(values)
-        
     }
+    
 
     return (
         <Form
@@ -88,10 +73,6 @@ export default function FormEdit(props: any) {
             <Form.Item
                 label="Skills"
                 name="skill"
-                rules={[
-
-                    { required: true, message: 'Please input!' }
-                ]}
             >
                 <Input style={{ width: '100%' }} />
             </Form.Item>
@@ -99,9 +80,6 @@ export default function FormEdit(props: any) {
             <Form.Item
                 label="Certification"
                 name="certification"
-                rules={[
-                    { required: true, message: 'Please input!' }
-                ]}
             >
                 <Input style={{ width: '100%' }} />
             </Form.Item>
@@ -114,7 +92,6 @@ export default function FormEdit(props: any) {
                 <Select placeholder="select your gender">
                     <Option value={true}>Male</Option>
                     <Option value={false}>Female</Option>
-                    <Option value={null}>Other</Option>
                 </Select>
             </Form.Item>
 

@@ -20,16 +20,16 @@ import './styleHeader.css'
 // import antd
 import { Button, Drawer, Input, Modal, Dropdown, Space, Avatar, Badge } from 'antd';
 import { SearchProps } from 'antd/es/input/Search';
-import { getMenuJob } from '../../apis/apiMenuJob';
+import { getMenuJob } from '../../../apis/apiMenuJob';
 import type { MenuProps } from 'antd';
 
 // import form login & register
-import FormLogin from '../../modules/AuthenLayout/FormLogin';
-import FormRegister from '../../modules/AuthenLayout/FormRegister';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { apiGetNameJob } from '../../apis/apiGetNameJob';
+import FormLogin from '../../../modules/AuthenLayout/FormLogin';
+import FormRegister from '../../../modules/AuthenLayout/FormRegister';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { apiGetNameJob } from '../../../apis/apiGetNameJob';
 
-import { detailOfListJobAction } from '../../redux/slices/detailOfTypeJob.slice';
+import { detailOfListJobAction } from '../../../redux/slices/detailOfTypeJob.slice';
 
 
 

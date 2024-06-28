@@ -5,6 +5,11 @@ import DetailJobPage from "../modules/UserLayout/DetailJobPage/DetailJobPage"
 import ListJobAndTypeJobPage from "../modules/UserLayout/ListJobAndTypeJobPage/ListJobAndTypeJobPage"
 import ListJobPage from "../modules/UserLayout/ListJobPage/ListJobPage"
 import ProfilePage from "../modules/UserLayout/ProfilePage/ProfilePage"
+import AdminPage from "../layouts/AdminLayout/AdminPage"
+import ManageWorks from "../modules/AdminLayout/ManageWorks"
+import ManageJobTypes from "../modules/AdminLayout/ManageJobTypes"
+import ManageServices from "../modules/AdminLayout/ManageServices"
+import UserManagement from "../modules/AdminLayout/usersManagement.tsx/UserManagement"
 
 const useRouteElement = () => {
     const element = useRoutes([
@@ -32,6 +37,29 @@ const useRouteElement = () => {
                     path: 'profile',
                     element: <ProfilePage />,
                 }
+            ]
+        },
+        {
+            path: 'admin',
+            element: <AdminPage />,
+            children: [
+                {
+                    path: '',
+                    element: <UserManagement />
+                },
+                {
+                    path: 'manage-works',
+                    element: <ManageWorks />
+                },
+                {
+                    path: 'manage-job-types',
+                    element: <ManageJobTypes />
+                },
+                {
+                    path: 'manage-services',
+                    element: <ManageServices />
+                },
+
             ]
         }
     ])

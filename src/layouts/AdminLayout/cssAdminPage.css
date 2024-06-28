@@ -1,0 +1,11 @@
+
+.admin-page .side-bar-admin .btn-logo-admin {
+    margin: 10px 0;
+}
+
+.admin-page .side-bar-admin .btn-logo-admin button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
+    border-radius: 50%;
+}

@@ -68,6 +68,9 @@ body {
     border-radius: 0 8px 8px 0;
     transition: 1s;
 }
+.admin-page .ant-layout {
+    flex: none;
+}
 
 @media only screen and (max-width:900px) {
     .form-register {

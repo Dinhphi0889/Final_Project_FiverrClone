@@ -31,11 +31,13 @@ export default function ProfilePage() {
     const [isLengthSkill, setIsLengthSkill] = useState(true)
     const [isLengthCertification, setIsLengthCertification] = useState(true)
 
-
     const [hiddenPhone, setHiddenPhone] = useState<any>()
     const [hiddenEmail, setHiddenEmail] = useState<any>()
     const [messageApi, contextHolder] = message.useMessage();
 
+    const [formData, setFormData] = useState<TypeUser>();
+
+    // notify register
     const registerSuccess = () => {
         messageApi.open({
             type: 'success',
@@ -64,9 +66,9 @@ export default function ProfilePage() {
         setOpen(false);
     };
 
-
+    // hooks hidden phone & email
     useEffect(() => {
-        handeleHiddenPhone()
+        handlerHiddenPhone()
         handlerHiddenEmail()
     }, [])
 
@@ -81,9 +83,9 @@ export default function ProfilePage() {
     }, [currentUser])
 
     // handler hidden phone
-    const handeleHiddenPhone = () => {
+    const handlerHiddenPhone = () => {
         const phone = currentUser.user.phone
-        if (phone) {
+        if (phone.length == 10) {
             let getNumberFront = phone.slice(0, 3)
             let getNumberBack = phone.slice(-2)
             let changeNumberMiddle = '*'.repeat(phone.length - 5)
@@ -91,7 +93,7 @@ export default function ProfilePage() {
             setHiddenPhone(mergePhone)
         }
     }
-    
+
     // handler hidden email
     const handlerHiddenEmail = () => {
         const email = currentUser.user.email
@@ -104,13 +106,9 @@ export default function ProfilePage() {
         }
     }
 
-    const [formData, setFormData] = useState<TypeUser>();
-
-
     // Submit editUser
     const handeFormSubmit = async () => {
         if (formData) {
-
             const result = await apiEditUser(currentUser?.user.id, formData)
             const local = {
                 token: currentUser.token,
@@ -138,6 +136,7 @@ export default function ProfilePage() {
         }
         setFormData(value);
     };
+
     const handlerModal = () => {
         return <>
             <Modal

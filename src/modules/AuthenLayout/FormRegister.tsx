@@ -29,17 +29,6 @@ const tailFormItemLayout = {
 export default function FormRegister(props: any) {
     const [form] = Form.useForm<FormData>();
     const [messageApi, contextHolder] = message.useMessage();
-    const getData = localStorage.getItem('user')
-
-    const data = getData ? JSON.parse(getData) : null
-
-
-    useEffect(() => {
-        if (data) {
-            console.log(data)
-            // form.setFieldValue(data)
-        }
-    }, [])
 
     const registerSuccess = () => {
         messageApi.open({
@@ -51,13 +40,11 @@ export default function FormRegister(props: any) {
 
     const onFinish = (fieldsValue: any) => {
         const getTime = new Date()
-        // const time = 
+        console.log(fieldsValue)
         const values = {
             ...fieldsValue,
             id: getTime.getTime().toString().slice(-4),
-            'birthday': fieldsValue['birthday'].format('DD-MM-YYYY'),
         }
-
         apiRegister(values)
         registerSuccess()
         props.setSwitchRegister(false)
@@ -129,7 +116,6 @@ export default function FormRegister(props: any) {
                 <Form.Item
                     name="confirm"
                     label="Confirm Password"
-
                     dependencies={['password']}
                     rules={[
                         {
@@ -154,10 +140,6 @@ export default function FormRegister(props: any) {
                     label="Phone Number"
                     rules={[
                         {
-                            type: 'number',
-                            message: 'Please input your phone number! '
-                        },
-                        {
                             required: true,
                             message: 'Please input your phone number!'
                         }
@@ -167,9 +149,9 @@ export default function FormRegister(props: any) {
                 </Form.Item>
                 <Form.Item
                     className='birthDay'
-                    name="birthday"
-                    label="Birth Day"
-                    rules={[{ required: true, message: 'Please input your birthday!' }]}
+                    label="Birthday"
+                    name='birthday'
+
                 >
                     <div>
                         <DatePicker className='select-birthday' />
