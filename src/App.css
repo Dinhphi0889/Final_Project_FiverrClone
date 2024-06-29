@@ -11,3 +11,112 @@
 body {
     font-family: "Poppins", sans-serif;
 }
+
+/* css custom breadcrumb */
+.ant-breadcrumb-link {
+    color: rgba(0, 0, 0, 0.45);
+    transition: color 0.2s;
+    padding: 0 4px;
+    border-radius: 4px;
+    /* height: 22px; */
+    display: inline-block;
+    margin-inline: -4px;
+    font-weight: 600;
+}
+
+.ant-breadcrumb-link:hover {
+    background-color: #b8b8b82e;
+    color: #565759;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ant-breadcrumb ol {
+    align-items: center;
+}
+
+.modal-login .ant-modal-footer {
+    display: none;
+}
+
+/* css img modal */
+
+.modal-login .img-form {
+    background-image: url('../src/assets/img/img_form.png');
+    object-fit: cover;
+    background-size: cover;
+    position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 429px;
+    left: 0;
+    top: 0%;
+    border-radius: 8px 0 0 8px;
+    transition: 1s;
+}
+
+.modal-login .switch-img-modal {
+    background-image: url('../src/assets/img/img_form.png');
+    object-fit: cover;
+    background-size: cover;
+    position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 435px;
+    left: 50%;
+    top: 0%;
+    border-radius: 0 8px 8px 0;
+    transition: 1s;
+}
+.admin-page .ant-layout {
+    flex: none;
+}
+
+@media only screen and (max-width:900px) {
+    .form-register {
+        display: none;
+    }
+
+    .css-img-modal {
+        display: none;
+    }
+
+    .modal-login {
+        width: 570px !important;
+    }
+}
+
+@media only screen and (max-width:460px) {
+    .form-login #normal_login {
+        width: 300px !important;
+    }
+
+    .form-register #register {
+        width: 300px !important;
+    }
+
+    .form-register #register .ant-col {
+        padding: 0 !important;
+    }
+
+    .form-register #register .ant-form-item {
+        margin-bottom: 10px !important;
+    }
+
+    .form-register #register #register_birthday {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* width: 100%; */
+    }
+}
+
+@media only screen and (max-width:370px) {
+    .form-login #normal_login {
+        width: 230px !important;
+    }
+
+    .form-register #register {
+        width: 230px !important;
+    }
+}

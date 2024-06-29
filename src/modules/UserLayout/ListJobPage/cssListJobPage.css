@@ -1,6 +1,12 @@
-/* .show-list-job{
-    display: flex;
-} */
+.banner {
+    background-image: url('../../../assets/img/banner_listjob.jpg');
+    position: relative;
+    height: 250px;
+    object-fit: cover;
+    background-size: cover;
+    border-radius: 10px;
+}
+
 .item-list-job {
     width: 100% !important;
     border: none;
@@ -10,7 +16,7 @@
     color: #1dbf73;
 }
 
-.item-list-job a {
+.item-list-job button {
     font-size: 1.1rem;
     color: #62646a;
     font-weight: 400;
@@ -19,7 +25,12 @@
 .item-list-job img {
     border-radius: 8px !important;
 }
-
+.item-list-job .btn-name-detail:focus{
+    outline: none;
+}
+.item-list-job .btn-name-detail:hover{
+    color: #1dbf73;
+}
 .show-list-job .item-list-job .ant-card-body {
     padding: 10px 0;
 }
@@ -31,26 +42,147 @@
 .ant-card:hover {
     cursor: default;
     box-shadow: none;
-
 }
 
-.banner {
-    position: relative;
-}
 
 .banner-content {
+    display: flex;
     top: 50%;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
 }
 
-.banner-content .tittle-banner{
+.banner-content .tittle-banner {
     font-size: 1.8rem;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+}
+
+.banner-content p {
+    color: #fff;
+    text-align: center;
+}
+
+.banner-content .btn-play-banner {
+    background-color: transparent;
+    color: #fff;
+    margin-top: 15px;
+    height: 45px;
+    width: 190px;
+    font-weight: 500;
+}
+
+.banner-content .text-button-play {
+    padding-left: 10px;
+}
+
+.banner-content .btn-play-banner:hover {
+    color: rgb(87, 86, 86) !important;
+    border-color: transparent !important;
+
+}
+
+/* css programming-tech */
+
+.programming-tech .item-programming-tech {
+    border-radius: 10px;
+    border: 1px solid #efeff0;
+    ;
+}
+
+.programming-tech .tittle-programming-tech,
+.tittle {
+    color: #404145;
+}
+
+.programming-tech .btn-programming-tech {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px 5px;
+    /* transition: .1s; */
+}
+
+
+.programming-tech .item-programming-tech img {
+    width: 40px;
+    margin-right: 8px;
+}
+
+.programming-tech .item-programming-tech i {
+    color: #62646a;
+    font-size: 1rem;
+    transition: .2s;
+}
+
+.programming-tech .text-item-programming-tech {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: 30px;
+}
+
+.programming-tech .btn-programming-tech:focus {
+    outline: none;
+    color: #1dbf73;
+}
+
+.programming-tech .item-programming-tech:hover,
+.programming-tech .item-programming-tech:hover i {
+    color: #1dbf73;
+}
+
+
+
+
+/* css antd */
+.modal-show-video .ant-modal-close,
+.modal-show-video .ant-btn-default,
+.modal-show-video .ant-btn-primary {
+    display: none;
+}
+
+.modal-show-video .ant-modal-content {
+    padding: 0;
+}
+
+/* css swiper */
+.programming-tech .swiper-slide {
+    width: auto !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    width: -10px !important;
+    /* top: -10% !important; */
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 1.1rem !important;
+    color: black !important;
+    background-color: rgb(208, 207, 207) !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
 }
 
 @media screen and (max-width : 640px) {
     /* .show-list-job {
         margin: 0 20px;
+    } */
+}
+
+@media only screen and (max-width:390px) {
+    /* .banner{
+        width: 97%;
     } */
 }

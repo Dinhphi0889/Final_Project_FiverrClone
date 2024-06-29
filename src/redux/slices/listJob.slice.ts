@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const listJobSlice = createSlice({
-    name: 'menu',
+    name: 'listJob',
     initialState,
     reducers: {
         setListJob: (state, { payload }) => {

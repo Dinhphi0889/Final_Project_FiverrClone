@@ -1,0 +1,374 @@
+
+#changeHeader {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    transition: all .3s ease;
+    width: 100%;
+    height: 90px;
+    z-index: 2;
+    border-bottom: 1px solid rgb(199, 197, 197);
+}
+
+
+header {
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* position: fixed; */
+    z-index: 2;
+    padding: 10px 50px;
+    margin: 0 auto;
+    max-width: 1400px;
+}
+.set-search-header{
+    visibility :visible;
+}
+
+.ant-space-item a:hover {
+    color: #1dbf73;
+}
+
+/* css header page child */
+.fixed-header-page {
+    height: 128px;
+}
+
+.fixed-header-page #btn-sidebar {
+    color: #62646a;
+}
+
+.fixed-header-page header p,
+.fixed-header-page header a {
+    color: #565759;
+}
+
+.fixed-header-page header .btn-join {
+    color: #1dbf73;
+    border-color: #1dbf73;
+}
+
+.fixed-header-page .menu-list-job {
+    display: flex !important;
+}
+
+
+/* sidebar */
+.show-sidebar .sidebar-menu a {
+    margin: 5px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #62646a;
+}
+
+.show-sidebar .sidebar-menu a i {
+    margin-left: 5px;
+}
+
+#btn-sidebar {
+    display: none !important;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color:#565759;
+}
+
+#btn-sidebar:focus {
+    outline: none;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+header p {
+    color: #393a3c;
+    font-size: 36px;
+}
+
+/* Custom input search */
+#searchHeader .hidden-search-navbar {
+    visibility: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#searchHeader {
+    width: 30%;
+    margin: 10px 20px;
+    transition: 0s !important;
+}
+#searchHeaderLogin{
+    width: 100%;
+    margin: 10px 20px;
+}
+
+#searchHeader .ant-input-group-addon,
+#searchHeader .ant-input-search-button,
+#searchHeader .ant-input-outlined {
+    transition: 0s !important;
+}
+
+.ant-input-group-addon {
+    background-color: #222325 !important;
+    padding: 10px !important;
+}
+
+.anticon-search {
+    font-size: 20px !important;
+}
+
+.ant-input {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ant-input-search-button {
+    background-color: transparent;
+    border: none;
+    color: white !important;
+    height: 100% !important;
+}
+
+.ant-input-search-button:hover,
+.ant-input-group-addon:hover {
+    background-color: #565759 !important;
+    color: white !important;
+    border-color: #393a3c !important;
+
+}
+
+.ant-input-search-button:focus {
+    outline: none;
+}
+
+/* Custom Navbar */
+nav a {
+    margin: 0 7px;
+    /* color: white; */
+    color: #565759;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-wrap: nowrap;
+    padding: 5px 6px;
+}
+nav a:hover{
+    color: #1dbf73;
+}
+nav a:nth-child(1):hover,
+nav a:nth-child(2):hover{
+    background-color: #b8b8b82e;
+    color: #565759;
+    border-radius: 5px;
+}
+
+/* menu-bar */
+
+.menu-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+}
+
+
+.menu-bar i {
+    padding-left: 8px;
+    font-size: 14px;
+    display: inline;
+}
+
+/* menu-bar-login */
+.menu-bar-login{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 60%;
+}
+
+.btn-custom {
+    padding: 0 19px;
+    font-size: 16px;
+    border: 1px solid white;
+    height: 40px;
+    margin-left: 10px;
+}
+
+header .btn-join {
+    background-color: transparent;
+    color: #1dbf73;
+    font-weight: 500;
+    border-color: #1dbf73;
+}
+
+.btn-join:hover {
+    background-color: #1dbf73 !important;
+    border-color: transparent !important;
+    color: white !important;
+}
+
+
+.btn-join:focus {
+    outline: none;
+}
+
+
+/* MenuList */
+
+.menu-list-job {
+    background-color: white;
+    color: #62646a;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 88px;
+    z-index: 2;
+    padding: 10px 50px;
+    width: 100%;
+}
+
+.menu-list-job p {
+    margin: 0 7px;
+    font-size: 1rem;
+    text-wrap: nowrap;
+}
+
+.menu-list-job a {
+    margin: 0 auto;
+    border: none;
+    background-color: transparent;
+}
+.menu-list-job button span{
+    font-size: 1.1rem;
+}
+.menu-list-job button:focus{
+    outline: none;
+}
+.menu-list-job button:hover span,.menu-list-job .ant-btn:hover{
+    color: #1dbf73 !important;
+}
+.menu-list-job .ant-dropdown-trigger .ant-space-item::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+}
+
+
+/* custom ant */
+#changeHeader .ant-affix {
+    width: 100% !important;
+}
+
+.menu-list-job .ant-dropdown-trigger .ant-space-item:hover::after {
+    width: 100%;
+    background: rgb(16, 168, 52);
+    color: rgb(16, 168, 52);
+    transform: translateX(1);
+    transition: .5s;
+}
+
+#changeHeader .ant-space-item:hover {
+    color: rgb(16, 168, 52);
+    transform: translateX(1);
+    transition: .5s;
+}
+
+.nameGroup ul p {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 2rem;
+}
+
+.nameGroup ul li a {
+    font-size: 18px;
+    line-height: 2rem;
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
+    background-color: white;
+}
+@media screen and (max-width:1200px) {
+    .menu-list-job{
+        justify-content: start;
+        padding: 0;
+        position: relative;
+        top: 0;
+    }
+    .menu-list-job p{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .menu-bar a:nth-child(3) {
+        display: none;
+    }
+
+    #btn-sidebar {
+        display: block !important;
+    }
+    .menu-list-job button{
+        margin: 0;
+    }
+    .menu-list-job button span{
+        font-size: 1rem;
+
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    nav a:nth-child(1),
+    nav a:nth-child(2),
+    nav a:nth-child(4) {
+        display: none;
+    }
+
+    .menu-bar,.menu-bar-login {
+        justify-content: flex-end;
+    }
+
+    #searchHeader, #searchHeaderLogin{
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+        padding: 10px 0px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    nav a:nth-child(3) {
+        display: none;
+    }
+    nav a:nth-child(5) {
+        display: none;
+    }
+    nav.menu-bar-login a:nth-child(3){
+        display: none;
+    }
+
+    header {
+        justify-content: space-between;
+        margin: 0 10px;
+    }
+
+    .menu-bar {
+        width: 10%;
+    }
+    header .btn-join {
+        color: #62646a !important;
+        border-color: transparent !important;
+    }
+
+}

@@ -1,0 +1,76 @@
+.tittle-type-job {
+    font-size: 1.5rem;
+    margin: 20px 10px;
+    font-weight: 600;
+}
+
+
+.item-detail-card .desc-detail {
+    color: black;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.item-detail-card .tittle-card-detail {
+    margin-bottom: 5px;
+}
+
+.item-detail-card .desc-detail:hover {
+    color: #1dbf73;
+}
+
+.item-detail-card .evaluate {
+    color: gray;
+    font-weight: 500;
+    font-size: .9rem;
+}
+
+.item-detail-card .ant-card-body {
+    padding: 20px 0;
+}
+
+.item-detail-card .img-detail {
+    border: 1px solid gray;
+}
+.item-detail-card .ant-card-actions li span{
+    color: rgb(58, 57, 57);
+}
+.item-detail-card .ant-card-actions li span:hover{
+    cursor: default !important;
+    color: gray !important;
+}
+
+.dropdown-type-job-page .dropdown-item{
+    margin: 10px 20px 20px 0;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.dropdown-type-job-page .dropdown-item:hover{
+    color: black !important;
+    background-color: #f5f5f5 !important;
+    /* border-color: white !important; */
+}
+
+.empty{
+    width: 100%;
+}
+
+@media only screen and (max-width:640px) {
+    .item-detail-card .item-card {
+        margin: 0 auto !important;
+        width: 80% !important;
+    }
+    .dropdown-type-job-page{
+        text-align: center;
+    }
+    .type-job-page .tittle-result{
+        text-align: center;
+    }
+    .dropdown-type-job-page .dropdown-item{
+        margin: 5px 5px 5px 0;
+    }
+}
+
