@@ -38,7 +38,7 @@ export default function ItemListJob() {
                             title={`Ad by: ${item.tenNguoiTao.toUpperCase()}`}
                         />
                         <div className='flex flex-col'>
-                            <a className='desc-detail mt-3'>{getDetail.tenCongViec}</a>
+                            <a href='/detail-job' className='desc-detail mt-3'>{getDetail.tenCongViec}</a>
                             <div>
                                 <Rate disabled defaultValue={getDetail.saoCongViec} />
                                 <span className='ml-2 evaluate'>{`(${getDetail.danhGia})`}</span>

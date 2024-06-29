@@ -103,7 +103,7 @@ export default function HomePage() {
 
     {/* Content */}
     <section className='content'>
-      <div className='background-content container mx-auto'><div/>
+      <div className='background-content container mx-auto'>
         <div>
           <div className='content-top grid grid-flow-cols lg:grid-cols-2 md:grid-cols-1 md:gap-10 '>
             <div className='text-content lg:mx-4 mx-10'>
@@ -153,7 +153,8 @@ export default function HomePage() {
             </em>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
     {/* Item Menu */}
     <section className='item-menu'>
