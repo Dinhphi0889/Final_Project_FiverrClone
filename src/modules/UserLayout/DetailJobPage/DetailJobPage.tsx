@@ -3,16 +3,19 @@ import {
   Breadcrumb,
   Button,
   Card,
+  Carousel,
   Col,
   Collapse,
   CollapseProps,
   Divider,
   Dropdown,
+  Form,
   Input,
   Layout,
   Progress,
   Rate,
   Row,
+  Skeleton,
   Space,
   Table,
 } from "antd";
@@ -35,44 +38,21 @@ import {
 } from "@ant-design/icons";
 import Title from "antd/es/typography/Title";
 import "./style.css";
-import Slider from "react-slick";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import {
+  UseMutationResult,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
+import { getBannerDetailJob, postComment } from "../../../apis/apiDetailJob";
+import { NewComment } from "../../../types/detailJob";
+import { AxiosError } from "axios";
 
 export default function DetailJobPage() {
-  const images = [
-    "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/4273758/original/57b854d197a85d535d4bd49e07c1e1a09b55a757/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs2/4273758/original/dfbe47457181ec358bb384cb324becf792c0d6f3/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs3/4273758/original/a999ee3b46517d55884aa5bdd9f6fdff9d8a28d7/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-    "https://fiverr-res.cloudinary.com/images/t_smartwm/t_main1,q_auto,f_auto,q_auto,f_auto/v1/attachments/delivery/asset/10cef5ddfd7a5167e27275a99c298fae-1618654878/jonathan_london%20big%20otter%20HR%20png%201/design-fascinating-logo-with-free-revisions.png",
-
-    // thêm các link hình ảnh khác ở đây
-  ];
-
-  const settings = {
-    customPaging: function (i: number) {
-      return (
-        <a className="small_image">
-          <img src={images[i]} alt={`Thumbnail ${i}`} />
-        </a>
-      );
-    },
-    dots: true,
-    dotsClass: "slick-dots slick-thumb",
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  const { isLoading, data, error } = useQuery({
+    queryKey: ["tenLoaicongViec"],
+    queryFn: getBannerDetailJob,
+  });
 
   const text = (
     <p style={{ paddingLeft: 24 }}>
@@ -105,7 +85,7 @@ export default function DetailJobPage() {
     },
   ];
   // Biến thông tin cho bản đánh giá
-  const data = [
+  const data_star = [
     {
       key: "5",
       stars: "5 Stars",
@@ -165,106 +145,11 @@ export default function DetailJobPage() {
   // Sort by
 
   // Sider
-  const Basic = () => {
-    return (
-      <>
-        <div className="flex justify-between mb-4">
-          <p>Basic</p>
-          <p>$ 1000</p>
-        </div>
-        <p style={{ fontWeight: "lighter" }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </p>
-        <div className="mt-6 flex space-x-2">
-          <ClockCircleOutlined />
-          <p>30 Days Delivery </p>
-          <SyncOutlined />
-          <p>Revolution</p>
-        </div>
-        <div className="mt-2">
-          <ul style={{ textAlign: "left" }}>
-            <li>
-              <p className="space-x-4" style={{ fontWeight: "lighter" }}>
-                <CheckOutlined
-                  style={{
-                    fontSize: "20px",
-                    color: "green",
-                    fontWeight: "bold",
-                    marginRight: "5px",
-                  }}
-                />
-                <span>Lorem ipsum dolor sit amet. </span>
-              </p>
-            </li>
-            <li>
-              <p className="space-x-4" style={{ fontWeight: "lighter" }}>
-                <CheckOutlined
-                  style={{
-                    fontSize: "20px",
-                    color: "green",
-                    fontWeight: "bold",
-                    marginRight: "5px",
-                  }}
-                />
-                <span>Lorem ipsum dolor sit amet. </span>
-              </p>
-            </li>
-            <li>
-              <p className="space-x-4" style={{ fontWeight: "lighter" }}>
-                <CheckOutlined
-                  style={{
-                    fontSize: "20px",
-                    color: "green",
-                    fontWeight: "bold",
-                    marginRight: "5px",
-                  }}
-                />
-                <span>Lorem ipsum dolor sit amet. </span>
-              </p>
-            </li>
-            <li>
-              <p className="space-x-4" style={{ fontWeight: "lighter" }}>
-                <CheckOutlined
-                  style={{
-                    fontSize: "20px",
-                    color: "green",
-                    fontWeight: "bold",
-                    marginRight: "5px",
-                  }}
-                />
-                <span>Lorem ipsum dolor sit amet. </span>
-              </p>
-            </li>
-            <li>
-              <p className="space-x-4" style={{ fontWeight: "lighter" }}>
-                <CheckOutlined
-                  style={{
-                    fontSize: "20px",
-                    color: "green",
-                    fontWeight: "bold",
-                    marginRight: "5px",
-                  }}
-                />
-                <span>Lorem ipsum dolor sit amet. </span>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </>
-    );
-  };
-  const contentListNoTitle: Record<string, React.ReactNode> = {
-    Basic: Basic(),
-    Standard: Basic(),
-    Premium: Basic(),
-  };
+
+  // if (!data || data.length === 0) return <>Không có dữ liệu</>;
+  const mangMoTaNgan = data?.[0].congViec.moTaNgan.split("\n");
 
   const [activeTabKey2, setActiveTabKey2] = useState<string>("Basic");
-
-  const onTab2Change = (key: string) => {
-    setActiveTabKey2(key);
-  };
-
   const tabListNoTitle = [
     {
       key: "Basic",
@@ -279,75 +164,136 @@ export default function DetailJobPage() {
       label: "Premium",
     },
   ];
+  const onTab2Change = (key: string) => {
+    setActiveTabKey2(key);
+  };
+  const Basic = (level: string) => {
+    return (
+      <>
+        <div className="flex justify-between mb-4">
+          <p>{mangMoTaNgan?.[0]}</p>
+          <p>{mangMoTaNgan?.[1]}</p>
+        </div>
+        <p style={{ fontWeight: "lighter" }}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+        <div className="mt-6 flex space-x-2">
+          <ClockCircleOutlined />
+          <p>30 Days Delivery </p>
+          <SyncOutlined />
+          <p>Revolution</p>
+        </div>
+        <div className="mt-2">
+          <ul style={{ textAlign: "left" }}>
+            {mangMoTaNgan?.slice(2).map((mota) => {
+              return (
+                <li>
+                  <p className="space-x-4" style={{ fontWeight: "lighter" }}>
+                    <CheckOutlined
+                      style={{
+                        fontSize: "20px",
+                        color: "green",
+                        fontWeight: "bold",
+                        marginRight: "5px",
+                      }}
+                    />
+                    <span> {mota}</span>
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </>
+    );
+  };
+  const contentListNoTitle: Record<string, React.ReactNode> = {
+    Basic: Basic("Basic"),
+    Standard: Basic("Standard"),
+    Premium: Basic("Premium"),
+  };
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const sider = document.getElementById("sidercomponent") as HTMLElement;
-  //     const footer = document.getElementById("footerpage") as HTMLElement;
-  //     const headerHeight =
-  //       document.querySelector(".ant-layout-header")?.offsetHeight || 0;
-  //     const footerOffset = footer.getBoundingClientRect().top;
-  //     const viewportHeight = window.innerHeight;
+  // comment
+  const [comment, setComment] = useState<string>("");
 
-  //     if (footerOffset <= viewportHeight) {
-  //       sider.style.position = "absolute";
-  //       sider.style.bottom = `${viewportHeight - footerOffset + 10}px`;
-  //       sider.style.top = "auto";
-  //     } else {
-  //       sider.style.position = "fixed";
-  //       sider.style.bottom = "auto";
-  //       sider.style.top = `${headerHeight}px`;
-  //     }
-  //   };
+  // Sử dụng useMutation với kiểu dữ liệu được xác định
+  const mutation: UseMutationResult<void, AxiosError, NewComment> = useMutation<
+    void,
+    AxiosError,
+    NewComment
+  >({
+    mutationFn: postComment,
+    onSuccess: () => {
+      // Xử lý sau khi bình luận được đăng thành công
+      alert("Bình luận đã được đăng!");
+      setComment("");
+    },
+    onError: (error: AxiosError) => {
+      // Xử lý lỗi
+      alert(`Có lỗi xảy ra`);
+    },
+  });
+  const handleSubmit = (event: React.FormEvent) => {
+    // event.preventDefault();
+    const newComment: NewComment = {
+      maCongViec: 1, // Giả sử mã công việc
+      maNguoiBinhLuan: 1, // Giả sử mã người bình luận
+      ngayBinhLuan: new Date().toISOString(), // Giả sử ngày bình luận là ngày hiện tại
+      noiDung: comment,
+      saoBinhLuan: 5, // Giả sử số sao bình luận
+    };
+    console.log(newComment);
+    mutation.mutate(newComment);
+  };
+  // comment
 
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-  // Sider
+  //Sider;
+  // if (isLoading) return <Skeleton />;
+  // if (error) return <>Lấy dữ liệu bị lỗi</>;
 
   return (
-    <div className="container mx-auto mb-8">
+    <div className="detailjob_page container mx-auto mb-8">
       <Breadcrumb
         separator=">"
         items={[
           {
-            title: "tenLoaiCongviec",
+            title: data?.[0].tenLoaiCongViec,
             href: "#",
           },
           {
-            title: "tenNhomChiTietLoai",
+            title: data?.[0].tenNhomChiTietLoai,
             href: "#",
           },
           {
-            title: "Fullweb Creation",
+            title: data?.[0].tenChiTietLoai,
             href: "#",
           },
         ]}
       />
       <Layout style={layoutStyle}>
-        <Content style={contentStyle}>
-          <Title level={3}>
-            I will do custom css, html, javascript, PHP coding
-          </Title>
-          <div className="flex items-center space-x-2 pb-2">
-            <Avatar icon={<UserOutlined />} />
-            <p>nofilzazaq</p>
-            <p>
-              <span>Top Rated Seller</span>
-            </p>
-            <div className="flex items-center space-x-2">
-              <Rate disabled defaultValue={2} />
-              <p>5</p>
+        <Content className="left_layout" style={contentStyle}>
+          <Title level={3}>{data?.[0].congViec.tenCongViec}</Title>
+          <div className="toprate flex items-center space-x-2 pb-2">
+            <div className="avatar_user flex items-center space-x-2">
+              <Avatar icon={<UserOutlined />} src={data?.[0].avatar} />
+              <p style={{ fontWeight: "bold" }}>{data?.[0].tenNguoiTao}</p>
+            </div>
+
+            <div className="detailjob_header flex items-center space-x-2">
+              <p>Top Rated Seller</p>
+
+              <Rate disabled value={data?.[0].congViec.saoCongViec} />
+
+              <p style={{ fontWeight: "bold" }}>
+                {data?.[0].congViec.saoCongViec}
+              </p>
               <p
                 style={{
                   borderRight: "1px solid black",
                   paddingRight: "8px",
                 }}
               >
-                (335)
+                ({data?.[0].congViec.danhGia})
               </p>
               <p>2 Order in Queue</p>
             </div>
@@ -365,14 +311,60 @@ export default function DetailJobPage() {
           {/* main carousel */}
 
           <div className="slider-container">
-            <Slider {...settings}>
-              {images.map((img, index) => (
-                <div className="slider-items" key={index}>
-                  <img src={img} alt={`Slide ${index}`} />
-                </div>
-              ))}
-            </Slider>
+            <Carousel arrows infinite={false}>
+              <div className="slider-items">
+                <img src={data?.[0].congViec.hinhAnh} />
+              </div>
+            </Carousel>
           </div>
+          <Sider
+            className="sider_layout sider_layout_active"
+            width="100%"
+            style={siderStyle}
+          >
+            <div className="sider_component">
+              <Space direction="vertical">
+                <Card
+                  className="mx-auto"
+                  style={{
+                    width: "100%",
+                    border: "1px solid #B8B8B8",
+                  }}
+                  tabList={tabListNoTitle}
+                  activeTabKey={activeTabKey2}
+                  onTabChange={onTab2Change}
+                  tabProps={{
+                    size: "middle",
+                  }}
+                >
+                  {contentListNoTitle[activeTabKey2]}
+                  <br />
+                  <div className="sidercard_btn">
+                    <Button type="primary" style={{ width: "80%" }}>
+                      <span style={{ color: "white", fontWeight: "bold" }}>
+                        Continues ($ {data?.[0].congViec.giaTien})
+                      </span>
+                    </Button>
+                  </div>
+                  <div className="mt-1">
+                    <Button style={{ width: "80%" }} className="font-bold">
+                      <span style={{ color: "green" }}> Compare Package</span>
+                    </Button>
+                  </div>
+                </Card>
+                <Card style={{ width: "100%", backgroundColor: "#B8B8B8" }}>
+                  <Space direction="vertical">
+                    <p>Do you have any special requirement</p>
+                    <Button
+                      style={{ backgroundColor: "#F0F2F5", width: "50%" }}
+                    >
+                      Get a Quote
+                    </Button>
+                  </Space>
+                </Card>
+              </Space>
+            </div>
+          </Sider>
 
           <div className="info-container mt-10">
             <Space direction="vertical">
@@ -383,14 +375,7 @@ export default function DetailJobPage() {
                 Top Rated Seller with all positive reviews
               </Title>
               <p>Hello,</p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                distinctio veritatis, eaque cumque magni necessitatibus cum
-                consectetur assumenda praesentium sed, dolores quidem eligendi
-                consequatur temporibus quasi eos sequi, ducimus beatae quia
-                nostrum? Dolorum sunt deleniti culpa exercitationem aspernatur
-                aliquam
-              </p>
+              <p>{data?.[0].congViec.moTa}</p>
               <div className="offer_things">
                 <Title className="font-bold" level={5}>
                   Things I offer
@@ -443,19 +428,23 @@ export default function DetailJobPage() {
                     style={{ color: "black" }}
                   >
                     <div>
-                      <Avatar size={64} icon={<UserOutlined />} />
+                      <Avatar
+                        src={data?.[0].avatar}
+                        size={64}
+                        icon={<UserOutlined />}
+                      />
                     </div>
                     <div className=" space-y-2">
                       <Title style={{ color: "grey" }} level={5}>
-                        nofilzazaq
+                        {data?.[0].tenNguoiTao}
                       </Title>
                       <p>Web Devloper</p>
                       <div className="flex items-center space-x-2 ">
-                        <Rate disabled defaultValue={5} />
+                        <Rate disabled value={data?.[0].congViec.saoCongViec} />
                         <p style={{ fontWeight: "bold", color: "#FADB14" }}>
-                          5
+                          {data?.[0].congViec.saoCongViec}
                         </p>
-                        <p>(363)</p>
+                        <p>({data?.[0].congViec.danhGia})</p>
                       </div>
                       <Button style={{ width: "100%" }}>Contact Me</Button>
                     </div>
@@ -500,10 +489,13 @@ export default function DetailJobPage() {
                 </div>
               </div>
               <div className="FAQ_rate">
-                <Row className="space-x-6" style={{ color: "black" }}>
+                <Row
+                  className="space-x-6 rating_breakdown"
+                  style={{ color: "black" }}
+                >
                   <Col span={11}>
                     <Table
-                      dataSource={data}
+                      dataSource={data_star}
                       columns={columns}
                       pagination={false}
                       showHeader={false}
@@ -514,14 +506,14 @@ export default function DetailJobPage() {
                       Rating Breakdown
                     </p>
                     <Row>
-                      <Col span={20}>
+                      <Col className="rating_breakdwn_text" span={20}>
                         <Space direction="vertical">
                           <p>Seller Comunication level</p>
                           <p>Recommend to a friend</p>
                           <p>Services as described</p>
                         </Space>
                       </Col>
-                      <Col span={4}>
+                      <Col className="rating_breakdwn_star" span={4}>
                         <Space direction="vertical">
                           <p>
                             <span className="mr-2">5</span>
@@ -561,11 +553,14 @@ export default function DetailJobPage() {
                 </div>
                 <Divider />
                 <div className="mt-6">
-                  <Row className="avatar  space-x-2 ">
-                    <Col span={1}>
+                  <Row className="avatar space-x-2 ">
+                    <Col
+                      xs={{ span: 2, offset: 1 }}
+                      xl={{ span: 1, offset: 2 }}
+                    >
                       <Avatar icon={<UserOutlined />} />
                     </Col>
-                    <Col span={22}>
+                    <Col xs={{ span: 20, offset: 1 }}>
                       <p>
                         <span style={{ fontWeight: "bold" }} className="mr-2">
                           Blasckballs
@@ -608,11 +603,14 @@ export default function DetailJobPage() {
                           </Space>
                         </div>
 
-                        <Row className="avatar_commnet  space-x-2">
-                          <Col span={1}>
+                        <Row className="avatar_comment  space-x-2">
+                          <Col
+                            xs={{ span: 2, offset: 1 }}
+                            xl={{ span: 1, offset: 2 }}
+                          >
                             <Avatar icon={<UserOutlined />} />
                           </Col>
-                          <Col span={22}>
+                          <Col xs={{ span: 20, offset: 1 }}>
                             <p>
                               <span
                                 style={{ fontWeight: "bold" }}
@@ -670,21 +668,48 @@ export default function DetailJobPage() {
                   </Row>
                   <div className="input_container mt-4">
                     <Row className="avatar_input flex space-x-2">
-                      <Col span={1}>
+                      <Col
+                        xs={{ span: 2, offset: 1 }}
+                        xl={{ span: 1, offset: 2 }}
+                      >
                         <Avatar icon={<UserOutlined />} />
                       </Col>
-                      <Col span={22}>
-                        <Input
-                          className="mb-4"
-                          style={{ width: "100%", height: "100px" }}
-                          placeholder="Write something ...."
-                          variant="filled"
-                        />
-                        <Button style={{ width: "30%" }} type="primary">
-                          <span style={{ color: "white", fontWeight: "bold" }}>
-                            Add comment
-                          </span>
-                        </Button>
+
+                      <Col xs={{ span: 20, offset: 1 }}>
+                        <Form>
+                          <Form.Item>
+                            <Input
+                              className="mb-4"
+                              style={{ width: "100%", height: "100px" }}
+                              placeholder="Write something ...."
+                              variant="filled"
+                              name="cmt"
+                              onChange={(event) => {
+                                console.log(
+                                  event.target.name,
+                                  event.target.value
+                                );
+                                setComment(event.target.value);
+                              }}
+                              // value={comment}
+                            />
+                          </Form.Item>
+                          <Form.Item>
+                            <Button
+                              className="btn_comment"
+                              htmlType="submit"
+                              style={{ width: "30%" }}
+                              type="primary"
+                              onClick={handleSubmit}
+                            >
+                              <span
+                                style={{ color: "white", fontWeight: "bold" }}
+                              >
+                                Add comment
+                              </span>
+                            </Button>
+                          </Form.Item>
+                        </Form>
                       </Col>
                     </Row>
                   </div>
@@ -694,19 +719,21 @@ export default function DetailJobPage() {
           </div>
         </Content>
 
-        <Sider width="40%" style={siderStyle}>
-          <div id="sidercomponent" className="siderdetailjob">
+        <Sider
+          className="sider_layout sider_layout_disable"
+          width="40%"
+          style={siderStyle}
+        >
+          <div className="sider_component">
             <Space direction="vertical">
               <Card
                 className="mx-auto"
                 style={{
                   width: "100%",
-                  // backgroundColor: "#B8B8B8",
                   border: "1px solid #B8B8B8",
                 }}
                 tabList={tabListNoTitle}
                 activeTabKey={activeTabKey2}
-                // tabBarExtraContent={<a href="#">More</a>}
                 onTabChange={onTab2Change}
                 tabProps={{
                   size: "middle",
@@ -717,7 +744,7 @@ export default function DetailJobPage() {
                 <div className="sidercard_btn">
                   <Button type="primary" style={{ width: "80%" }}>
                     <span style={{ color: "white", fontWeight: "bold" }}>
-                      Continues ($ 1,000)
+                      Continues ($ {data?.[0].congViec.giaTien})
                     </span>
                   </Button>
                 </div>

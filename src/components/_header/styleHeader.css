@@ -314,23 +314,74 @@ header .btn-join {
   }
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   nav a:nth-child(5) {
     display: none;
   }
 
   header {
     justify-content: space-between;
-    /* padding: 0px 20px; */
   }
 
   .menu-bar {
     width: 10%;
   }
 
-  /* header.changeColor .btn-join {
-        border: none;
-        color: #62646a;
-        font-size: 1.1rem;
-    } */
+ 
+} */
+
+/* iPhone 6, 7, 8 */
+@media only screen and (min-width: 375px) and (max-width: 667px) {
+  #changeHeader {
+    width: 375px;
+  }
+  nav a:nth-child(5) {
+    display: none;
+  }
+  .header_cover {
+    width: 375px;
+  }
+  header {
+    justify-content: space-between;
+  }
+  .menu-bar {
+    width: 10%;
+  }
+  .info-trust {
+    display: none;
+  }
+  .form-carousel {
+    top: 50%;
+  }
+  .form-carousel-input {
+    width: 300px;
+  }
+
+  .carousel-item {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  .carousel-item > div {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .title-item p {
+    font-size: 12px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .item-service .item-popular-services {
+    padding: 0 5px;
+  }
+
+  .item-service .slick-slider .slick-prev:before {
+    left: 5px;
+  }
 }

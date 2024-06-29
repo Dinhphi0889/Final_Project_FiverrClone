@@ -78,9 +78,6 @@ span {
   overflow: hidden;
 }
 
-.slider-container .slick-dots img {
-  height: 100%;
-}
 .slider-container .small_image {
   display: inline-block;
   height: 100%;
@@ -144,6 +141,71 @@ span {
   height: 15px;
 }
 
-.siderdetailjob {
-  position: fixed;
+.slider-container .slick-slider .slick-prev::after {
+  left: 9px;
+  top: 6px;
+}
+
+.slider-container .slick-slider .slick-next::after {
+  left: 6px;
+  top: 6px;
+}
+
+/* iPhone 6, 7, 8 */
+@media only screen and (min-width: 375px) and (max-width: 667px) {
+  .detailjob_page {
+    margin-top: 550px;
+  }
+  .detailjob_page .ant-breadcrumb-link {
+    display: block;
+  }
+  .sider_layout_disable {
+    display: none;
+  }
+
+  .left_layout
+    .ant-layout-sider.ant-layout-sider-dark.sider_layout.sider_layout_active {
+    padding: 0 !important;
+  }
+  .Rate-part {
+    display: block;
+  }
+
+  .rating_breakdown {
+    display: block;
+  }
+  .FAQ_rate .ant-col.ant-col-11.css-dev-only-do-not-override-17seli4 {
+    margin-top: 15px;
+  }
+
+  .FAQ_rate .ant-row.css-dev-only-do-not-override-17seli4 {
+    width: 300px;
+  }
+  .rating_breakdwn_text {
+    width: 250px;
+  }
+  .rating_breakdwn_star p {
+    display: flex;
+  }
+
+  .btn_comment {
+    width: 60% !important;
+  }
+
+  .left_layout {
+    font-size: 10px !important;
+  }
+
+  .left_layout .anticon.anticon-star {
+    font-size: 10px;
+  }
+  .toprate {
+    display: block;
+  }
+  .detailjob_header ul {
+    line-height: 10px;
+  }
+  .user ul {
+    line-height: 10px;
+  }
 }

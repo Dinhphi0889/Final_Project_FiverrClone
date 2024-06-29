@@ -166,7 +166,7 @@ export default function HeaderPage() {
 
   return (
     <div id="changeHeader">
-      <div>
+      <div className="header_cover">
         <header>
           <Button className="pt-0" id="btn-sidebar" onClick={showDrawer}>
             <i className="fa-solid fa-bars"></i>
