@@ -209,3 +209,23 @@ span {
     line-height: 10px;
   }
 }
+/* Ipad */
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .left_layout .sider_layout_active {
+    display: none !important;
+  }
+
+  .btn_comment {
+    width: 60% !important;
+  }
+  .toprate {
+    display: block;
+  }
+  .detailjob_header ul {
+    line-height: 10px;
+  }
+  .detailjob_header .anticon.anticon-star {
+    font-size: 13px;
+  }
+}
