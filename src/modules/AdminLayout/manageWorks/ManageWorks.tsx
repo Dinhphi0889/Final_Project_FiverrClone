@@ -1,4 +1,4 @@
-import { Button, Modal, Pagination, Space, Table, Tag, message } from 'antd';
+import { Button, Pagination, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { apiGetJobAdmin } from '../../../apis/apiGetJobAdmin';
 export default function ManageWorks() {

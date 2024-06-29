@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Modal, Pagination, Space, Table, Tag, message } from 'antd';
+import { Button, Pagination, Space, Table, Tag } from 'antd';
 import { apiGetServicesAdmin } from '../../../apis/apiGetServicesAdmin';
 import { TypeServices } from '../../../types/typeServices';
 
