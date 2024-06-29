@@ -18,10 +18,9 @@ export const apiRegister = async (data: {
 }) => {
     try {
         const response = await api.post('auth/signup/', data)
-        console.log(response)
+        return response.data.content
     }
     catch (error: any) {
-        console.log(error)
         throw Error(error)
     }
 }

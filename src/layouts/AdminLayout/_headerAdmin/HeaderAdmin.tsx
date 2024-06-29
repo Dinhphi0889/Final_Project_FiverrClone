@@ -3,25 +3,33 @@
 import { Button, Layout, Menu } from 'antd';
 import Sider from 'antd/es/layout/Sider'
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // import css
 import '../cssAdminPage.css'
 export default function HeaderAdmin() {
+
+    const navigate = useNavigate()
+    const backHome =()=>{
+        navigate('/')
+    }
     return (
         <>
             <Layout
             >
                 <Sider
-                    className='side-bar-admin'
+                    className='side-bar-admin h-full'
                     breakpoint="lg"
                     collapsedWidth="0"
-                    style={{ height: '100vh' }}
+                    // style={{ height: 'auto' }}
 
                 >
                     <div className="demo-logo-vertical" />
                     <div className='btn-logo-admin flex justify-center'>
-                        <Button className=''><i className="fa-solid fa-user-tie"></i></Button>
+                        <Button className=''
+                        onClick={backHome}
+                        ><i className="fa-solid fa-user-tie"></i>
+                        </Button>
                     </div>
                     <Menu
                         theme="dark"

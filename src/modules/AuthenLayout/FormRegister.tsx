@@ -1,6 +1,5 @@
 import { Button, DatePicker, Form, Input, Select, message, } from 'antd';
 import { apiRegister } from '../../apis/apiRegister';
-import { useEffect } from 'react';
 const { Option } = Select;
 
 const formItemLayout = {
@@ -38,18 +37,24 @@ export default function FormRegister(props: any) {
     };
 
 
-    const onFinish = (fieldsValue: any) => {
+    const onFinish = async (fieldsValue: any) => {
         const getTime = new Date()
-        console.log(fieldsValue)
         const values = {
             ...fieldsValue,
             id: getTime.getTime().toString().slice(-4),
         }
-        apiRegister(values)
-        registerSuccess()
-        props.setSwitchRegister(false)
+        const result = await apiRegister(values)
+        if (result) {
+            registerSuccess()
+            props.setSwitchRegister(false)
+        }else{
+            console.log("error")
+        }
     };
-
+    const handleValuesChange = () => {
+        const values = form.getFieldsValue()
+        props.formEdit({ ...values, id: props.dataPropsAdmin.id })
+    }
 
     return (
         <>
@@ -59,6 +64,7 @@ export default function FormRegister(props: any) {
                 form={form}
                 name="register"
                 onFinish={onFinish}
+                onChange={handleValuesChange}
                 style={{ width: 400 }}
                 scrollToFirstError
             >
@@ -148,10 +154,8 @@ export default function FormRegister(props: any) {
                     <Input style={{ width: '100%' }} />
                 </Form.Item>
                 <Form.Item
-                    className='birthDay'
                     label="Birthday"
                     name='birthday'
-
                 >
                     <div>
                         <DatePicker className='select-birthday' />

@@ -29,7 +29,7 @@ export default function UserManagement() {
 
   // call api
   const callApi = async (pageIndex: any) => {
-    const result: any = await apiGetUserAdmin(pageIndex, 7)
+    const result: any = await apiGetUserAdmin(pageIndex, 10)
     setDataUser(result.data)
   }
   useEffect(() => {
@@ -65,6 +65,7 @@ export default function UserManagement() {
     });
   };
 
+
   const handleFormEdit = (data: any) => {
     const newArrSkill = data.skill.split(',')
     const newArrCer = data.certification.split(',')
@@ -78,7 +79,6 @@ export default function UserManagement() {
   };
 
   const handeFormSubmit = () => {
-    console.log(formData)
     if (formData) {
       apiEditUser(formData.id, formData)
       handleOk()
@@ -109,7 +109,6 @@ export default function UserManagement() {
           </Button>,
         ]}
       >
-
         <FormShowInfo dataPropsAdmin={selectedItem}
           formEdit={handleFormEdit}
         />
@@ -164,7 +163,7 @@ export default function UserManagement() {
       </Table>
       <Pagination
         defaultCurrent={1}
-        total={50}
+        total={60}
         onChange={changePageIndex}
         className='flex justify-end mt-3 mr-3'
       />

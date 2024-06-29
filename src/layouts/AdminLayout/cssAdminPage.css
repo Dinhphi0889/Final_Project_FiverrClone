@@ -9,3 +9,6 @@
     font-size: 1.3rem;
     border-radius: 50%;
 }
+.admin-page .ant-select-selector, .admin-page .ant-select-arrow {
+    display: none;
+}

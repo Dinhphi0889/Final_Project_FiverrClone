@@ -56,7 +56,6 @@ export const FormShowInfo = (props: any) => {
             >
                 <Form.Item label="Name"
                     name='name'>
-
                     <Input />
                 </Form.Item>
 

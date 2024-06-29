@@ -28,8 +28,6 @@ export default function ProfilePage() {
     const dispatch = useAppDispatch()
     const { currentUser } = useAppSelector((state) => state.user)
     const [getNameAvatar, setGetNameAvatar] = useState('')
-    const [isLengthSkill, setIsLengthSkill] = useState(true)
-    const [isLengthCertification, setIsLengthCertification] = useState(true)
 
     const [hiddenPhone, setHiddenPhone] = useState<any>()
     const [hiddenEmail, setHiddenEmail] = useState<any>()
@@ -71,16 +69,6 @@ export default function ProfilePage() {
         handlerHiddenPhone()
         handlerHiddenEmail()
     }, [])
-
-    // custom button edit || add new
-    useEffect(() => {
-        if (Array(currentUser?.user.skill).length <= 1) {
-            setIsLengthSkill(false)
-        }
-        if (Array(currentUser?.user.certification).length <= 1) {
-            setIsLengthCertification(false)
-        }
-    }, [currentUser])
 
     // handler hidden phone
     const handlerHiddenPhone = () => {
@@ -126,6 +114,7 @@ export default function ProfilePage() {
 
     //FormEdit User
     const handleFormEdit = (data: any) => {
+        console.log(data)
         const newArrSkill = data.skill.split(',')
         const newArrCer = data.certification.split(',')
         const value = {
@@ -253,19 +242,11 @@ export default function ProfilePage() {
                                 <div className='card-skills my-4'>
                                     <div className='skills card-information-tittle items-center'>
                                         <em>Skills</em>
-                                        {isLengthSkill ? (
-                                            <Button
-                                                onClick={showModal}
-                                                className='button-edit'>
-                                                <i className="fa-solid fa-pencil"></i>
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                className='button-edit font-medium'
-                                                onClick={showModal}
-                                            >Add new</Button>
-                                        )}
-
+                                        <Button
+                                            onClick={showModal}
+                                            className='button-edit'>
+                                            <i className="fa-solid fa-pencil"></i>
+                                        </Button>
                                     </div>
                                     <div className='skills card-information-detail mb-5'>
                                         <span className='text-detail'>
@@ -279,20 +260,12 @@ export default function ProfilePage() {
                                 <div className='card-certifications my-4'>
                                     <div className='certification card-information-tittle items-center'>
                                         <em>Certification</em>
-                                        {isLengthCertification ? (
-                                            <Button
-                                                className='button-edit'
-                                                onClick={showModal}
-                                            >
-                                                <i className="fa-solid fa-pencil"></i>
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                className='button-edit font-medium'
-                                                onClick={showModal}
-                                            >Add new</Button>
-                                        )}
-
+                                        <Button
+                                            className='button-edit'
+                                            onClick={showModal}
+                                        >
+                                            <i className="fa-solid fa-pencil"></i>
+                                        </Button>
                                     </div>
                                     <div className='certification card-information-detail mb-5'>
                                         <span className='text-detail'>{currentUser?.user.certification.length > 1 ? (currentUser.user.certification.join(', ')) : (currentUser.user.certification.join())}</span>

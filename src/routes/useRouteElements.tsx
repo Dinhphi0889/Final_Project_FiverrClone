@@ -6,9 +6,9 @@ import ListJobAndTypeJobPage from "../modules/UserLayout/ListJobAndTypeJobPage/L
 import ListJobPage from "../modules/UserLayout/ListJobPage/ListJobPage"
 import ProfilePage from "../modules/UserLayout/ProfilePage/ProfilePage"
 import AdminPage from "../layouts/AdminLayout/AdminPage"
-import ManageWorks from "../modules/AdminLayout/ManageWorks"
-import ManageJobTypes from "../modules/AdminLayout/ManageJobTypes"
-import ManageServices from "../modules/AdminLayout/ManageServices"
+import ManageWorks from "../modules/AdminLayout/manageWorks/ManageWorks"
+import ManageJobTypes from "../modules/AdminLayout/manageJobType/ManageJobTypes"
+import ManageServices from "../modules/AdminLayout/manageService/ManageServices"
 import UserManagement from "../modules/AdminLayout/usersManagement.tsx/UserManagement"
 
 const useRouteElement = () => {
