@@ -52,7 +52,6 @@ export const FormShowInfo = (props: any) => {
                 }}
                 onValuesChange={handleValuesChange}
                 form={form}
-
             >
                 <Form.Item label="Name"
                     name='name'>

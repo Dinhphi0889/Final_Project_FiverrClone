@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom"
+import { Navigate, Outlet, useRoutes } from "react-router-dom"
 import UserLayout from "../layouts/UserLayout"
 import HomePage from "../modules/UserLayout/HomePage/HomePage"
 import DetailJobPage from "../modules/UserLayout/DetailJobPage/DetailJobPage"
@@ -10,6 +10,14 @@ import ManageWorks from "../modules/AdminLayout/manageWorks/ManageWorks"
 import ManageJobTypes from "../modules/AdminLayout/manageJobType/ManageJobTypes"
 import ManageServices from "../modules/AdminLayout/manageService/ManageServices"
 import UserManagement from "../modules/AdminLayout/usersManagement.tsx/UserManagement"
+import { useAppSelector } from "../redux/hooks"
+
+
+const ProtectedAdminRoute = () => {
+    const { currentUser } = useAppSelector((state) => state.user)
+    
+    return currentUser.user.role === 'ADMIN' ? (<Outlet />) : (<Navigate to={'/'} />)
+}
 
 const useRouteElement = () => {
     const element = useRoutes([
@@ -41,24 +49,33 @@ const useRouteElement = () => {
         },
         {
             path: 'admin',
-            element: <AdminPage />,
+            element: <ProtectedAdminRoute />,
             children: [
                 {
                     path: '',
-                    element: <UserManagement />
+                    element: <AdminPage />,
+                    children: [
+                        {
+                            path: '',
+                            element: <UserManagement />
+                        },
+
+                        {
+                            path: 'manage-works',
+                            element: <ManageWorks />
+                        },
+                        {
+                            path: 'manage-job-types',
+                            element: <ManageJobTypes />
+                        },
+                        {
+                            path: 'manage-services',
+                            element: <ManageServices />
+                        },
+                    ]
                 },
-                {
-                    path: 'manage-works',
-                    element: <ManageWorks />
-                },
-                {
-                    path: 'manage-job-types',
-                    element: <ManageJobTypes />
-                },
-                {
-                    path: 'manage-services',
-                    element: <ManageServices />
-                },
+
+
 
             ]
         }
