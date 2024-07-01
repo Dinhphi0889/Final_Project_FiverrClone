@@ -31,6 +31,7 @@ export default function FormEdit(props: any) {
 
     return (
         <Form
+        className='form-edit-profile'
             form={form}
             {...formItemLayout}
             initialValues={{
