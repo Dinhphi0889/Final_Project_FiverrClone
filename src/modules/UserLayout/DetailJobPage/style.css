@@ -109,7 +109,7 @@
 .ant-table-cell span {
   font-weight: bold;
 }
-.ant-btn {
+.detailjob_page .ant-btn {
   width: 70px;
 }
 .ant-table-row .ant-table-cell {
@@ -146,7 +146,7 @@
   top: 6px;
 }
 
-.slider-container .slick-slider .slick-next::after {
+.detailjob_page .slider-container .slick-slider .slick-next::after {
   left: 6px;
   top: 6px;
 }

@@ -96,8 +96,10 @@ export default function ProfilePage() {
 
     // Submit editUser
     const handeFormSubmit = async () => {
+        console.log(formData)
         if (formData) {
             const result = await apiEditUser(currentUser?.user.id, formData)
+            
             const local = {
                 token: currentUser.token,
                 user: result,
@@ -114,14 +116,14 @@ export default function ProfilePage() {
 
     //FormEdit User
     const handleFormEdit = (data: any) => {
-        console.log(data)
         const newArrSkill = data.skill.split(',')
         const newArrCer = data.certification.split(',')
         const value = {
             ...data,
             birthday: data['birthday'].format('DD-MM-YYYY'),
             skill: newArrSkill,
-            certification: newArrCer
+            certification: newArrCer,
+            role:currentUser.user.role
         }
         setFormData(value);
     };

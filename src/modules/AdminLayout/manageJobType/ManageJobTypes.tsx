@@ -14,7 +14,7 @@ import {
   apiDeleteTypeJob,
   apiEditTypeJob,
   apiGetTypeJobAmin,
-} from "../../../apis/apiGetTypeJobAdmin";
+} from "../../../apis/apiGetTypeJobAdmin.ts";
 
 interface JobType {
   id: number;
