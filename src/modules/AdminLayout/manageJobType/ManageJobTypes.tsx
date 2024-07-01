@@ -1,14 +1,17 @@
 import { Button, Pagination, Space, Table } from 'antd';
 import { useEffect, useState } from 'react';
-import { apiGetTypeJobAmin } from '../../../apis/apiGetTypeJobAdmin';
+import { apiGetDataPagination } from '../../../apis/apiPaginationAdmin';
+import { SearchProps } from 'antd/es/input/Search';
 
 export default function ManageJobTypes() {
   const { Column } = Table;
+
+
   const [pageIndex, setPageIndex] = useState(1)
   const [typeJob, setTypeJob] = useState()
 
   const callApi = async (pageIndex: any) => {
-    const result: any = await apiGetTypeJobAmin(pageIndex, 10)
+    const result: any = await apiGetDataPagination('loai-cong-viec', pageIndex, 10)
     setTypeJob(result.data)
   }
   useEffect(() => {

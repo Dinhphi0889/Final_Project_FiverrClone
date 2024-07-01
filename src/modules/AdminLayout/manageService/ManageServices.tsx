@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Pagination, Space, Table, Tag } from 'antd';
-import { apiGetServicesAdmin } from '../../../apis/apiGetServicesAdmin';
 import { TypeServices } from '../../../types/typeServices';
+import { apiGetDataPagination } from '../../../apis/apiPaginationAdmin';
 
 export default function ManageServices() {
 
@@ -11,7 +11,7 @@ export default function ManageServices() {
 
 
   const callApi = async (pageIndex: any) => {
-    const result: any = await apiGetServicesAdmin(pageIndex, 10)
+    const result: any = await apiGetDataPagination('thue-cong-viec',pageIndex, 10)
     setServices(result.data)
   }
   useEffect(() => {
@@ -44,7 +44,6 @@ export default function ManageServices() {
             role ? <Tag color='#87d068'>COMPLETE</Tag> : <Tag color='#f50'>UNFINISHED</Tag>
           )}
         />
-
 
         <Column
           title="Action"

@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 
 // import antd
-import { Button, Modal, Pagination, Space, Table, Tag, message } from 'antd';
+import { Button, Modal, Pagination, Space, Table, Tag, message, Input } from 'antd';
+import { SearchProps } from 'antd/es/input/Search';
 
 //import api
 import { apiGetUserAdmin } from '../../../apis/apiGetUserAdmin';
@@ -14,10 +15,13 @@ import { TypeUser } from '../../../types/typeUser';
 
 // import form custom
 import { FormShowInfo } from './FormShowInfo';
+import { apiSearchUserAdmin } from '../../../apis/apiSearchUserAdmin';
 
 export default function UserManagement() {
   const { Column } = Table;
+  const { Search } = Input;
 
+  
   // create hooks + use
   const [dataUser, setDataUser] = useState<TypeUser[]>()
   const [pageIndex, setPageIndex] = useState(1)
@@ -92,7 +96,7 @@ export default function UserManagement() {
       <Modal
         className='modal-edit mb-2 text-center'
         open={open}
-        title="Show Information"
+        title="Edit User"
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
@@ -116,9 +120,28 @@ export default function UserManagement() {
     </>
   }
 
+  //search user
+  const onSearch = async (e: any) => {
+    const { value } = e.target
+    if (value !== "" && value.trim()) {
+      const result = await apiSearchUserAdmin(value)
+      setDataUser(result)
+    }
+  }
+
   return (
-    <>
+    <div className='ml-10'>
       {contextHolder}
+      <div className='my-5'
+        style={{ width: '50%' }}>
+        <h1 className='text-2xl'>Search</h1>
+        <Search
+          className='searchUser'
+          placeholder="Search User"
+          // onSearch={onSearch}
+          onChange={onSearch}
+        />
+      </div>
       <Table
         dataSource={dataUser}
         pagination={false}
@@ -168,6 +191,6 @@ export default function UserManagement() {
         className='flex justify-end mt-3 mr-3'
       />
       {handlerModal()}
-    </>
+    </div>
   );
 }

@@ -375,15 +375,16 @@ export default function HeaderPage() {
                     <i className="fa-regular fa-heart text-xl"></i>
                   </a>
                   <a type='button' className='text-lg font-semibold'>Orders</a>
-                  <Dropdown
+                  {currentUser.user.role === 'ADMIN' ? (<Dropdown
                     menu={{
                       items: [
                         { label: <a href='/profile'>Account Setting</a>, key: 0 },
-                        { label: <a href='' onClick={handleLogout}>Logout</a>, key: 1 },
+                        { label: <a onClick={handleLogout}>Logout</a>, key: 1 },
+                        { label: <a href='/admin'>Go To Admin</a>, key: 2 }
+
                       ]
                     }}
-                  >
-                    <Space size="large">
+                  ><Space size="large">
                       <Badge dot
                         status='success'
                         offset={[-7, 35]}>
@@ -397,8 +398,28 @@ export default function HeaderPage() {
                           {getNameAvatar}
                         </Avatar>
                       </Badge>
-                    </Space>
-                  </Dropdown>
+                    </Space></Dropdown>) : (<Dropdown
+                      menu={{
+                        items: [
+                          { label: <a href='/profile'>Account Setting</a>, key: 0 },
+                          { label: <a href='' onClick={handleLogout}>Logout</a>, key: 1 },
+                        ]
+                      }}
+                    ><Space size="large">
+                        <Badge dot
+                          status='success'
+                          offset={[-7, 35]}>
+                          <Avatar
+                            className='text-xl'
+                            style={{
+                              cursor: 'pointer',
+                              verticalAlign: 'middle',
+                              backgroundColor: 'orange'
+                            }} size="large">
+                            {getNameAvatar}
+                          </Avatar>
+                        </Badge>
+                      </Space></Dropdown>)}
                 </>
 
               ) : (

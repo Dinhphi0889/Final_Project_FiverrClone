@@ -1,0 +1,12 @@
+.form-edit-works .ant-row {
+    /* justify-content: center; */
+    /* justify-content: space-between; */
+    align-items: center;
+} 
+.modal-edit-manage-work .ant-modal-title{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.modal-edit-manage-work .ant-col-14{
+    max-width: 100%;
+}
