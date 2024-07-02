@@ -16,19 +16,25 @@ import { TypeUser } from '../../../types/typeUser';
 // import form custom
 import { FormShowInfo } from './FormShowInfo';
 import { apiSearchUserAdmin } from '../../../apis/apiSearchUserAdmin';
+import { PlusOutlined } from '@ant-design/icons';
+import AddNewUser from './FormAddNewUser';
+import FormAddNew from './FormAddNewUser';
+import { apiRegister } from '../../../apis/apiRegister';
 
 export default function UserManagement() {
   const { Column } = Table;
   const { Search } = Input;
 
-  
+
   // create hooks + use
   const [dataUser, setDataUser] = useState<TypeUser[]>()
   const [pageIndex, setPageIndex] = useState(1)
   const [selectedItem, setSelectedItem] = useState(null);
   const [formData, setFormData] = useState<TypeUser>();
+  const [dataFormAddNew, setFormDataAddNew] = useState()
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openModalAddNew, setOpenModalAddNew] = useState(false)
   const [messageApi, contextHolder] = message.useMessage();
 
   // call api
@@ -45,30 +51,31 @@ export default function UserManagement() {
     setPageIndex(pageIndex)
   }
 
-  const showModal = (data: any) => {
-    setOpen(true);
+  // modal edit
+  const showModalEdit = (data: any) => {
+    setOpenEdit(true);
     setSelectedItem(data)
   };
 
-  const handleOk = () => {
+  const handleOkEdit = () => {
     registerSuccess()
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      setOpen(false);
+      setOpenEdit(false);
     }, 500);
   };
 
-  const handleCancel = () => {
-    setOpen(false);
+  const handleCancelEdit = () => {
+    setOpenEdit(false);
   };
+
   const registerSuccess = () => {
     messageApi.open({
       type: 'success',
-      content: 'Update Success',
+      content: 'Success',
     });
   };
-
 
   const handleFormEdit = (data: any) => {
     const newArrSkill = data.skill.split(',')
@@ -82,32 +89,32 @@ export default function UserManagement() {
     setFormData(value);
   };
 
-  const handeFormSubmit = () => {
+  const handeFormSubmitEdit = () => {
     if (formData) {
       apiEditUser(formData.id, formData)
-      handleOk()
+      handleOkEdit()
     } else {
-      handleCancel()
+      handleCancelEdit()
     }
   }
 
-  const handlerModal = () => {
+  const handlerModalEdit = () => {
     return <>
       <Modal
         className='modal-edit mb-2 text-center'
-        open={open}
+        open={openEdit}
         title="Edit User"
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={handleOkEdit}
+        onCancel={handleCancelEdit}
         footer={[
-          <Button key="back" onClick={handleCancel}>
+          <Button key="back" onClick={handleCancelEdit}>
             Cancel
           </Button>,
           <Button
             key="submit"
             type="primary"
             loading={loading}
-            onClick={handeFormSubmit}
+            onClick={handeFormSubmitEdit}
           >
             Submit
           </Button>,
@@ -118,6 +125,63 @@ export default function UserManagement() {
         />
       </Modal>
     </>
+  }
+
+
+
+  // modal Add New
+  const showModalAddNew = (data: any) => {
+    setOpenModalAddNew(true);
+  };
+
+  const handleOkModalAddNew = () => {
+    registerSuccess()
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpenModalAddNew(false);
+    }, 500);
+  };
+
+  const handleCancelModalAddNew = () => {
+    setOpenModalAddNew(false);
+  };
+
+  const handlerModalAddNew = () => {
+    return <Modal
+      className='modal-edit mb-2'
+      open={openModalAddNew}
+      title="Add New User"
+      onOk={handleOkModalAddNew}
+      onCancel={handleCancelModalAddNew}
+      footer={[
+        <Button key="back" onClick={handleCancelModalAddNew}>
+          Cancel
+        </Button>,
+        <Button
+          key="submit"
+          type="primary"
+          loading={loading}
+          onClick={submitFormAddNew}
+        >
+          Submit
+        </Button>,
+      ]}
+    >
+      <FormAddNew submitFormAddNew={getDataFormAddNew} />
+    </Modal>
+  }
+  const getDataFormAddNew = (values: any) => {
+    console.log(values)
+    setFormDataAddNew(values)
+  }
+  const submitFormAddNew = async () => {
+    console.log(dataFormAddNew)
+    // if (dataFormAddNew) {
+    //   const result = await apiRegister(dataFormAddNew)
+    //   registerSuccess()
+    //   console.log(result)
+    // }
   }
 
   //search user
@@ -132,7 +196,7 @@ export default function UserManagement() {
   return (
     <div className='ml-10'>
       {contextHolder}
-      <div className='my-5'
+      <div className='mt-5 mb-3'
         style={{ width: '50%' }}>
         <h1 className='text-2xl'>Search</h1>
         <Search
@@ -141,6 +205,13 @@ export default function UserManagement() {
           // onSearch={onSearch}
           onChange={onSearch}
         />
+      </div>
+      <div className='mb-3'>
+        <Button className='flex items-center'
+          onClick={showModalAddNew}
+        ><PlusOutlined />
+          Add New</Button>
+
       </div>
       <Table
         dataSource={dataUser}
@@ -178,7 +249,7 @@ export default function UserManagement() {
           render={(_: any, record: any) => (
             <Space size="middle">
               <Button
-                onClick={() => { showModal(record) }}>Edit</Button>
+                onClick={() => { showModalEdit(record) }}>Edit</Button>
               <Button>Delete</Button>
             </Space>
           )}
@@ -190,7 +261,8 @@ export default function UserManagement() {
         onChange={changePageIndex}
         className='flex justify-end mt-3 mr-3'
       />
-      {handlerModal()}
+      {handlerModalEdit()}
+      {handlerModalAddNew()}
     </div>
   );
 }

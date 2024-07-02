@@ -34,6 +34,7 @@ export default function ListJobAndTypeJobPage() {
 
   const [endPointBreadcrumb, setEndPointBreadcrumb] = useState(String)
 
+  // customBreadcrumb
   useEffect(() => {
     if (detailOfTypeJob) {
       let name = ''

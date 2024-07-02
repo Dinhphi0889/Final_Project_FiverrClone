@@ -26,6 +26,7 @@ export const FormShowInfo = (props: any) => {
         })
     }, [props.dataPropsAdmin, form])
 
+    // get values onChange
     const handleValuesChange = () => {
         const values = form.getFieldsValue()
         props.formEdit({ ...values, id: props.dataPropsAdmin.id })

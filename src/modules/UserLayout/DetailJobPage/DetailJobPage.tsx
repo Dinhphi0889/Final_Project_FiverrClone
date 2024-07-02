@@ -38,7 +38,7 @@ import {
 } from "@ant-design/icons";
 import Title from "antd/es/typography/Title";
 import "./style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   UseMutationResult,
   useMutation,
@@ -47,12 +47,26 @@ import {
 import { getBannerDetailJob, postComment } from "../../../apis/apiDetailJob";
 import { NewComment } from "../../../types/detailJob";
 import { AxiosError } from "axios";
+import { useLocation } from "react-router-dom";
+import { TypeDetailOfListJob } from "../../../types/typeDetailOfListJob";
+
 
 export default function DetailJobPage() {
   const { isLoading, data, error } = useQuery({
     queryKey: ["tenLoaicongViec"],
     queryFn: getBannerDetailJob,
   });
+
+  // lấy data props từ component detailoftypejob
+  const [dataProps, setDataProps] = useState<TypeDetailOfListJob>()
+
+  const { state } = useLocation()
+
+  useEffect(() => {
+    if (state) {
+      setDataProps(state.detailJob.data)
+    }
+  }, [state])
 
   const text = (
     <p style={{ paddingLeft: 24 }}>
@@ -145,9 +159,10 @@ export default function DetailJobPage() {
   // Sort by
 
   // Sider
+  console.log(data?.[0])
 
   // if (!data || data.length === 0) return <>Không có dữ liệu</>;
-  const mangMoTaNgan = data?.[0].congViec.moTaNgan.split("\n");
+  const mangMoTaNgan = dataProps?.congViec.moTaNgan.split("\n");
 
   const [activeTabKey2, setActiveTabKey2] = useState<string>("Basic");
   const tabListNoTitle = [
@@ -172,6 +187,7 @@ export default function DetailJobPage() {
       <>
         <div className="flex justify-between mb-4">
           <p>{mangMoTaNgan?.[0]}</p>
+          {/* <p>{mangMoTaNgan?.[0]}</p> */}
           <p>{mangMoTaNgan?.[1]}</p>
         </div>
         <p style={{ fontWeight: "lighter" }}>
@@ -250,42 +266,42 @@ export default function DetailJobPage() {
   //Sider;
   // if (isLoading) return <Skeleton />;
   // if (error) return <>Lấy dữ liệu bị lỗi</>;
-
+  console.log(dataProps)
   return (
     <div className="detailjob_page container mx-auto mb-8">
       <Breadcrumb
         separator=">"
         items={[
           {
-            title: data?.[0].tenLoaiCongViec,
+            title: dataProps?.tenLoaiCongViec,
             href: "#",
           },
           {
-            title: data?.[0].tenNhomChiTietLoai,
+            title: dataProps?.tenNhomChiTietLoai,
             href: "#",
           },
           {
-            title: data?.[0].tenChiTietLoai,
+            title: dataProps?.tenChiTietLoai,
             href: "#",
           },
         ]}
       />
       <Layout style={layoutStyle}>
         <Content className="left_layout" style={contentStyle}>
-          <Title level={3}>{data?.[0].congViec.tenCongViec}</Title>
+          <Title level={3}>{dataProps?.congViec.tenCongViec}</Title>
           <div className="toprate flex items-center space-x-2 pb-2">
             <div className="avatar_user flex items-center space-x-2">
-              <Avatar icon={<UserOutlined />} src={data?.[0].avatar} />
-              <p style={{ fontWeight: "bold" }}>{data?.[0].tenNguoiTao}</p>
+              <Avatar icon={<UserOutlined />} src={dataProps?.avatar} />
+              <p style={{ fontWeight: "bold" }}>{dataProps?.tenNguoiTao}</p>
             </div>
 
             <div className="detailjob_header flex items-center space-x-2">
               <p>Top Rated Seller</p>
 
-              <Rate disabled value={data?.[0].congViec.saoCongViec} />
+              <Rate className="rate-custom" disabled value={dataProps?.congViec.saoCongViec} />
 
               <p style={{ fontWeight: "bold" }}>
-                {data?.[0].congViec.saoCongViec}
+                {dataProps?.congViec.saoCongViec}
               </p>
               <p
                 style={{
@@ -293,7 +309,7 @@ export default function DetailJobPage() {
                   paddingRight: "8px",
                 }}
               >
-                ({data?.[0].congViec.danhGia})
+                ({dataProps?.congViec.danhGia})
               </p>
               <p>2 Order in Queue</p>
             </div>
@@ -313,7 +329,7 @@ export default function DetailJobPage() {
           <div className="slider-container">
             <Carousel arrows infinite={false}>
               <div className="slider-items">
-                <img src={data?.[0].congViec.hinhAnh} />
+                <img src={dataProps?.congViec.hinhAnh} />
               </div>
             </Carousel>
           </div>
@@ -342,7 +358,7 @@ export default function DetailJobPage() {
                   <div className="sidercard_btn">
                     <Button type="primary" style={{ width: "80%" }}>
                       <span style={{ color: "white", fontWeight: "bold" }}>
-                        Continues ($ {data?.[0].congViec.giaTien})
+                        Continues ($ {dataProps?.congViec.giaTien})
                       </span>
                     </Button>
                   </div>
@@ -375,7 +391,7 @@ export default function DetailJobPage() {
                 Top Rated Seller with all positive reviews
               </Title>
               <p>Hello,</p>
-              <p>{data?.[0].congViec.moTa}</p>
+              <p>{dataProps?.congViec.moTa}</p>
               <div className="offer_things">
                 <Title className="font-bold" level={5}>
                   Things I offer
@@ -440,11 +456,11 @@ export default function DetailJobPage() {
                       </Title>
                       <p>Web Devloper</p>
                       <div className="flex items-center space-x-2 ">
-                        <Rate disabled value={data?.[0].congViec.saoCongViec} />
+                        <Rate className="rate-custom" disabled value={data?.[0].congViec.saoCongViec} />
                         <p style={{ fontWeight: "bold", color: "#FADB14" }}>
-                          {data?.[0].congViec.saoCongViec}
+                          {dataProps?.congViec.saoCongViec}
                         </p>
-                        <p>({data?.[0].congViec.danhGia})</p>
+                        <p>({dataProps?.congViec.danhGia})</p>
                       </div>
                       <Button style={{ width: "100%" }}>Contact Me</Button>
                     </div>
@@ -465,6 +481,7 @@ export default function DetailJobPage() {
                 <div className="flex items-center space-x-2 ">
                   <p style={{ fontWeight: "bold" }}>(363) Reviews</p>
                   <Rate
+                    className="rate-custom"
                     style={{ fontSize: "15px" }}
                     disabled
                     defaultValue={5}
@@ -691,7 +708,7 @@ export default function DetailJobPage() {
                                 );
                                 setComment(event.target.value);
                               }}
-                              // value={comment}
+                            // value={comment}
                             />
                           </Form.Item>
                           <Form.Item>
