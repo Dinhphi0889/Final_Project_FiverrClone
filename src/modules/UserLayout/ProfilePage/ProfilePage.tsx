@@ -1,6 +1,6 @@
 
 // import antd
-import { Avatar, Button, Card, Modal, message } from 'antd'
+import { Avatar, Button, Card, GetProp, Modal, Upload, UploadFile, UploadProps, message } from 'antd'
 
 // import hooks
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
@@ -20,20 +20,26 @@ import { currentUserAction } from '../../../redux/slices/user.slice'
 
 // import TypeUser
 import { TypeUser } from '../../../types/typeUser'
+import { PlusOutlined } from '@ant-design/icons'
+import { apiUploadAvatar } from '../../../apis/apiUploadAvatar'
 
 export default function ProfilePage() {
 
+    type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
 
     // create + use hooks
     const dispatch = useAppDispatch()
     const { currentUser } = useAppSelector((state) => state.user)
     const [getNameAvatar, setGetNameAvatar] = useState('')
-
     const [hiddenPhone, setHiddenPhone] = useState<any>()
     const [hiddenEmail, setHiddenEmail] = useState<any>()
     const [messageApi, contextHolder] = message.useMessage();
 
     const [formData, setFormData] = useState<TypeUser>();
+    const [fileList, setFileList] = useState<UploadFile[]>([])
+    const [imageUrl, setImageUrl] = useState<string>();
+    const [loading, setLoading] = useState(false);
+
 
     // notify register
     const registerSuccess = () => {
@@ -44,7 +50,6 @@ export default function ProfilePage() {
     };
 
     // hooks open modal
-    const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
     const showModal = () => {
@@ -99,7 +104,7 @@ export default function ProfilePage() {
         console.log(formData)
         if (formData) {
             const result = await apiEditUser(currentUser?.user.id, formData)
-            
+
             const local = {
                 token: currentUser.token,
                 user: result,
@@ -123,7 +128,7 @@ export default function ProfilePage() {
             birthday: data['birthday'].format('DD-MM-YYYY'),
             skill: newArrSkill,
             certification: newArrCer,
-            role:currentUser.user.role
+            role: currentUser.user.role
         }
         setFormData(value);
     };
@@ -162,6 +167,52 @@ export default function ProfilePage() {
             setGetNameAvatar(getNameUserSplit.toUpperCase())
         }
     }, [currentUser])
+
+    const getBase64 = (img: FileType, callback: (url: string) => void) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => callback(reader.result as string));
+        reader.readAsDataURL(img);
+        console.log(img)
+    };
+
+    const beforeUpload = (file: FileType) => {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            const base64 = reader.result as string
+            const newFile: UploadFile = {
+                uid: file.uid,
+                name: file.name,
+                status: 'done',
+                url: base64
+            }
+            setFileList([...fileList, newFile]);
+        }
+        reader.onerror = (error) => {
+            message.error('File reading failed');
+            console.error('File reading error: ', error);
+        };
+        return false
+
+    };
+
+    const handleChange: UploadProps['onChange'] = (info) => {
+        if (info.file.status === 'uploading') {
+            setLoading(true);
+            return;
+        }
+        if (info.file.status === 'done') {
+            getBase64(info.file.originFileObj as FileType, (url: any) => {
+            })
+        }
+    };
+
+    const uploadButton = (
+        <button style={{ border: 0, background: 'none' }} type="button">
+            <PlusOutlined />
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </button>
+    );
     return (
         <>
             {contextHolder}
@@ -194,14 +245,15 @@ export default function ProfilePage() {
                                 <Avatar
                                     style={{
                                         verticalAlign: 'middle',
-                                        backgroundColor: 'orange',
                                         fontSize: '2rem',
+                                        background: 'orange'
                                     }}
                                     size={100}>
-                                    {getNameAvatar}
-                                </Avatar>
-                                <p className='card-name lg:my-3'>{currentUser?.user.name}
 
+                                    {currentUser.user.avatar ? <img src={currentUser.user.avatar}></img> : getNameAvatar}
+                                </Avatar>
+
+                                <p className='card-name lg:my-3'>{currentUser?.user.name}
                                 </p>
                                 <Button
                                     className='button-edit'

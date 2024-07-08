@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 // import antd
 import { Button, Modal, Pagination, Space, Table, Tag, message, Input } from 'antd';
-import { SearchProps } from 'antd/es/input/Search';
 
 //import api
 import { apiGetUserAdmin } from '../../../apis/apiGetUserAdmin';
@@ -17,7 +16,6 @@ import { TypeUser } from '../../../types/typeUser';
 import { FormShowInfo } from './FormShowInfo';
 import { apiSearchUserAdmin } from '../../../apis/apiSearchUserAdmin';
 import { PlusOutlined } from '@ant-design/icons';
-import AddNewUser from './FormAddNewUser';
 import FormAddNew from './FormAddNewUser';
 import { apiRegister } from '../../../apis/apiRegister';
 
@@ -84,7 +82,8 @@ export default function UserManagement() {
       ...data,
       birthday: data['birthday'].format('DD-MM-YYYY'),
       skill: newArrSkill,
-      certification: newArrCer
+      certification: newArrCer,
+      avatar:data.avatar
     }
     setFormData(value);
   };
@@ -126,11 +125,8 @@ export default function UserManagement() {
       </Modal>
     </>
   }
-
-
-
   // modal Add New
-  const showModalAddNew = (data: any) => {
+  const showModalAddNew = () => {
     setOpenModalAddNew(true);
   };
 
@@ -176,12 +172,11 @@ export default function UserManagement() {
     setFormDataAddNew(values)
   }
   const submitFormAddNew = async () => {
-    console.log(dataFormAddNew)
-    // if (dataFormAddNew) {
-    //   const result = await apiRegister(dataFormAddNew)
-    //   registerSuccess()
-    //   console.log(result)
-    // }
+    if (dataFormAddNew) {
+      const result = await apiRegister(dataFormAddNew)
+      registerSuccess()
+      console.log(result)
+    }
   }
 
   //search user
@@ -202,7 +197,6 @@ export default function UserManagement() {
         <Search
           className='searchUser'
           placeholder="Search User"
-          // onSearch={onSearch}
           onChange={onSearch}
         />
       </div>

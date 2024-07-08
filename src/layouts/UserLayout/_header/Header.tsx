@@ -1,7 +1,7 @@
 // import hooks
 import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useWindowSize } from 'react-use'
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -335,7 +335,12 @@ export default function HeaderPage() {
   // handler Logout
   const handleLogout = () => {
     localStorage.removeItem('user')
-    navigate('/')
+    if (window.location.pathname === '/') {
+      navigate(0)
+    } else {
+      navigate('/')
+      navigate(0)
+    }
   }
 
   return (
@@ -389,13 +394,15 @@ export default function HeaderPage() {
                         status='success'
                         offset={[-7, 35]}>
                         <Avatar
-                          className='text-xl'
                           style={{
-                            cursor: 'pointer',
                             verticalAlign: 'middle',
-                            backgroundColor: 'orange'
-                          }} size="large">
-                          {getNameAvatar}
+                            fontSize: '2rem',
+                            background: 'orange'
+
+                          }}
+                          size={40}>
+
+                          {currentUser.user.avatar ? <img src={currentUser.user.avatar}></img> : getNameAvatar}
                         </Avatar>
                       </Badge>
                     </Space></Dropdown>) : (<Dropdown
@@ -410,13 +417,13 @@ export default function HeaderPage() {
                           status='success'
                           offset={[-7, 35]}>
                           <Avatar
-                            className='text-xl'
                             style={{
-                              cursor: 'pointer',
                               verticalAlign: 'middle',
-                              backgroundColor: 'orange'
-                            }} size="large">
-                            {getNameAvatar}
+                              fontSize: '2rem',
+                            }}
+                            size={40}>
+
+                            {currentUser.user.avatar ? <img src={currentUser.user.avatar}></img> : getNameAvatar}
                           </Avatar>
                         </Badge>
                       </Space></Dropdown>)}

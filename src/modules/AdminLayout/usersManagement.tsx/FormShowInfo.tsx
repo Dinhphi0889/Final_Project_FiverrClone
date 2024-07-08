@@ -18,7 +18,6 @@ export const FormShowInfo = (props: any) => {
     const [form] = Form.useForm<FormData>();
     const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
 
-
     useEffect(() => {
         form.setFieldsValue({
             ...props.dataPropsAdmin,
@@ -28,6 +27,7 @@ export const FormShowInfo = (props: any) => {
 
     // get values onChange
     const handleValuesChange = () => {
+        
         const values = form.getFieldsValue()
         props.formEdit({ ...values, id: props.dataPropsAdmin.id })
     }
@@ -100,8 +100,9 @@ export const FormShowInfo = (props: any) => {
                 <Form.Item
                     label="Birthday"
                     name='birthday'
+                    
                 >
-                    <DatePicker />
+                    <DatePicker onChange={handleValuesChange} />
                 </Form.Item>
             </Form>
 
