@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useRoutes } from "react-router-dom"
+import { Navigate, Outlet, useNavigate, useRoutes } from "react-router-dom"
 import UserLayout from "../layouts/UserLayout"
 import HomePage from "../modules/UserLayout/HomePage/HomePage"
 import DetailJobPage from "../modules/UserLayout/DetailJobPage/DetailJobPage"
@@ -15,8 +15,7 @@ import { useAppSelector } from "../redux/hooks"
 
 const ProtectedAdminRoute = () => {
     const { currentUser } = useAppSelector((state) => state.user)
-    
-    return currentUser.user.role === 'ADMIN' ? (<Outlet />) : (<Navigate to={'/'} />)
+    return currentUser?.user.role === 'ADMIN' ? (<Outlet />) : (<Navigate to={'/'} />)
 }
 
 const useRouteElement = () => {
@@ -48,7 +47,7 @@ const useRouteElement = () => {
             ]
         },
         {
-            path: 'admin',
+            path: '/admin',
             element: <ProtectedAdminRoute />,
             children: [
                 {
