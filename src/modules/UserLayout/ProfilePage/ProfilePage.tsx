@@ -1,6 +1,6 @@
 
 // import antd
-import { Avatar, Button, Card, GetProp, Modal, Upload, UploadFile, UploadProps, message } from 'antd'
+import { Avatar, Button, Card, GetProp, Modal, UploadProps, message } from 'antd'
 
 // import hooks
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
@@ -20,8 +20,8 @@ import { currentUserAction } from '../../../redux/slices/user.slice'
 
 // import TypeUser
 import { TypeUser } from '../../../types/typeUser'
-import { PlusOutlined } from '@ant-design/icons'
-import { apiUploadAvatar } from '../../../apis/apiUploadAvatar'
+import { apiGetJobHired } from '../../../apis/apiGetJobHired'
+import Meta from 'antd/es/card/Meta'
 
 export default function ProfilePage() {
 
@@ -36,10 +36,8 @@ export default function ProfilePage() {
     const [messageApi, contextHolder] = message.useMessage();
 
     const [formData, setFormData] = useState<TypeUser>();
-    const [fileList, setFileList] = useState<UploadFile[]>([])
-    const [imageUrl, setImageUrl] = useState<string>();
     const [loading, setLoading] = useState(false);
-
+    const [isJobHired, setIsJobHired] = useState()
 
     // notify register
     const registerSuccess = () => {
@@ -104,7 +102,6 @@ export default function ProfilePage() {
         console.log(formData)
         if (formData) {
             const result = await apiEditUser(currentUser?.user.id, formData)
-
             const local = {
                 token: currentUser.token,
                 user: result,
@@ -117,7 +114,6 @@ export default function ProfilePage() {
             handleCancel()
         }
     }
-
 
     //FormEdit User
     const handleFormEdit = (data: any) => {
@@ -168,51 +164,15 @@ export default function ProfilePage() {
         }
     }, [currentUser])
 
-    const getBase64 = (img: FileType, callback: (url: string) => void) => {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => callback(reader.result as string));
-        reader.readAsDataURL(img);
-        console.log(img)
-    };
+    const callApiHiredJob = async () => {
+        const result = await apiGetJobHired()
+        setIsJobHired(result)
+    }
 
-    const beforeUpload = (file: FileType) => {
-        const reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => {
-            const base64 = reader.result as string
-            const newFile: UploadFile = {
-                uid: file.uid,
-                name: file.name,
-                status: 'done',
-                url: base64
-            }
-            setFileList([...fileList, newFile]);
-        }
-        reader.onerror = (error) => {
-            message.error('File reading failed');
-            console.error('File reading error: ', error);
-        };
-        return false
+    useEffect(() => {
+        callApiHiredJob()
+    }, [])
 
-    };
-
-    const handleChange: UploadProps['onChange'] = (info) => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-            return;
-        }
-        if (info.file.status === 'done') {
-            getBase64(info.file.originFileObj as FileType, (url: any) => {
-            })
-        }
-    };
-
-    const uploadButton = (
-        <button style={{ border: 0, background: 'none' }} type="button">
-            <PlusOutlined />
-            <div style={{ marginTop: 8 }}>Upload</div>
-        </button>
-    );
     return (
         <>
             {contextHolder}

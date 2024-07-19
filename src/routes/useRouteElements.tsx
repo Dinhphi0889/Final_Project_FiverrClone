@@ -11,6 +11,7 @@ import ManageJobTypes from "../modules/AdminLayout/manageJobType/ManageJobTypes"
 import ManageServices from "../modules/AdminLayout/manageService/ManageServices"
 import UserManagement from "../modules/AdminLayout/usersManagement.tsx/UserManagement"
 import { useAppSelector } from "../redux/hooks"
+import CommingSoon from "../CommingSoon"
 
 
 const ProtectedAdminRoute = () => {
@@ -73,10 +74,11 @@ const useRouteElement = () => {
                         },
                     ]
                 },
-
-
-
             ]
+        },
+        {
+            path:'/comming-soon',
+            element:<CommingSoon/>
         }
     ])
     return element

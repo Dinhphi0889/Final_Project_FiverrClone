@@ -18,6 +18,7 @@ import { apiSearchUserAdmin } from '../../../apis/apiSearchUserAdmin';
 import { PlusOutlined } from '@ant-design/icons';
 import FormAddNew from './FormAddNewUser';
 import { apiRegister } from '../../../apis/apiRegister';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserManagement() {
   const { Column } = Table;
@@ -34,6 +35,7 @@ export default function UserManagement() {
   const [openEdit, setOpenEdit] = useState(false);
   const [openModalAddNew, setOpenModalAddNew] = useState(false)
   const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate()
 
   // call api
   const callApi = async (pageIndex: any) => {
@@ -83,7 +85,7 @@ export default function UserManagement() {
       birthday: data['birthday'].format('DD-MM-YYYY'),
       skill: newArrSkill,
       certification: newArrCer,
-      avatar:data.avatar
+      avatar: data.avatar
     }
     setFormData(value);
   };
@@ -168,14 +170,13 @@ export default function UserManagement() {
     </Modal>
   }
   const getDataFormAddNew = (values: any) => {
-    console.log(values)
     setFormDataAddNew(values)
   }
   const submitFormAddNew = async () => {
     if (dataFormAddNew) {
       const result = await apiRegister(dataFormAddNew)
       registerSuccess()
-      console.log(result)
+      setOpenModalAddNew(false);
     }
   }
 
@@ -251,7 +252,7 @@ export default function UserManagement() {
       </Table>
       <Pagination
         defaultCurrent={1}
-        total={60}
+        total={80}
         onChange={changePageIndex}
         className='flex justify-end mt-3 mr-3'
       />

@@ -72,6 +72,10 @@ body {
     flex: none;
 }
 
+.backgroundCommingSoon{
+    background-image: url('https://images.unsplash.com/photo-1604093882750-3ed498f3178b');
+}
+
 @media only screen and (max-width:900px) {
     .form-register {
         display: none;
