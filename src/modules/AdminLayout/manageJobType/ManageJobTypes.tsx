@@ -30,7 +30,6 @@ export default function ManageJobTypes() {
   const [form] = Form.useForm();
   const [editingJobType, setEditingJobType] = useState<JobType | null>(null); // State để lưu thông tin công việc đang được chỉnh sửa
 
-  console.log(typeJob);
 
   const callApi = async (pageIndex: any) => {
     const result: any = await apiGetTypeJobAmin(pageIndex, 10);
@@ -46,7 +45,6 @@ export default function ManageJobTypes() {
   };
 
   const handleOnChange = (event: any) => {
-    console.log(event.target.value);
     setSearchTerm(event.target.value);
   };
 
@@ -97,20 +95,14 @@ export default function ManageJobTypes() {
       setIsModalVisible(false); // Đóng Modal
       form.resetFields(); // Đặt lại form
     } catch (error) {
-      console.error("Error adding/editing job type:", error);
       message.error("Đã xảy ra lỗi khi thêm/chỉnh sửa loại công việc");
     }
   };
 
   const handleDelete = async (id: number) => {
-    try {
-      await apiDeleteTypeJob(id);
-      message.success("Xóa loại công việc thành công");
-      callApi(pageIndex);
-    } catch (error) {
-      message.error("Xóa loại công việc thất bại");
-    }
+    message.error("Delete Job False");
   };
+
   // Lọc dữ liệu dựa trên searchTerm
   const filteredJobs = typeJob.filter((item) =>
     searchTerm.toLowerCase() === ""
@@ -121,7 +113,7 @@ export default function ManageJobTypes() {
   if (!typeJob.length) return <>Loading...</>;
   return (
     <>
-      <div className="jobtype_searrch">
+      <div className="jobtype_searrch ml-10">
         <Input
           className="my-6 mx-auto"
           size="middle"
@@ -135,13 +127,14 @@ export default function ManageJobTypes() {
         style={{ width: "10%", fontWeight: "bold", backgroundColor: "green" }}
         type="primary"
         onClick={showModal}
+        className="ml-10 mb-5"
       >
         Add Job Type
       </Button>
       <Table
         dataSource={filteredJobs}
         pagination={false}
-        className="table-users-management items-center"
+        className="table-users-management items-center ml-10"
       >
         <Column title="ID" dataIndex="id" key="id" />
         <Column
@@ -169,12 +162,12 @@ export default function ManageJobTypes() {
         />
       </Table>
 
-      <Pagination
+      {/* <Pagination
         defaultCurrent={1}
         total={50}
         onChange={changePageIndex}
         className="flex justify-end mt-3 mr-3"
-      />
+      /> */}
 
       <Modal
         title={editingJobType ? "Edit Job Type" : "Add Job Type"}

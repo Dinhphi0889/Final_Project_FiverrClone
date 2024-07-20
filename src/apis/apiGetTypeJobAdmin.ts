@@ -9,7 +9,6 @@ export const apiGetTypeJobAmin = async (
     const response = await api.get(
       `loai-cong-viec/phan-trang-tim-kiem?pageIndex=${pageIndex}&pageSize=${pageSize}&searchTerm=${searchTerm}`
     );
-    console.log(response.data);
     return response.data.content;
   } catch (error: any) {
     throw Error(error);

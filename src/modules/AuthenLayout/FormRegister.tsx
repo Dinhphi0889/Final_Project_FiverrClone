@@ -48,7 +48,6 @@ export default function FormRegister(props: any) {
             registerSuccess()
             props.setSwitchRegister(false)
         }else{
-            console.log("error")
         }
     };
     const handleValuesChange = () => {

@@ -186,8 +186,14 @@ export default function UserManagement() {
     if (value !== "" && value.trim()) {
       const result = await apiSearchUserAdmin(value)
       setDataUser(result)
+    }else{
+      callApi(pageIndex)
     }
   }
+
+  const handleDelete = async () => {
+    message.error("Delete User False");
+  };
 
   return (
     <div className='ml-10'>
@@ -245,7 +251,7 @@ export default function UserManagement() {
             <Space size="middle">
               <Button
                 onClick={() => { showModalEdit(record) }}>Edit</Button>
-              <Button>Delete</Button>
+              <Button onClick={handleDelete}>Delete</Button>
             </Space>
           )}
         />

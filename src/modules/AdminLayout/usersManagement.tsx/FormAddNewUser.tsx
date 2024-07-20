@@ -17,11 +17,9 @@ export default function FromAddNew(props: any) {
     const [form] = Form.useForm<FormData>();
     const handleValuesChange = () => {
         const values = form.getFieldsValue()
-        console.log(values)
         props.submitFormAddNew(values)
     }
     const onFinish = (values: any) => {
-        console.log(values)
     }
 
     return (

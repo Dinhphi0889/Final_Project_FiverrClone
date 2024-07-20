@@ -28,7 +28,6 @@ function FormLogin(props: any) {
     try {
 
       const result = await apiLogin(values)
-      console.log(result)
       loginSuccess()
       props.closeModal(false)
       localStorage.setItem('user', JSON.stringify(result))

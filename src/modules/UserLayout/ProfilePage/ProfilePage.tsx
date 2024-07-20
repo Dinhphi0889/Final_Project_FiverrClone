@@ -99,7 +99,6 @@ export default function ProfilePage() {
 
     // Submit editUser
     const handeFormSubmit = async () => {
-        console.log(formData)
         if (formData) {
             const result = await apiEditUser(currentUser?.user.id, formData)
             const local = {

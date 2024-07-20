@@ -83,8 +83,8 @@ export default function ListJobAndTypeJobPage() {
         </div>
       ) : (
         <div className="container mx-auto">
-          <h1 className="tittle-result text-2xl lg:text-3xl font-semibold">Result for <em className="text-2xl">{`"${state.nameFind}"`}</em></h1>
-          <div className="dropdown-type-job-page">
+          <h1 className="tittle-result text-2xl lg:text-3xl font-semibold mb-2">Result for <em className="text-2xl">{`"${state.nameFind}"`}</em></h1>
+          <div className="dropdown-type-job-page mb-2">
             <Dropdown
               trigger={['click']}
               menu={{ items }}

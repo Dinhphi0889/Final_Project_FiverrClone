@@ -77,12 +77,7 @@ export default function DetailJobPage() {
       content: 'Hire Job Success',
     });
   };
-  const error = () => {
-    messageApi.open({
-      type: 'error',
-      content: "Can't Hire Job, Check Again",
-    });
-  };
+
   const showLoading = () => {
     setOpenDrawer(true);
     setLoading(true);
@@ -257,33 +252,6 @@ export default function DetailJobPage() {
   // comment
   const [comment, setComment] = useState<string>("");
 
-  // Sử dụng useMutation với kiểu dữ liệu được xác định
-  const mutation: UseMutationResult<void, AxiosError, NewComment> = useMutation<
-    void,
-    AxiosError,
-    NewComment
-  >({
-    mutationFn: postComment,
-    onSuccess: () => {
-      // Xử lý sau khi bình luận được đăng thành công
-      alert("Bình luận đã được đăng!");
-      setComment("");
-    },
-    onError: (error: AxiosError) => {
-      // Xử lý lỗi
-      alert(`Có lỗi xảy ra`);
-    },
-  });
-  const handleSubmit = (event: React.FormEvent) => {
-    const newComment: NewComment = {
-      maCongViec: 1, // Giả sử mã công việc
-      maNguoiBinhLuan: 1, // Giả sử mã người bình luận
-      ngayBinhLuan: new Date().toISOString(), // Giả sử ngày bình luận là ngày hiện tại
-      noiDung: comment,
-      saoBinhLuan: 5, // Giả sử số sao bình luận
-    };
-    mutation.mutate(newComment);
-  };
   const hireJob = async () => {
     const date = new Date()
     const data = {
@@ -732,10 +700,7 @@ export default function DetailJobPage() {
                                 variant="filled"
                                 name="cmt"
                                 onChange={(event) => {
-                                  console.log(
-                                    event.target.name,
-                                    event.target.value
-                                  );
+                                 
                                   setComment(event.target.value);
                                 }}
                               />
@@ -746,7 +711,7 @@ export default function DetailJobPage() {
                                 htmlType="submit"
                                 style={{ width: "30%" }}
                                 type="primary"
-                                onClick={handleSubmit}
+                                // onClick={handleSubmit}
                               >
                                 <span className="span-detail"
                                   style={{ color: "white", fontWeight: "bold" }}

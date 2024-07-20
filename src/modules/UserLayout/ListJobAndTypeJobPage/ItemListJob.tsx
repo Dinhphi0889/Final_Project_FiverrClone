@@ -23,7 +23,6 @@ export default function ItemListJob() {
                         { detailJob: { data } }
                 })
         }
-        console.log(data)
     }
     if (detailOfTypeJob.length > 0) {
         return detailOfTypeJob.map((item: TypeDetailOfListJob) => {
