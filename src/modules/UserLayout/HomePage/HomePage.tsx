@@ -23,12 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import { Input } from 'antd';
 import { SearchProps } from 'antd/es/input/Search';
 
-
 import { detailOfListJobAction } from '../../../redux/slices/detailOfTypeJob.slice.ts';
-
-
-
-
 
 const { Search } = Input;
 
@@ -43,16 +38,17 @@ export default function HomePage() {
   // create + use event handlers
   const showOnSearch = async (event: any) => {
     if (event.target.value !== "" && event.target.value.trim()) {
-      const result = await apiGetNameJob(event.target.value);
-      dispatch(nameJobAction.setNameJob(result));
-      setShowNameJob("block");
+      setTimeout(async () => {
+        const result = await apiGetNameJob(event.target.value);
+        dispatch(nameJobAction.setNameJob(result));
+        setShowNameJob("block");
+      }, 500)
     } else if (event.target.value === "") {
       setShowNameJob("none");
     }
   }
   const onSearch: SearchProps['onSearch'] = async (value) => {
     if (value !== "" && value.trim()) {
-      console.log(value)
       const result = await apiGetNameJob(value)
       dispatch(detailOfListJobAction.setDetailOfTypeJob(result))
       navigate(`/list-job-and-type-job/result-for-${value}`, { state: { nameFind: value } })

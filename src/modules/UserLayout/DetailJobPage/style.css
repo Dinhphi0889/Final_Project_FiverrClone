@@ -1,5 +1,5 @@
-.detailjob_page p,
-.detailjob_page span {
+.span-detail,
+.p-detail {
   color: black;
 }
 
@@ -24,7 +24,6 @@
   border: 0 solid currentcolor;
   border-inline-width: 2px 0;
   border-block-width: 2px 0;
-  /* border-radius: 1px; */
   content: "";
   color: black;
 }
@@ -32,9 +31,11 @@
 .slick-prev::after {
   transform: rotate(-45deg) translate(8px, 0);
 }
+
 .slick-next::after {
   transform: rotate(135deg) translate(-5px, 3px);
 }
+
 .slider-container .slider-items {
   height: 100% !important;
   overflow: hidden;
@@ -44,6 +45,7 @@
   padding: 12px !important;
   /* position: absolute; */
 }
+
 .slider-items img {
   object-fit: contain;
   height: 100% !important;
@@ -98,20 +100,24 @@
 .desc_info_list li {
   padding-left: 10px;
 }
+
 .desc_info_list li::marker {
-  content: "●"; /* Sử dụng dấu chấm tròn đầy */
-  color: black; /* Màu của dấu chấm */
+  content: "●";
+  color: black;
 }
 
 .ant-table-cell {
   padding: 0 16px !important;
 }
+
 .ant-table-cell span {
   font-weight: bold;
 }
+
 .detailjob_page .ant-btn {
   width: 70px;
 }
+
 .ant-table-row .ant-table-cell {
   padding: 0;
 }
@@ -119,6 +125,7 @@
 .ant-table-tbody {
   background-color: transparent;
 }
+
 .ant-tabs-nav-wrap {
   justify-content: center;
 }
@@ -127,8 +134,8 @@
   background-color: green;
   transition: all 0.5s;
 }
-.sidercard_btn
-  .ant-btn.css-dev-only-do-not-override-17seli4.ant-btn-primary:hover {
+
+.sidercard_btn .ant-btn.css-dev-only-do-not-override-17seli4.ant-btn-primary:hover {
   background-color: rgba(0, 128, 0, 0.479);
 }
 
@@ -151,24 +158,63 @@
   top: 6px;
 }
 
+.price-drawer{
+  border-bottom: 1px solid rgb(214, 214, 214);
+  padding-bottom: 1rem;
+}
+.info-deposit{
+  margin: 10px;
+  border: 2px solid gray;
+  padding: 5px;
+  border-radius: 10px;
+}
+.info-deposit-top{
+  border-bottom: 1px solid rgb(214, 214, 214);
+  padding: 10px;
+}
+.info-deposit-bottom{
+  padding: 10px;
+}
+.quanlity{
+  margin: 5px;
+}
+.btn-down,.btn-up{
+  width: 30px;
+  height: 30px;
+  border: 1px solid gray;
+  border-radius: 50%;
+}
+.btn-continues{
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+.btn-continues:hover{
+  background-color: rgb(68, 66, 66) !important;
+  color: white !important;
+  border: none;
+}
 
 
 /* iPhone 6, 7, 8 */
-@media only screen and (min-width: 375px) and (max-width: 667px) {
+@media only screen and (min-width: 300px) and (max-width: 667px) {
+
   /* .detailjob_page {
     margin-top: 550px;
   } */
   .detailjob_page .ant-breadcrumb-link {
     display: block;
   }
+
   .sider_layout_disable {
     display: none;
   }
 
-  .left_layout
-    .ant-layout-sider.ant-layout-sider-dark.sider_layout.sider_layout_active {
+  .left_layout .ant-layout-sider.ant-layout-sider-dark.sider_layout.sider_layout_active {
     padding: 0 !important;
   }
+
   .Rate-part {
     display: block;
   }
@@ -176,6 +222,7 @@
   .rating_breakdown {
     display: block;
   }
+
   .FAQ_rate .ant-col.ant-col-11.css-dev-only-do-not-override-17seli4 {
     margin-top: 15px;
   }
@@ -183,9 +230,11 @@
   .FAQ_rate .ant-row.css-dev-only-do-not-override-17seli4 {
     width: 300px;
   }
+
   .rating_breakdwn_text {
     width: 250px;
   }
+
   .rating_breakdwn_star p {
     display: flex;
   }
@@ -201,16 +250,24 @@
   .left_layout .anticon.anticon-star {
     font-size: 10px;
   }
+
   .toprate {
     display: block;
   }
+
   .detailjob_header ul {
     line-height: 10px;
   }
+
   .user ul {
     line-height: 10px;
   }
+
+  .ant-layout-content {
+    width: auto !important;
+  }
 }
+
 /* Ipad */
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -221,12 +278,15 @@
   .btn_comment {
     width: 60% !important;
   }
+
   .toprate {
     display: block;
   }
+
   .detailjob_header ul {
     line-height: 10px;
   }
+
   .detailjob_header .anticon.anticon-star {
     font-size: 13px;
   }

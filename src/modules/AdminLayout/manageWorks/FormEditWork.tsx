@@ -28,7 +28,6 @@ export const FormEditWork = (props: any) => {
 
     const handleValuesChange = () => {
         const values = form.getFieldsValue()
-        console.log({ ...values, id: props.editJob.id, maChiTietLoaiCongViec: props.editJob.maChiTietLoaiCongViec })
         props.formEditJob({ ...values, id: props.editJob.id, maChiTietLoaiCongViec: props.editJob.maChiTietLoaiCongViec })
     }
 

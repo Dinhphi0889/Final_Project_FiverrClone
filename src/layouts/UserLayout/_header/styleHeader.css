@@ -1,4 +1,3 @@
-
 #changeHeader {
     background-color: #fff;
     position: fixed;
@@ -22,8 +21,9 @@ header {
     margin: 0 auto;
     max-width: 1400px;
 }
-.set-search-header{
-    visibility :visible;
+
+.set-search-header {
+    visibility: visible;
 }
 
 .ant-space-item a:hover {
@@ -71,7 +71,7 @@ header {
     background-color: transparent;
     border: none;
     font-size: 1.5rem;
-    color:#565759;
+    color: #565759;
 }
 
 #btn-sidebar:focus {
@@ -102,7 +102,8 @@ header p {
     margin: 10px 20px;
     transition: 0s !important;
 }
-#searchHeaderLogin{
+
+#searchHeaderLogin {
     width: 100%;
     margin: 10px 20px;
 }
@@ -158,11 +159,13 @@ nav a {
     text-wrap: nowrap;
     padding: 5px 6px;
 }
-nav a:hover{
+
+nav a:hover {
     color: #1dbf73;
 }
+
 nav a:nth-child(1):hover,
-nav a:nth-child(2):hover{
+nav a:nth-child(2):hover {
     background-color: #b8b8b82e;
     color: #565759;
     border-radius: 5px;
@@ -185,7 +188,7 @@ nav a:nth-child(2):hover{
 }
 
 /* menu-bar-login */
-.menu-bar-login{
+.menu-bar-login {
     display: flex;
     align-items: center;
     justify-content: end;
@@ -244,15 +247,20 @@ header .btn-join {
     border: none;
     background-color: transparent;
 }
-.menu-list-job button span{
+
+.menu-list-job button span {
     font-size: 1.1rem;
 }
-.menu-list-job button:focus{
+
+.menu-list-job button:focus {
     outline: none;
 }
-.menu-list-job button:hover span,.menu-list-job .ant-btn:hover{
+
+.menu-list-job button:hover span,
+.menu-list-job .ant-btn:hover {
     color: #1dbf73 !important;
 }
+
 .menu-list-job .ant-dropdown-trigger .ant-space-item::after {
     content: '';
     display: block;
@@ -295,14 +303,21 @@ header .btn-join {
 .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item:hover {
     background-color: white;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+    display: none;
+}
+
 @media screen and (max-width:1200px) {
-    .menu-list-job{
+    .menu-list-job {
         justify-content: start;
         padding: 0;
         position: relative;
         top: 0;
     }
-    .menu-list-job p{
+
+    .menu-list-job p {
         width: 90%;
     }
 }
@@ -315,10 +330,12 @@ header .btn-join {
     #btn-sidebar {
         display: block !important;
     }
-    .menu-list-job button{
+
+    .menu-list-job button {
         margin: 0;
     }
-    .menu-list-job button span{
+
+    .menu-list-job button span {
         font-size: 1rem;
 
     }
@@ -332,11 +349,13 @@ header .btn-join {
         display: none;
     }
 
-    .menu-bar,.menu-bar-login {
+    .menu-bar,
+    .menu-bar-login {
         justify-content: flex-end;
     }
 
-    #searchHeader, #searchHeaderLogin{
+    #searchHeader,
+    #searchHeaderLogin {
         display: none;
     }
 
@@ -351,10 +370,12 @@ header .btn-join {
     nav a:nth-child(3) {
         display: none;
     }
+
     nav a:nth-child(5) {
         display: none;
     }
-    nav.menu-bar-login a:nth-child(3){
+
+    nav.menu-bar-login a:nth-child(3) {
         display: none;
     }
 
@@ -366,6 +387,7 @@ header .btn-join {
     .menu-bar {
         width: 10%;
     }
+
     header .btn-join {
         color: #62646a !important;
         border-color: transparent !important;

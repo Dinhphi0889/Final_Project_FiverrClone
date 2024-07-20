@@ -26,7 +26,7 @@ export default function ManageServices() {
       <Table
         dataSource={services}
         pagination={false}
-        className='table-users-management items-center'
+        className='table-users-management items-center ml-10 mt-10'
 
       >
         <Column title="ID" dataIndex="id" key="id" />

@@ -1,4 +1,4 @@
-import { Button, Modal, Pagination, Space, Table, Input } from 'antd';
+import { Button, Modal, Pagination, Space, Table, Input, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { apiGetDataPagination } from '../../../apis/apiPaginationAdmin';
 import { FormEditWork } from './FormEditWork';
@@ -72,8 +72,9 @@ export default function ManageWorks() {
       result.map((itemResult: TypeNameJob) => {
         resultSearch.push(itemResult.congViec)
       })
-      // console.log(resultSearch)
       setJob(resultSearch)
+    } else {
+      callApi(pageIndex)
     }
   }
 
@@ -106,6 +107,10 @@ export default function ManageWorks() {
       </Modal>
     </>
   }
+
+  const handleDelete = async () => {
+    message.error("Delete Job False");
+  };
 
   return (
     <div className='manage-work-page ml-10'>
@@ -180,7 +185,7 @@ export default function ManageWorks() {
                 onClick={() => { showModal(record) }}
               >Edit
               </Button>
-              <Button>Delete</Button>
+              <Button onClick={handleDelete}>Delete</Button>
             </Space>
           )}
         />

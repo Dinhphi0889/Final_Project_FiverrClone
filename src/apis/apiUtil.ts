@@ -9,8 +9,8 @@ api.interceptors.request.use((config: any) => {
     const currentUser = userLocal ? JSON.parse(userLocal) : null
     config.headers = {
         ...config.headers,
-        Authrization: currentUser ? `Bearer ${currentUser.accessToken}` : '',
-        TokenCyberSoft: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA2MiIsIkhldEhhblN0cmluZyI6IjE3LzEwLzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcyOTEyMzIwMDAwMCIsIm5iZiI6MTcwMDE1NDAwMCwiZXhwIjoxNzI5MjcwODAwfQ.xKQVYYnO9233wkXRw5oU4Dtx41flqDuUnA0DbkDYRmM',
+        token: currentUser ? `${currentUser.token}` : '',
+        "tokenCybersoft": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJOb2RlSlMgNDIiLCJIZXRIYW5TdHJpbmciOiIwNy8xMi8yMDI0IiwiSGV0SGFuVGltZSI6IjE3MzM1Mjk2MDAwMDAiLCJuYmYiOjE3MTUxMDEyMDAsImV4cCI6MTczMzY3NzIwMH0.eRjDGZmIzPZGC0Mf03m9BN2p0gTqsUjw8zEfQtBd_bQ',
     };
     return config
 })

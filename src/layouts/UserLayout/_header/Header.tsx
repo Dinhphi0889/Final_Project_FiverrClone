@@ -1,7 +1,7 @@
 // import hooks
 import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useWindowSize } from 'react-use'
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -31,11 +31,7 @@ import { apiGetNameJob } from '../../../apis/apiGetNameJob';
 
 import { detailOfListJobAction } from '../../../redux/slices/detailOfTypeJob.slice';
 
-
-
 const { Search } = Input;
-
-
 
 export default function HeaderPage() {
 
@@ -114,8 +110,6 @@ export default function HeaderPage() {
       formLogin.style.display = 'block'
     }
   }, [width])
-
-
 
   // Handler show modal
   const showModal = () => {
@@ -431,12 +425,13 @@ export default function HeaderPage() {
 
               ) : (
                 <>
-                  <a>Fiverr Pro<i className="fa-solid fa-chevron-down"></i></a>
-                  <a>Explore<i className="fa-solid fa-chevron-down"></i></a>
-                  <a><i className="fa-solid fa-globe"
-                    style={{ paddingRight: '8px' }}></i>English</a>
-                  <a>Become a Seller</a>
-                  <a>Sign Up</a>
+                  <a href="/comming-soon">Fiverr Pro<i className="fa-solid fa-chevron-down"></i></a>
+                  <a href="/comming-soon">Explore<i className="fa-solid fa-chevron-down"></i></a>
+                  <a href="/comming-soon">
+                    <i className="fa-solid fa-globe"
+                      style={{ paddingRight: '8px' }}></i>English</a>
+                  <a href="/comming-soon">Become a Seller</a>
+                  <a type='button' onClick={showModal}>Sign Up</a>
                   <Button onClick={showModal}
                     className='btn-custom btn-join'>Join
                   </Button>
